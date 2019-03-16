@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 7 Simulation | Psyc 7709 R Book</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 7 Simulation | Psyc 7709 R Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Simulation | Psyc 7709 R Book" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Matthew Crump">
+
+
+<meta name="date" content="2019-03-16">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="statistics.html">
+<link rel="next" href="references.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
+<li class="chapter" data-level="2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html"><i class="fa fa-check"></i><b>2</b> Basic Programming in R</a><ul>
+<li class="chapter" data-level="2.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#variables"><i class="fa fa-check"></i><b>2.1</b> Variables</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#style-guide"><i class="fa fa-check"></i><b>2.1.1</b> Style guide</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#double-checking-your-variable-works"><i class="fa fa-check"></i><b>2.1.2</b> Double-checking your variable works</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#changing-the-contents-of-a-variable"><i class="fa fa-check"></i><b>2.1.3</b> Changing the contents of a variable</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#properties-of-variables"><i class="fa fa-check"></i><b>2.1.4</b> Properties of variables</a></li>
+<li class="chapter" data-level="2.1.5" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#converting-between-numeric-and-character"><i class="fa fa-check"></i><b>2.1.5</b> Converting between numeric and character</a></li>
+<li class="chapter" data-level="2.1.6" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#converting-between-character-and-numeric"><i class="fa fa-check"></i><b>2.1.6</b> converting between character and numeric</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#vectors"><i class="fa fa-check"></i><b>2.2</b> Vectors</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#indexing"><i class="fa fa-check"></i><b>2.2.1</b> indexing</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#assignment-and-indexing"><i class="fa fa-check"></i><b>2.2.2</b> assignment and indexing</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#c-is-for-combine"><i class="fa fa-check"></i><b>2.2.3</b> c is for combine</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#loops"><i class="fa fa-check"></i><b>2.3</b> Loops</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#breaking-a-loop"><i class="fa fa-check"></i><b>2.3.1</b> Breaking a loop</a></li>
+<li class="chapter" data-level="2.3.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#while-loops"><i class="fa fa-check"></i><b>2.3.2</b> While loops</a></li>
+<li class="chapter" data-level="2.3.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#repeat-loops"><i class="fa fa-check"></i><b>2.3.3</b> Repeat loops</a></li>
+<li class="chapter" data-level="2.3.4" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#examples"><i class="fa fa-check"></i><b>2.3.4</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#logical-comparison"><i class="fa fa-check"></i><b>2.4</b> Logical comparison</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#equal-to"><i class="fa fa-check"></i><b>2.4.1</b> equal to</a></li>
+<li class="chapter" data-level="2.4.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#not-equal-to"><i class="fa fa-check"></i><b>2.4.2</b> not equal to</a></li>
+<li class="chapter" data-level="2.4.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#greater-than-less-than"><i class="fa fa-check"></i><b>2.4.3</b> Greater than/ less than</a></li>
+<li class="chapter" data-level="2.4.4" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#section"><i class="fa fa-check"></i><b>2.4.4</b> &gt;= &lt;=</a></li>
+<li class="chapter" data-level="2.4.5" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#and"><i class="fa fa-check"></i><b>2.4.5</b> AND</a></li>
+<li class="chapter" data-level="2.4.6" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#or"><i class="fa fa-check"></i><b>2.4.6</b> OR</a></li>
+<li class="chapter" data-level="2.4.7" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#true-false"><i class="fa fa-check"></i><b>2.4.7</b> TRUE FALSE</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#if-else"><i class="fa fa-check"></i><b>2.5</b> IF ELSE</a></li>
+<li class="chapter" data-level="2.6" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#functions"><i class="fa fa-check"></i><b>2.6</b> Functions</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#function-syntax"><i class="fa fa-check"></i><b>2.6.1</b> function syntax</a></li>
+<li class="chapter" data-level="2.6.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#example-functions"><i class="fa fa-check"></i><b>2.6.2</b> example functions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html"><i class="fa fa-check"></i><b>3</b> Programming Challenges for learning the fundamentals</a><ul>
+<li class="chapter" data-level="3.1" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#tips-for-approaching-the-problems"><i class="fa fa-check"></i><b>3.1</b> Tips for Approaching the Problems</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#rstudios-text-editor"><i class="fa fa-check"></i><b>3.1.1</b> Rstudio’s Text editor</a></li>
+<li class="chapter" data-level="3.1.2" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#use-informative-variable-names."><i class="fa fa-check"></i><b>3.1.2</b> Use informative variable names.</a></li>
+<li class="chapter" data-level="3.1.3" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#use-comments."><i class="fa fa-check"></i><b>3.1.3</b> Use comments.</a></li>
+<li class="chapter" data-level="3.1.4" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#r-markdown."><i class="fa fa-check"></i><b>3.1.4</b> R Markdown.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#easier-problems"><i class="fa fa-check"></i><b>3.2</b> Easier Problems</a></li>
+<li class="chapter" data-level="3.3" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#harder-problems"><i class="fa fa-check"></i><b>3.3</b> Harder Problems</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html"><i class="fa fa-check"></i><b>4</b> Data visualization (ggplot2)</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ggplot2-resources"><i class="fa fa-check"></i><b>4.1</b> ggplot2 resources</a></li>
+<li class="chapter" data-level="4.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#example-code"><i class="fa fa-check"></i><b>4.2</b> Example code</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#scatterplot"><i class="fa fa-check"></i><b>4.2.1</b> Scatterplot</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#bar-graph"><i class="fa fa-check"></i><b>4.2.2</b> bar graph</a></li>
+<li class="chapter" data-level="4.2.3" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#line-graph"><i class="fa fa-check"></i><b>4.2.3</b> Line Graph</a></li>
+<li class="chapter" data-level="4.2.4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#histogram"><i class="fa fa-check"></i><b>4.2.4</b> Histogram</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#advanced-ggplot"><i class="fa fa-check"></i><b>4.3</b> Advanced ggplot</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#add-on-packages"><i class="fa fa-check"></i><b>4.3.1</b> Add-on packages</a></li>
+<li class="chapter" data-level="4.3.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#figure-output-tips"><i class="fa fa-check"></i><b>4.3.2</b> Figure Output tips</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#knitr-options"><i class="fa fa-check"></i><b>4.4</b> knitr options</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#knitr-figure-output-defaults"><i class="fa fa-check"></i><b>4.4.1</b> knitr figure output defaults</a></li>
+<li class="chapter" data-level="4.4.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#figure-output-per-code-block"><i class="fa fa-check"></i><b>4.4.2</b> figure output per code block</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#data-vis-assignment-with-solutions"><i class="fa fa-check"></i><b>4.5</b> Data-vis assignment with solutions</a></li>
+<li class="chapter" data-level="4.6" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#list-of-figures-to-reproduce"><i class="fa fa-check"></i><b>4.6</b> List of Figures to reproduce</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>5</b> Data-Wrangling</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-wrangling.html"><a href="data-wrangling.html#what-is-data-wrangling"><i class="fa fa-check"></i><b>5.1</b> What is Data-wrangling</a></li>
+<li class="chapter" data-level="5.2" data-path="data-wrangling.html"><a href="data-wrangling.html#dplyr-basics"><i class="fa fa-check"></i><b>5.2</b> dplyr basics</a></li>
+<li class="chapter" data-level="5.3" data-path="data-wrangling.html"><a href="data-wrangling.html#basic-dataframe-stuff-without-dplyr"><i class="fa fa-check"></i><b>5.3</b> basic dataframe stuff without dplyr</a></li>
+<li class="chapter" data-level="5.4" data-path="data-wrangling.html"><a href="data-wrangling.html#a-couple-questions"><i class="fa fa-check"></i><b>5.4</b> A couple questions:</a></li>
+<li class="chapter" data-level="5.5" data-path="data-wrangling.html"><a href="data-wrangling.html#dplyr-style"><i class="fa fa-check"></i><b>5.5</b> dplyr style</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="data-wrangling.html"><a href="data-wrangling.html#quick-example"><i class="fa fa-check"></i><b>5.5.1</b> quick example</a></li>
+<li class="chapter" data-level="5.5.2" data-path="data-wrangling.html"><a href="data-wrangling.html#filter"><i class="fa fa-check"></i><b>5.5.2</b> filter</a></li>
+<li class="chapter" data-level="5.5.3" data-path="data-wrangling.html"><a href="data-wrangling.html#group_by-and-summarise"><i class="fa fa-check"></i><b>5.5.3</b> group_by and summarise</a></li>
+<li class="chapter" data-level="5.5.4" data-path="data-wrangling.html"><a href="data-wrangling.html#focus-on-summarise"><i class="fa fa-check"></i><b>5.5.4</b> focus on summarise</a></li>
+<li class="chapter" data-level="5.5.5" data-path="data-wrangling.html"><a href="data-wrangling.html#mutate"><i class="fa fa-check"></i><b>5.5.5</b> Mutate</a></li>
+<li class="chapter" data-level="5.5.6" data-path="data-wrangling.html"><a href="data-wrangling.html#select"><i class="fa fa-check"></i><b>5.5.6</b> Select</a></li>
+<li class="chapter" data-level="5.5.7" data-path="data-wrangling.html"><a href="data-wrangling.html#star-wars-questions-and-answers"><i class="fa fa-check"></i><b>5.5.7</b> Star wars questions and answers</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="data-wrangling.html"><a href="data-wrangling.html#data-input"><i class="fa fa-check"></i><b>5.6</b> Data input</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="data-wrangling.html"><a href="data-wrangling.html#other-helpful-libraries-for-reading-in-files"><i class="fa fa-check"></i><b>5.6.1</b> Other helpful libraries for reading in files</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="data-wrangling.html"><a href="data-wrangling.html#example-analysis"><i class="fa fa-check"></i><b>5.7</b> Example Analysis</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="data-wrangling.html"><a href="data-wrangling.html#load-the-data-and-libraries-you-will-use"><i class="fa fa-check"></i><b>5.7.1</b> Load the data and libraries you will use</a></li>
+<li class="chapter" data-level="5.7.2" data-path="data-wrangling.html"><a href="data-wrangling.html#pre-processing"><i class="fa fa-check"></i><b>5.7.2</b> Pre-processing</a></li>
+<li class="chapter" data-level="5.7.3" data-path="data-wrangling.html"><a href="data-wrangling.html#checks"><i class="fa fa-check"></i><b>5.7.3</b> Checks</a></li>
+<li class="chapter" data-level="5.7.4" data-path="data-wrangling.html"><a href="data-wrangling.html#exclusion"><i class="fa fa-check"></i><b>5.7.4</b> Exclusion</a></li>
+<li class="chapter" data-level="5.7.5" data-path="data-wrangling.html"><a href="data-wrangling.html#analysis"><i class="fa fa-check"></i><b>5.7.5</b> Analysis</a></li>
+<li class="chapter" data-level="5.7.6" data-path="data-wrangling.html"><a href="data-wrangling.html#table-of-2x2-means"><i class="fa fa-check"></i><b>5.7.6</b> table of 2x2 means</a></li>
+<li class="chapter" data-level="5.7.7" data-path="data-wrangling.html"><a href="data-wrangling.html#plot-of-2x2-means"><i class="fa fa-check"></i><b>5.7.7</b> plot of 2x2 means</a></li>
+<li class="chapter" data-level="5.7.8" data-path="data-wrangling.html"><a href="data-wrangling.html#repeated-measure-anova"><i class="fa fa-check"></i><b>5.7.8</b> Repeated measure ANOVA</a></li>
+<li class="chapter" data-level="5.7.9" data-path="data-wrangling.html"><a href="data-wrangling.html#example-write-up"><i class="fa fa-check"></i><b>5.7.9</b> Example Write-Up</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>6</b> Statistics</a><ul>
+<li class="chapter" data-level="6.1" data-path="statistics.html"><a href="statistics.html#t-tests"><i class="fa fa-check"></i><b>6.1</b> t-tests</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="statistics.html"><a href="statistics.html#one-sample-t-test"><i class="fa fa-check"></i><b>6.1.1</b> one sample t-test</a></li>
+<li class="chapter" data-level="6.1.2" data-path="statistics.html"><a href="statistics.html#paired-sample-t-test"><i class="fa fa-check"></i><b>6.1.2</b> paired-sample t-test</a></li>
+<li class="chapter" data-level="6.1.3" data-path="statistics.html"><a href="statistics.html#independent-sample-t-test"><i class="fa fa-check"></i><b>6.1.3</b> Independent sample t-test</a></li>
+<li class="chapter" data-level="6.1.4" data-path="statistics.html"><a href="statistics.html#printing"><i class="fa fa-check"></i><b>6.1.4</b> printing</a></li>
+<li class="chapter" data-level="6.1.5" data-path="statistics.html"><a href="statistics.html#writing"><i class="fa fa-check"></i><b>6.1.5</b> writing</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="statistics.html"><a href="statistics.html#anova"><i class="fa fa-check"></i><b>6.2</b> ANOVA</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="statistics.html"><a href="statistics.html#between-subjects-1-factor"><i class="fa fa-check"></i><b>6.2.1</b> between-subjects 1 factor</a></li>
+<li class="chapter" data-level="6.2.2" data-path="statistics.html"><a href="statistics.html#between-subjects-2-factor"><i class="fa fa-check"></i><b>6.2.2</b> between-subjects 2 factor</a></li>
+<li class="chapter" data-level="6.2.3" data-path="statistics.html"><a href="statistics.html#repeated-measures-1-factor"><i class="fa fa-check"></i><b>6.2.3</b> repeated-measures 1 factor</a></li>
+<li class="chapter" data-level="6.2.4" data-path="statistics.html"><a href="statistics.html#repeated-measures-2-factor"><i class="fa fa-check"></i><b>6.2.4</b> repeated-measures 2 factor</a></li>
+<li class="chapter" data-level="6.2.5" data-path="statistics.html"><a href="statistics.html#papaja"><i class="fa fa-check"></i><b>6.2.5</b> papaja</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="statistics.html"><a href="statistics.html#linear-regression"><i class="fa fa-check"></i><b>6.3</b> Linear Regression</a></li>
+<li class="chapter" data-level="6.4" data-path="statistics.html"><a href="statistics.html#randomization-test"><i class="fa fa-check"></i><b>6.4</b> Randomization Test</a></li>
+<li class="chapter" data-level="6.5" data-path="statistics.html"><a href="statistics.html#correlation"><i class="fa fa-check"></i><b>6.5</b> Correlation</a></li>
+<li class="chapter" data-level="6.6" data-path="statistics.html"><a href="statistics.html#chi-square"><i class="fa fa-check"></i><b>6.6</b> Chi-square</a></li>
+<li class="chapter" data-level="6.7" data-path="statistics.html"><a href="statistics.html#binomial-test"><i class="fa fa-check"></i><b>6.7</b> binomial test</a></li>
+<li class="chapter" data-level="6.8" data-path="statistics.html"><a href="statistics.html#post-hoc-tests"><i class="fa fa-check"></i><b>6.8</b> Post-hoc tests</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="statistics.html"><a href="statistics.html#pairwise-t-tests"><i class="fa fa-check"></i><b>6.8.1</b> pairwise t-tests</a></li>
+<li class="chapter" data-level="6.8.2" data-path="statistics.html"><a href="statistics.html#tukey-hsd-test"><i class="fa fa-check"></i><b>6.8.2</b> tukey HSD test</a></li>
+<li class="chapter" data-level="6.8.3" data-path="statistics.html"><a href="statistics.html#fishers-lsd"><i class="fa fa-check"></i><b>6.8.3</b> Fishers LSD</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="statistics.html"><a href="statistics.html#linear-contrasts"><i class="fa fa-check"></i><b>6.9</b> Linear Contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>7</b> Simulation</a><ul>
+<li class="chapter" data-level="7.1" data-path="simulation.html"><a href="simulation.html#null-hypothesis"><i class="fa fa-check"></i><b>7.1</b> Null-hypothesis</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="simulation.html"><a href="simulation.html#null-for-a-t-test"><i class="fa fa-check"></i><b>7.1.1</b> Null for a t-test</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="simulation.html"><a href="simulation.html#alternative-hypothesis"><i class="fa fa-check"></i><b>7.2</b> Alternative hypothesis</a></li>
+<li class="chapter" data-level="7.3" data-path="simulation.html"><a href="simulation.html#power-and-effect-size"><i class="fa fa-check"></i><b>7.3</b> Power and Effect Size</a></li>
+<li class="chapter" data-level="7.4" data-path="simulation.html"><a href="simulation.html#power-analysis-with-r"><i class="fa fa-check"></i><b>7.4</b> Power analysis with R</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="simulation.html"><a href="simulation.html#pwr-package"><i class="fa fa-check"></i><b>7.4.1</b> pwr package</a></li>
+<li class="chapter" data-level="7.4.2" data-path="simulation.html"><a href="simulation.html#power-curves"><i class="fa fa-check"></i><b>7.4.2</b> power-curves</a></li>
+<li class="chapter" data-level="7.4.3" data-path="simulation.html"><a href="simulation.html#sample-size-planning"><i class="fa fa-check"></i><b>7.4.3</b> Sample-size planning</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="simulation.html"><a href="simulation.html#simulation-approach-to-power-calculations"><i class="fa fa-check"></i><b>7.5</b> Simulation approach to power calculations</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="simulation.html"><a href="simulation.html#simulated-power-for-a-t-test"><i class="fa fa-check"></i><b>7.5.1</b> Simulated power for a t-test</a></li>
+<li class="chapter" data-level="7.5.2" data-path="simulation.html"><a href="simulation.html#simulating-cell-size"><i class="fa fa-check"></i><b>7.5.2</b> Simulating cell-size</a></li>
+<li class="chapter" data-level="7.5.3" data-path="simulation.html"><a href="simulation.html#one-way-anova"><i class="fa fa-check"></i><b>7.5.3</b> One-Way ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="simulation.html"><a href="simulation.html#closing-thoughts"><i class="fa fa-check"></i><b>7.6</b> Closing thoughts</a></li>
+<li class="chapter" data-level="7.7" data-path="simulation.html"><a href="simulation.html#more-examples"><i class="fa fa-check"></i><b>7.7</b> More example(s)</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="simulation.html"><a href="simulation.html#correlation-between-traits-and-behavior"><i class="fa fa-check"></i><b>7.7.1</b> Correlation between traits and behavior</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Psyc 7709 R Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="simulation" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> Simulation</h1>
+<p><strong>Bold Claim</strong>: If you can’t simulate your data, you might not understand it very well.</p>
+<p>This week on simulation shows you how to generate simulated data in R. There are many reasons to do this, including:</p>
+<ol style="list-style-type: decimal">
+<li>Develop a deeper understanding of the assumptions behind statistical tests</li>
+<li>Sample-size planning and power-analysis</li>
+<li>Understand how real data ought to behave given the assumptions you are making about the data.</li>
+</ol>
+<div id="null-hypothesis" class="section level2">
+<h2><span class="header-section-number">7.1</span> Null-hypothesis</h2>
+<p>In general, the null-hypothesis is the hypothesis that your experimental manipulation didn’t work. Or, the hypothesis of no differences.</p>
+<p>We can simulate null-hypotheses in R for any experimental design. We do this in the following way:</p>
+<ol style="list-style-type: decimal">
+<li>Use R to generate sample data in each condition of a design</li>
+<li>Make sure the sample data comes from the very same distribution for all conditions (ensure that there are no differences)</li>
+<li>Compute a test-statistic for each simulation, save it, then repeat to create the sampling distribution of the test statistic.</li>
+<li>The sampling distribution of the test-statistic is the null-distribution. We use it to set an alpha criterion, and then do hypothesis testing.</li>
+</ol>
+<div id="null-for-a-t-test" class="section level3">
+<h3><span class="header-section-number">7.1.1</span> Null for a t-test</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># samples A and B come from the same normal distribution</span>
+A &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">10</span>,<span class="dt">mean=</span><span class="dv">10</span>, <span class="dt">sd=</span><span class="dv">5</span>)
+B &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">10</span>,<span class="dt">mean=</span><span class="dv">10</span>, <span class="dt">sd=</span><span class="dv">5</span>)
+
+<span class="co"># the pvalue for this one pretend simulation</span>
+<span class="kw">t.test</span>(A,B,<span class="dt">var.equal=</span><span class="ot">TRUE</span>)<span class="op">$</span>p.value</code></pre>
+<pre><code>## [1] 0.8760652</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># running the simulation</span>
+<span class="co"># everytime we run this function we do one simulated experiment and return the p-value</span>
+sim_null &lt;-<span class="st"> </span><span class="cf">function</span>(){
+  A &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">10</span>,<span class="dt">mean=</span><span class="dv">10</span>, <span class="dt">sd=</span><span class="dv">5</span>)
+  B &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">10</span>,<span class="dt">mean=</span><span class="dv">10</span>, <span class="dt">sd=</span><span class="dv">5</span>)
+  <span class="kw">return</span>(<span class="kw">t.test</span>(A,B,<span class="dt">var.equal=</span><span class="ot">TRUE</span>)<span class="op">$</span>p.value)
+}
+
+<span class="co"># use replicate to run the sim many times</span>
+outcomes &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">1000</span>,<span class="kw">sim_null</span>())
+
+<span class="co"># plot the null-distribution of p-values</span>
+<span class="kw">hist</span>(outcomes)</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-151-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># proportion of simulated experiments had a p-value less than .05</span>
+<span class="kw">length</span>(outcomes[outcomes<span class="op">&lt;</span>.<span class="dv">05</span>])<span class="op">/</span><span class="dv">1000</span></code></pre>
+<pre><code>## [1] 0.05</code></pre>
+<p>We ran the above simulation 1000 times. By definition, we should get approximately 5% of the simulations returning a p-value less than .05. If we increase the number of simulations, then we will get a more accurate answer that converges on 5% every time.</p>
+</div>
+</div>
+<div id="alternative-hypothesis" class="section level2">
+<h2><span class="header-section-number">7.2</span> Alternative hypothesis</h2>
+<p>The very general alternative to the null hypothesis (no differences), is often called the <strong>alternative</strong> hypothesis: that the manipulation does cause a difference. More specifically, there are an infinite number of possible alternative hypotheses, each involving a difference of a specific size.</p>
+<p>Consider this. How often will we find a p-value less than .05 if there was a mean difference of 5 between sample A and B. Let’s use all of the same parameters as before, except this time we sample from different distributions for A and B.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make the mean for B 15 (5 more than A)</span>
+sim_alternative &lt;-<span class="st"> </span><span class="cf">function</span>(){
+  A &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">10</span>,<span class="dt">mean=</span><span class="dv">10</span>, <span class="dt">sd=</span><span class="dv">5</span>)
+  B &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">10</span>,<span class="dt">mean=</span><span class="dv">15</span>, <span class="dt">sd=</span><span class="dv">5</span>)
+  <span class="kw">return</span>(<span class="kw">t.test</span>(A,B,<span class="dt">var.equal=</span><span class="ot">TRUE</span>)<span class="op">$</span>p.value)
+}
+
+<span class="co"># use replicate to run the sim many times</span>
+outcomes &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">1000</span>,<span class="kw">sim_alternative</span>())
+
+<span class="co"># plot the distribution of p-values</span>
+<span class="kw">hist</span>(outcomes)</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-152-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># proportion of simulated experiments had a p-value less than .05</span>
+<span class="kw">length</span>(outcomes[outcomes<span class="op">&lt;</span>.<span class="dv">05</span>])<span class="op">/</span><span class="dv">1000</span></code></pre>
+<pre><code>## [1] 0.571</code></pre>
+<p>We programmed a mean difference of 5 between our sample for A and B, and we found p-values less than .05 a much higher proportion of the time. This is sensible, as there really was a difference between the samples (we put it there).</p>
+</div>
+<div id="power-and-effect-size" class="section level2">
+<h2><span class="header-section-number">7.3</span> Power and Effect Size</h2>
+<p><strong>Power</strong>: the probability of rejecting a null-hypothesis, given that there is a true effect of some size.</p>
+<p><strong>Effect-size</strong>: In general, it’s the assumed size of the difference. In the above example, we assumed a difference of 5, so the assumed effect-size was 5.</p>
+<p>There are many other ways to define and measure effect-size. Perhaps the most common way is Cohen’s D. Cohen’s D expresses the mean difference in terms of standard deviation units. In the above example, both distributions had a standard deviation of 5. The mean for A was 10, and the mean for B was 15. Using Cohen’s D, the effect-size was 1. This is because 15 is 1 standard deviation away from 10 (the standard deviation is also 5).</p>
+<p>When we calculated the proportion of simulations that returned a p-value less than .05, we found the power of the design to detect an effect-size of 1.</p>
+<p>Power depends on three major things:</p>
+<ol style="list-style-type: decimal">
+<li>Sample-size</li>
+<li>Effect-size</li>
+<li>Alpha-criterion</li>
+</ol>
+<p>Power is a property of a design. The power of a design increases when sample-size increases. The power of a design increases when the actual true effect-size increases. The power of a design increases then the alpha criterion increases (e.g, going from .05 to .1, making it easier to reject the null).</p>
+</div>
+<div id="power-analysis-with-r" class="section level2">
+<h2><span class="header-section-number">7.4</span> Power analysis with R</h2>
+<p>There are many packages and functions for power analysis. Power analysis is important for planning a design. For example, you can determine how many subjects you need in order to have a high probability of detecting a true effect (of a particular size) if it is really there.</p>
+<div id="pwr-package" class="section level3">
+<h3><span class="header-section-number">7.4.1</span> pwr package</h3>
+<p>Here is an example of using the <code>pwr</code> package to find the power for an independent sample t-test, with n=10, to detect an effect-size of 1. This answer is similar to our simulations answer. The simulation would converge on this answer if we increased the number of simulations.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pwr)
+<span class="kw">pwr.t.test</span>(<span class="dt">n=</span><span class="dv">10</span>,
+           <span class="dt">d=</span><span class="dv">1</span>,
+           <span class="dt">sig.level=</span>.<span class="dv">05</span>,
+           <span class="dt">type=</span><span class="st">&quot;two.sample&quot;</span>,
+           <span class="dt">alternative=</span><span class="st">&quot;two.sided&quot;</span>)</code></pre>
+<pre><code>## 
+##      Two-sample t test power calculation 
+## 
+##               n = 10
+##               d = 1
+##       sig.level = 0.05
+##           power = 0.5620066
+##     alternative = two.sided
+## 
+## NOTE: n is number in *each* group</code></pre>
+<p>As I mentioned there are many functions for directly computing power in R. Feel free to use them. In this class, we learn how to use simulation to conduct power analyses. This can be a redundant approach that is not necessary, given there are other functions we can use. Additionally, we will not get exact solutions (but approximate ones). Nevertheless, the existing power functions can be limited and may not apply to your design. The simulation approach can be extended to any design. Learning how to run the simulations will also improve your statistical sensibilities, and power calculations will become less of a black box.</p>
+<p>Two more things before moving onto simulation: power-curves, and sample-size planning.</p>
+</div>
+<div id="power-curves" class="section level3">
+<h3><span class="header-section-number">7.4.2</span> power-curves</h3>
+<p>A design’s power is in relation to the true effect-size. The same design has different levels of power to detect different sized effects. Let’s make a power curve to see the power of a t-test for independent samples (n=10) to detect a range of effect-sizes</p>
+<pre class="sourceCode r"><code class="sourceCode r">effect_sizes &lt;-<span class="st"> </span><span class="kw">seq</span>(.<span class="dv">1</span>,<span class="dv">2</span>,.<span class="dv">1</span>)
+power &lt;-<span class="st"> </span><span class="kw">sapply</span>(effect_sizes, 
+          <span class="dt">FUN =</span> <span class="cf">function</span>(x) {
+            <span class="kw">pwr.t.test</span>(<span class="dt">n=</span><span class="dv">10</span>,
+            <span class="dt">d=</span>x,
+            <span class="dt">sig.level=</span>.<span class="dv">05</span>,
+            <span class="dt">type=</span><span class="st">&quot;two.sample&quot;</span>,
+            <span class="dt">alternative=</span><span class="st">&quot;two.sided&quot;</span>)<span class="op">$</span>power})
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(effect_sizes,power)
+
+<span class="kw">library</span>(ggplot2)
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>effect_sizes,
+                    <span class="dt">y=</span>power))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-154-1.png" width="672" /></p>
+<p>This power curve applies to all independent-sample t-tests with n=10. It is a property, or fact about those designs. Every design has it’s own power curve. The power curve shows us what <strong>should</strong> happen (on average), when the <strong>true</strong> state of the world involves effects of different sizes.</p>
+<p>If you do not know the power-curve for your design, then you do not know how sensitive your design is for detecting effects of particular sizes. You might accidentally be using an under powered design, with only a very small chance of detecting an effect of a size you are interested in.</p>
+<p>If you do know the power-curve for your design, you will be in a better position to plan your experiment, for example by modifying the number of subjects that you run.</p>
+</div>
+<div id="sample-size-planning" class="section level3">
+<h3><span class="header-section-number">7.4.3</span> Sample-size planning</h3>
+<p>Here is one way to plan for the number of subjects that you need to find an effect of interest.</p>
+<ol style="list-style-type: decimal">
+<li>Establish a smallest effect-size of interest</li>
+<li>Create a curve showing the power of your design as a function of number of subjects to detect the smallest effect-size of interest.</li>
+</ol>
+<p>It’s not clear how you establish a smallest effect-size of interest. But let’s say you are interested in detecting an effect of at least d = .2. This means that two conditions would differ by at least a .2 standard deviation shift. If you find something smaller than that, let’s say you wouldn’t care about it because it wouldn’t be big enough for you to care. How many subjects do you need to have a high powered design, one that would almost always reject the null-hypothesis?</p>
+<p>This is for an independent samples t-test:</p>
+<pre class="sourceCode r"><code class="sourceCode r">num_subjects &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">10</span>,<span class="dv">1000</span>,<span class="dv">10</span>)
+power &lt;-<span class="st"> </span><span class="kw">sapply</span>(num_subjects, 
+          <span class="dt">FUN =</span> <span class="cf">function</span>(x) {
+            <span class="kw">pwr.t.test</span>(<span class="dt">n=</span>x,
+            <span class="dt">d=</span>.<span class="dv">2</span>,
+            <span class="dt">sig.level=</span>.<span class="dv">05</span>,
+            <span class="dt">type=</span><span class="st">&quot;two.sample&quot;</span>,
+            <span class="dt">alternative=</span><span class="st">&quot;two.sided&quot;</span>)<span class="op">$</span>power})
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(num_subjects,power)
+
+<span class="kw">library</span>(ggplot2)
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>num_subjects,
+                    <span class="dt">y=</span>power))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-155-1.png" width="672" /></p>
+<p>Well, it looks like you need many subjects to have high power. For example, if you want to detect the effect 95% of the time, you would need around 650 subjects. It’s worth doing this kind of analysis to see if your design checks out. You don’t want to waste your time running an experiment that is designed to fail (even when the true effect is real).</p>
+</div>
+</div>
+<div id="simulation-approach-to-power-calculations" class="section level2">
+<h2><span class="header-section-number">7.5</span> Simulation approach to power calculations</h2>
+<p>The simulation approach to power analysis involves these steps:</p>
+<ol style="list-style-type: decimal">
+<li>Use R to sample numbers into each condition of any design.</li>
+<li>You can set the properties (e.g., n, mean, sd, kind of distribution etc.) of each sample in each condition, and mimic any type of expected pattern</li>
+<li>Analyze the simulated data to obtain a p-value (use any analysis appropriate to the design)</li>
+<li>Repeat many times, save the p-values</li>
+<li>Compute power by determining the proportion of simulated p-values that are less than your alpha criterion.</li>
+</ol>
+<p>For all simulations, increasing number of simulations will improve the accuracy of your results. We will use 1000 simulations throughout. 10,000 would be better, but might take just a little bit longer.</p>
+<div id="simulated-power-for-a-t-test" class="section level3">
+<h3><span class="header-section-number">7.5.1</span> Simulated power for a t-test</h3>
+<p>A power curve for n=10.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># function to run a simulated t-test</span>
+sim_power &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  A &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">10</span>,<span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)
+  B &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">10</span>,<span class="dt">mean=</span>(<span class="dv">0</span><span class="op">+</span>x), <span class="dt">sd=</span><span class="dv">1</span>)
+  <span class="kw">return</span>(<span class="kw">t.test</span>(A,B,<span class="dt">var.equal=</span><span class="ot">TRUE</span>)<span class="op">$</span>p.value)
+}
+
+<span class="co"># vector of effect sizes</span>
+effect_sizes &lt;-<span class="st"> </span><span class="kw">seq</span>(.<span class="dv">1</span>,<span class="dv">2</span>,.<span class="dv">1</span>)
+<span class="co"># run simulation for each effect size 1000 times</span>
+power &lt;-<span class="st"> </span><span class="kw">sapply</span>(effect_sizes, 
+          <span class="dt">FUN =</span> <span class="cf">function</span>(x) {
+            sims &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">1000</span>,<span class="kw">sim_power</span>(x))
+            sim_power &lt;-<span class="st"> </span><span class="kw">length</span>(sims[sims<span class="op">&lt;</span>.<span class="dv">05</span>])<span class="op">/</span><span class="kw">length</span>(sims)
+            <span class="kw">return</span>(sim_power)})
+<span class="co"># combine into dataframe</span>
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(effect_sizes,power)
+
+<span class="co"># plot the power curve</span>
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>effect_sizes,
+                    <span class="dt">y=</span>power))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-156-1.png" width="672" /></p>
+<p>In this case, there is no obvious benefit to computing the power-curve by simulation. The answer we get is similar to the answer we got before using the <code>pwr</code> package, but our simulation answer is more noisy. Why bother the simulation?</p>
+<p>One answer to the why bother question is that you can simulate deeper aspects of the design and get more refined answers without having to work through the math.</p>
+</div>
+<div id="simulating-cell-size" class="section level3">
+<h3><span class="header-section-number">7.5.2</span> Simulating cell-size</h3>
+<p>Many experimental designs involve multiple measurements, or trials, for each subject in each condition. How many trials should we require for each subject in each condition? Traditional power analysis doesn’t make it easy to answer this question. However, the power of a design will depend not only on the number subjects, but also the number trials used to estimate the mean for each subject in each condition.</p>
+<p>Consider a simple Stroop experiment. The researcher is interested in measuring a Stroop effect of at least d=.1 (e.g., the difference between mean congruent trials is .1 standard deviations smaller than mean incongruent trials). How many subjects are required? And, how many trials should each subject perform in the congruent and incongruent conditions? Let’s use simulation to find out.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># function to run a simulated t-test</span>
+<span class="co"># nsubs sets number of subjects</span>
+<span class="co"># ntrials to change number of trials</span>
+<span class="co"># d sets effect size</span>
+<span class="co"># this is a paired sample test to model Stroop</span>
+sim_power &lt;-<span class="st"> </span><span class="cf">function</span>(nsubs,ntrials,d){
+  A &lt;-<span class="st"> </span><span class="kw">replicate</span>(nsubs,<span class="kw">mean</span>(<span class="kw">rnorm</span>(<span class="dt">n=</span>ntrials,<span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)))
+  B &lt;-<span class="st"> </span><span class="kw">replicate</span>(nsubs,<span class="kw">mean</span>(<span class="kw">rnorm</span>(<span class="dt">n=</span>ntrials,<span class="dt">mean=</span>d, <span class="dt">sd=</span><span class="dv">1</span>)))
+  <span class="kw">return</span>(<span class="kw">t.test</span>(A,B,<span class="dt">paired=</span><span class="ot">TRUE</span>)<span class="op">$</span>p.value)
+}
+
+<span class="co"># vectors for number of subjects and trials</span>
+n_subs_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">50</span>)
+n_trials_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">50</span>,<span class="dv">100</span>)
+
+<span class="co"># a loop to run all simulations</span>
+power &lt;-<span class="st"> </span><span class="kw">c</span>()
+subjects &lt;-<span class="st"> </span><span class="kw">c</span>()
+trials &lt;-<span class="st"> </span><span class="kw">c</span>()
+i &lt;-<span class="st"> </span><span class="dv">0</span> <span class="co"># use this as a counter for indexing</span>
+<span class="cf">for</span>(s <span class="cf">in</span> n_subs_vector){
+  <span class="cf">for</span>(t <span class="cf">in</span> n_trials_vector){
+    i &lt;-<span class="st"> </span>i<span class="op">+</span><span class="dv">1</span>
+    sims &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">1000</span>,<span class="kw">sim_power</span>(s,t,.<span class="dv">1</span>))
+    power[i] &lt;-<span class="st"> </span><span class="kw">length</span>(sims[sims<span class="op">&lt;</span>.<span class="dv">05</span>])<span class="op">/</span><span class="kw">length</span>(sims)
+    subjects[i] &lt;-<span class="st"> </span>s
+    trials[i] &lt;-<span class="st"> </span>t
+  }
+}
+
+<span class="co"># combine into dataframe</span>
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(power,subjects,trials)
+
+<span class="co"># plot the power curve</span>
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>subjects,
+                    <span class="dt">y=</span>power,
+                    <span class="dt">group=</span>trials,
+                    <span class="dt">color=</span>trials))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-157-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># a vectorized version of the loop</span>
+<span class="co"># run simulation for each effect size 1000 times</span>
+
+<span class="co"># power &lt;- outer(n_subs_vector,</span>
+<span class="co">#                n_trials_vector,</span>
+<span class="co">#                FUN = Vectorize(function(x,y) {</span>
+<span class="co">#                   sims &lt;- replicate(100,sim_power(x,y))  </span>
+<span class="co">#                   sim_power &lt;- length(sims[sims&lt;.05])/length(sims)</span>
+<span class="co">#                   return(sim_power)</span>
+<span class="co">#                }))</span></code></pre>
+<p>To my eye, it looks like 30 subjects with 100 trials in each condition would give you a very high power to find a Stroop effect of d=.1.</p>
+</div>
+<div id="one-way-anova" class="section level3">
+<h3><span class="header-section-number">7.5.3</span> One-Way ANOVA</h3>
+<p>Let’s extend our simulation based approach to the one-way ANOVA. Let’s assume a between-subjects design, with one factor that has four levels: A, B, C, and D. There will be 20 subjects in each group. What is the power curve for this design to detect effects of various size? Immediately, the situation becomes complicated, there are numerous ways that the means for A, B, C, and D could vary. Let’s assume the simplest case, three of them are the same, and one of them is different by some amount of standard deviations. We will compute the main effect, and report the proportion of significant experiments as we increase the effect size for the fourth group.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># function to run a simulated t-test</span>
+sim_power_anova &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  A &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">20</span>,<span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)
+  B &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">20</span>,<span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)
+  C &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">20</span>,<span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)
+  D &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">20</span>,<span class="dt">mean=</span>(<span class="dv">0</span><span class="op">+</span>x), <span class="dt">sd=</span><span class="dv">1</span>)
+  df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">condition =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>),<span class="dt">each=</span><span class="dv">20</span>)),
+                   <span class="dt">DV =</span> <span class="kw">c</span>(A,B,C,D))
+  aov_results &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">aov</span>(DV<span class="op">~</span>condition,df))
+  <span class="co">#return the pvalue</span>
+  <span class="kw">return</span>(aov_results[[<span class="dv">1</span>]]<span class="op">$</span><span class="st">`</span><span class="dt">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">1</span>])
+}
+
+<span class="co"># vector of effect sizes</span>
+effect_sizes &lt;-<span class="st"> </span><span class="kw">seq</span>(.<span class="dv">1</span>,<span class="dv">2</span>,.<span class="dv">1</span>)
+<span class="co"># run simulation for each effect size 1000 times</span>
+power &lt;-<span class="st"> </span><span class="kw">sapply</span>(effect_sizes, 
+          <span class="dt">FUN =</span> <span class="cf">function</span>(x) {
+            sims &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">1000</span>,<span class="kw">sim_power_anova</span>(x))
+            sim_power &lt;-<span class="st"> </span><span class="kw">length</span>(sims[sims<span class="op">&lt;</span>.<span class="dv">05</span>])<span class="op">/</span><span class="kw">length</span>(sims)
+            <span class="kw">return</span>(sim_power)})
+<span class="co"># combine into dataframe</span>
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(effect_sizes,power)
+
+<span class="co"># plot the power curve</span>
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>effect_sizes,
+                    <span class="dt">y=</span>power))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-158-1.png" width="672" /></p>
+<p>It looks like this design (1 factor, between-subjects, 20 subjects per group) has high power to detect an effect of d=1, specifically when one of the groups differs from the others by d=1.</p>
+<p>However, most effects in psychology are smalls, d=.2 is very common. How, many subjects does this design require to have high power (let’s say above .95, although most people use .8) to detect that small effect?</p>
+<pre class="sourceCode r"><code class="sourceCode r">sim_power_anova &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  A &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span>x,<span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)
+  B &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span>x,<span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)
+  C &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span>x,<span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)
+  D &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span>x,<span class="dt">mean=</span>.<span class="dv">2</span>, <span class="dt">sd=</span><span class="dv">1</span>)
+  df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">condition =</span> <span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>),<span class="dt">each=</span>x)),
+                   <span class="dt">DV =</span> <span class="kw">c</span>(A,B,C,D))
+  aov_results &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">aov</span>(DV<span class="op">~</span>condition,df))
+  <span class="co">#return the pvalue</span>
+  <span class="kw">return</span>(aov_results[[<span class="dv">1</span>]]<span class="op">$</span><span class="st">`</span><span class="dt">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">1</span>])
+}
+
+<span class="co"># vector of effect sizes</span>
+subjects &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">10</span>,<span class="dv">1000</span>,<span class="dv">50</span>)
+<span class="co"># run simulation for each effect size 1000 times</span>
+power &lt;-<span class="st"> </span><span class="kw">sapply</span>(subjects, 
+          <span class="dt">FUN =</span> <span class="cf">function</span>(x) {
+            sims &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">1000</span>,<span class="kw">sim_power_anova</span>(x))
+            sim_power &lt;-<span class="st"> </span><span class="kw">length</span>(sims[sims<span class="op">&lt;</span>.<span class="dv">05</span>])<span class="op">/</span><span class="kw">length</span>(sims)
+            <span class="kw">return</span>(sim_power)})
+<span class="co"># combine into dataframe</span>
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(subjects,power)
+
+<span class="co"># plot the power curve</span>
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>subjects,
+                    <span class="dt">y=</span>power))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-159-1.png" width="672" /></p>
+<p>The simulations suggests we need about 560 subjects in each group to have power .95 to detect the effect (d=.2). That’s a total of 2240 subjects. Reality can be surprising when it comes to power analysis. It is better to be surprised about your design before you run your experiment, not after.</p>
+</div>
+</div>
+<div id="closing-thoughts" class="section level2">
+<h2><span class="header-section-number">7.6</span> Closing thoughts</h2>
+<p>The simulation approach is powerful and flexible. It can be applied whenever you can formalize your assumptions about the data. And, your simulations can be highly customized to account for all kinds of nuances, like different numbers of subjects, different distributions, assumptions about noise, etc. If you are wondering what your design can do, maybe you should simulate it.</p>
+</div>
+<div id="more-examples" class="section level2">
+<h2><span class="header-section-number">7.7</span> More example(s)</h2>
+<p>As I find time I will try to add more examples here, especially out of the box examples to illustrate how simulation can be applied.</p>
+<div id="correlation-between-traits-and-behavior" class="section level3">
+<h3><span class="header-section-number">7.7.1</span> Correlation between traits and behavior</h3>
+<p>A common research strategy is to measure putative correlations between people’s traits and their behavior. For example, a researcher might prepare a questionnaire with several questions. Perhaps the questions are about their political views, or about their life satisfaction, or anything else. The research might ask some group of people to answer the questions, and to also perform some task. At the end of the experiment, they might ask if different kinds of people (measured by the questionnaire) perform differently on the behavioral measure. For example, we might have people answer several questions about their openness to new experiences, we might also measure their performance on a working memory task. A research question might be, do people who are more open to experience perform better on a working memory task? The answer would lie in a correlation between the answers on the questions, and the performance on the task. Let’s simulate this kind of situation, say for 20 subjects. Each subject answers 20 questions, and they perform a behavioral task. At the end of the experiment, we correlate the answers on each question, with the performance on the task. What kind of correlations would we expect by chance alone? Let’s say the participants are all random robots. They answer each question randomly, and their performance on the behavioral task is sampled randomly from some normal distribution. If everything is random, shouldn’t we expect to find no correlations?</p>
+<p>Details:</p>
+<p>Let’s assume that each question involves a likert scale from 1 to 7. Each person randomly picks a number from 1 to 7 for each question. Let’s assume performance on the behavioral task is sampled from a normal distribution with mean = 0, and sd = 1.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get 20 random answers for all 20 subjects and 20 questions</span>
+<span class="co"># columns will be individual subjects 1 to 20</span>
+<span class="co"># rows will be questions 1 to 20</span>
+questionnaire &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>,<span class="dv">20</span><span class="op">*</span><span class="dv">20</span>, <span class="dt">replace=</span><span class="ot">TRUE</span>),<span class="dt">ncol=</span><span class="dv">20</span>)
+<span class="co"># get 20 measures of performance on behavioral task</span>
+behavioral_task &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">20</span>,<span class="dv">0</span>,<span class="dv">1</span>)
+
+<span class="co"># correlate behavior with each question</span>
+save_correlations &lt;-<span class="kw">c</span>()
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>){
+  save_correlations[i] &lt;-<span class="st"> </span><span class="kw">cor</span>(behavioral_task,questionnaire[i,])
+}
+
+<span class="co"># show histogram of 20 correlations</span>
+<span class="kw">hist</span>(save_correlations)</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
+<p>The histogram shows that a range of correlations between individual questions and behavior can emerge just by chance alone. If you run the above code a few times, you will see that the histogram changes a bit because of random chance.</p>
+<p>Oftentimes researchers might not know which question on the questionnaire is the best question. That is, the one that best correlates with behavior. Consider a researcher who computes all of the correlations between each question and behavior, and then chooses the question with highest correlation (positive or negative) as the best question. After all, it has the highest correlation. After choosing this question, they might suggest that behavior is strongly correlated with how people answer this question.</p>
+<p>Let’s try to find out by simulation what kinds of large correlations can occur just by chance alone. We will run the above many times, and each time we will save the absolute value of the largest correlation between a question and behavior. Just how large can these correlations be by chance alone?</p>
+<pre class="sourceCode r"><code class="sourceCode r">save_max &lt;-<span class="st"> </span><span class="kw">c</span>()
+<span class="cf">for</span>( j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10000</span>){
+  questionnaire &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>,<span class="dv">20</span><span class="op">*</span><span class="dv">20</span>, <span class="dt">replace=</span><span class="ot">TRUE</span>),<span class="dt">ncol=</span><span class="dv">20</span>)
+  behavioral_task &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">20</span>,<span class="dv">0</span>,<span class="dv">1</span>)
+  
+  save_correlations &lt;-<span class="kw">c</span>()
+  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>){
+    save_correlations[i] &lt;-<span class="st"> </span><span class="kw">cor</span>(behavioral_task,questionnaire[i,])
+  }
+  save_max[j] &lt;-<span class="st"> </span><span class="kw">max</span>(<span class="kw">abs</span>(save_correlations))
+}
+
+<span class="kw">hist</span>(save_max)</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-161-1.png" width="672" /></p>
+<p>The simulation shows that chance alone in this situation can produce very large correlations, as large as .8 or .9 (although not very often).</p>
+<p>The situation changes somewhat if many more subjects are run. Let’s do the same as above, but run 200 subjects, rather than 20.</p>
+<pre class="sourceCode r"><code class="sourceCode r">save_max &lt;-<span class="st"> </span><span class="kw">c</span>()
+<span class="cf">for</span>( j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10000</span>){
+  questionnaire &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>,<span class="dv">200</span><span class="op">*</span><span class="dv">20</span>, <span class="dt">replace=</span><span class="ot">TRUE</span>),<span class="dt">ncol=</span><span class="dv">200</span>)
+  behavioral_task &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">200</span>,<span class="dv">0</span>,<span class="dv">1</span>)
+  
+  save_correlations &lt;-<span class="kw">c</span>()
+  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>){
+    save_correlations[i] &lt;-<span class="st"> </span><span class="kw">cor</span>(behavioral_task,questionnaire[i,])
+  }
+  save_max[j] &lt;-<span class="st"> </span><span class="kw">max</span>(<span class="kw">abs</span>(save_correlations))
+}
+
+<span class="kw">hist</span>(save_max)</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-162-1.png" width="672" /></p>
+<p>Now, chance doesn’t do much better than .25.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="statistics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/06-Simulation.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["7709Rbook.pdf", "7709Rbook.epub"],
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

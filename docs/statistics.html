@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 6 Statistics | Psyc 7709 R Book</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 6 Statistics | Psyc 7709 R Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Statistics | Psyc 7709 R Book" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Matthew Crump">
+
+
+<meta name="date" content="2019-03-16">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="data-wrangling.html">
+<link rel="next" href="simulation.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
+<li class="chapter" data-level="2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html"><i class="fa fa-check"></i><b>2</b> Basic Programming in R</a><ul>
+<li class="chapter" data-level="2.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#variables"><i class="fa fa-check"></i><b>2.1</b> Variables</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#style-guide"><i class="fa fa-check"></i><b>2.1.1</b> Style guide</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#double-checking-your-variable-works"><i class="fa fa-check"></i><b>2.1.2</b> Double-checking your variable works</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#changing-the-contents-of-a-variable"><i class="fa fa-check"></i><b>2.1.3</b> Changing the contents of a variable</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#properties-of-variables"><i class="fa fa-check"></i><b>2.1.4</b> Properties of variables</a></li>
+<li class="chapter" data-level="2.1.5" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#converting-between-numeric-and-character"><i class="fa fa-check"></i><b>2.1.5</b> Converting between numeric and character</a></li>
+<li class="chapter" data-level="2.1.6" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#converting-between-character-and-numeric"><i class="fa fa-check"></i><b>2.1.6</b> converting between character and numeric</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#vectors"><i class="fa fa-check"></i><b>2.2</b> Vectors</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#indexing"><i class="fa fa-check"></i><b>2.2.1</b> indexing</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#assignment-and-indexing"><i class="fa fa-check"></i><b>2.2.2</b> assignment and indexing</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#c-is-for-combine"><i class="fa fa-check"></i><b>2.2.3</b> c is for combine</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#loops"><i class="fa fa-check"></i><b>2.3</b> Loops</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#breaking-a-loop"><i class="fa fa-check"></i><b>2.3.1</b> Breaking a loop</a></li>
+<li class="chapter" data-level="2.3.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#while-loops"><i class="fa fa-check"></i><b>2.3.2</b> While loops</a></li>
+<li class="chapter" data-level="2.3.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#repeat-loops"><i class="fa fa-check"></i><b>2.3.3</b> Repeat loops</a></li>
+<li class="chapter" data-level="2.3.4" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#examples"><i class="fa fa-check"></i><b>2.3.4</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#logical-comparison"><i class="fa fa-check"></i><b>2.4</b> Logical comparison</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#equal-to"><i class="fa fa-check"></i><b>2.4.1</b> equal to</a></li>
+<li class="chapter" data-level="2.4.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#not-equal-to"><i class="fa fa-check"></i><b>2.4.2</b> not equal to</a></li>
+<li class="chapter" data-level="2.4.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#greater-than-less-than"><i class="fa fa-check"></i><b>2.4.3</b> Greater than/ less than</a></li>
+<li class="chapter" data-level="2.4.4" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#section"><i class="fa fa-check"></i><b>2.4.4</b> &gt;= &lt;=</a></li>
+<li class="chapter" data-level="2.4.5" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#and"><i class="fa fa-check"></i><b>2.4.5</b> AND</a></li>
+<li class="chapter" data-level="2.4.6" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#or"><i class="fa fa-check"></i><b>2.4.6</b> OR</a></li>
+<li class="chapter" data-level="2.4.7" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#true-false"><i class="fa fa-check"></i><b>2.4.7</b> TRUE FALSE</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#if-else"><i class="fa fa-check"></i><b>2.5</b> IF ELSE</a></li>
+<li class="chapter" data-level="2.6" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#functions"><i class="fa fa-check"></i><b>2.6</b> Functions</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#function-syntax"><i class="fa fa-check"></i><b>2.6.1</b> function syntax</a></li>
+<li class="chapter" data-level="2.6.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#example-functions"><i class="fa fa-check"></i><b>2.6.2</b> example functions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html"><i class="fa fa-check"></i><b>3</b> Programming Challenges for learning the fundamentals</a><ul>
+<li class="chapter" data-level="3.1" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#tips-for-approaching-the-problems"><i class="fa fa-check"></i><b>3.1</b> Tips for Approaching the Problems</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#rstudios-text-editor"><i class="fa fa-check"></i><b>3.1.1</b> Rstudio’s Text editor</a></li>
+<li class="chapter" data-level="3.1.2" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#use-informative-variable-names."><i class="fa fa-check"></i><b>3.1.2</b> Use informative variable names.</a></li>
+<li class="chapter" data-level="3.1.3" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#use-comments."><i class="fa fa-check"></i><b>3.1.3</b> Use comments.</a></li>
+<li class="chapter" data-level="3.1.4" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#r-markdown."><i class="fa fa-check"></i><b>3.1.4</b> R Markdown.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#easier-problems"><i class="fa fa-check"></i><b>3.2</b> Easier Problems</a></li>
+<li class="chapter" data-level="3.3" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#harder-problems"><i class="fa fa-check"></i><b>3.3</b> Harder Problems</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html"><i class="fa fa-check"></i><b>4</b> Data visualization (ggplot2)</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ggplot2-resources"><i class="fa fa-check"></i><b>4.1</b> ggplot2 resources</a></li>
+<li class="chapter" data-level="4.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#example-code"><i class="fa fa-check"></i><b>4.2</b> Example code</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#scatterplot"><i class="fa fa-check"></i><b>4.2.1</b> Scatterplot</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#bar-graph"><i class="fa fa-check"></i><b>4.2.2</b> bar graph</a></li>
+<li class="chapter" data-level="4.2.3" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#line-graph"><i class="fa fa-check"></i><b>4.2.3</b> Line Graph</a></li>
+<li class="chapter" data-level="4.2.4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#histogram"><i class="fa fa-check"></i><b>4.2.4</b> Histogram</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#advanced-ggplot"><i class="fa fa-check"></i><b>4.3</b> Advanced ggplot</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#add-on-packages"><i class="fa fa-check"></i><b>4.3.1</b> Add-on packages</a></li>
+<li class="chapter" data-level="4.3.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#figure-output-tips"><i class="fa fa-check"></i><b>4.3.2</b> Figure Output tips</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#knitr-options"><i class="fa fa-check"></i><b>4.4</b> knitr options</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#knitr-figure-output-defaults"><i class="fa fa-check"></i><b>4.4.1</b> knitr figure output defaults</a></li>
+<li class="chapter" data-level="4.4.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#figure-output-per-code-block"><i class="fa fa-check"></i><b>4.4.2</b> figure output per code block</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#data-vis-assignment-with-solutions"><i class="fa fa-check"></i><b>4.5</b> Data-vis assignment with solutions</a></li>
+<li class="chapter" data-level="4.6" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#list-of-figures-to-reproduce"><i class="fa fa-check"></i><b>4.6</b> List of Figures to reproduce</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>5</b> Data-Wrangling</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-wrangling.html"><a href="data-wrangling.html#what-is-data-wrangling"><i class="fa fa-check"></i><b>5.1</b> What is Data-wrangling</a></li>
+<li class="chapter" data-level="5.2" data-path="data-wrangling.html"><a href="data-wrangling.html#dplyr-basics"><i class="fa fa-check"></i><b>5.2</b> dplyr basics</a></li>
+<li class="chapter" data-level="5.3" data-path="data-wrangling.html"><a href="data-wrangling.html#basic-dataframe-stuff-without-dplyr"><i class="fa fa-check"></i><b>5.3</b> basic dataframe stuff without dplyr</a></li>
+<li class="chapter" data-level="5.4" data-path="data-wrangling.html"><a href="data-wrangling.html#a-couple-questions"><i class="fa fa-check"></i><b>5.4</b> A couple questions:</a></li>
+<li class="chapter" data-level="5.5" data-path="data-wrangling.html"><a href="data-wrangling.html#dplyr-style"><i class="fa fa-check"></i><b>5.5</b> dplyr style</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="data-wrangling.html"><a href="data-wrangling.html#quick-example"><i class="fa fa-check"></i><b>5.5.1</b> quick example</a></li>
+<li class="chapter" data-level="5.5.2" data-path="data-wrangling.html"><a href="data-wrangling.html#filter"><i class="fa fa-check"></i><b>5.5.2</b> filter</a></li>
+<li class="chapter" data-level="5.5.3" data-path="data-wrangling.html"><a href="data-wrangling.html#group_by-and-summarise"><i class="fa fa-check"></i><b>5.5.3</b> group_by and summarise</a></li>
+<li class="chapter" data-level="5.5.4" data-path="data-wrangling.html"><a href="data-wrangling.html#focus-on-summarise"><i class="fa fa-check"></i><b>5.5.4</b> focus on summarise</a></li>
+<li class="chapter" data-level="5.5.5" data-path="data-wrangling.html"><a href="data-wrangling.html#mutate"><i class="fa fa-check"></i><b>5.5.5</b> Mutate</a></li>
+<li class="chapter" data-level="5.5.6" data-path="data-wrangling.html"><a href="data-wrangling.html#select"><i class="fa fa-check"></i><b>5.5.6</b> Select</a></li>
+<li class="chapter" data-level="5.5.7" data-path="data-wrangling.html"><a href="data-wrangling.html#star-wars-questions-and-answers"><i class="fa fa-check"></i><b>5.5.7</b> Star wars questions and answers</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="data-wrangling.html"><a href="data-wrangling.html#data-input"><i class="fa fa-check"></i><b>5.6</b> Data input</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="data-wrangling.html"><a href="data-wrangling.html#other-helpful-libraries-for-reading-in-files"><i class="fa fa-check"></i><b>5.6.1</b> Other helpful libraries for reading in files</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="data-wrangling.html"><a href="data-wrangling.html#example-analysis"><i class="fa fa-check"></i><b>5.7</b> Example Analysis</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="data-wrangling.html"><a href="data-wrangling.html#load-the-data-and-libraries-you-will-use"><i class="fa fa-check"></i><b>5.7.1</b> Load the data and libraries you will use</a></li>
+<li class="chapter" data-level="5.7.2" data-path="data-wrangling.html"><a href="data-wrangling.html#pre-processing"><i class="fa fa-check"></i><b>5.7.2</b> Pre-processing</a></li>
+<li class="chapter" data-level="5.7.3" data-path="data-wrangling.html"><a href="data-wrangling.html#checks"><i class="fa fa-check"></i><b>5.7.3</b> Checks</a></li>
+<li class="chapter" data-level="5.7.4" data-path="data-wrangling.html"><a href="data-wrangling.html#exclusion"><i class="fa fa-check"></i><b>5.7.4</b> Exclusion</a></li>
+<li class="chapter" data-level="5.7.5" data-path="data-wrangling.html"><a href="data-wrangling.html#analysis"><i class="fa fa-check"></i><b>5.7.5</b> Analysis</a></li>
+<li class="chapter" data-level="5.7.6" data-path="data-wrangling.html"><a href="data-wrangling.html#table-of-2x2-means"><i class="fa fa-check"></i><b>5.7.6</b> table of 2x2 means</a></li>
+<li class="chapter" data-level="5.7.7" data-path="data-wrangling.html"><a href="data-wrangling.html#plot-of-2x2-means"><i class="fa fa-check"></i><b>5.7.7</b> plot of 2x2 means</a></li>
+<li class="chapter" data-level="5.7.8" data-path="data-wrangling.html"><a href="data-wrangling.html#repeated-measure-anova"><i class="fa fa-check"></i><b>5.7.8</b> Repeated measure ANOVA</a></li>
+<li class="chapter" data-level="5.7.9" data-path="data-wrangling.html"><a href="data-wrangling.html#example-write-up"><i class="fa fa-check"></i><b>5.7.9</b> Example Write-Up</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>6</b> Statistics</a><ul>
+<li class="chapter" data-level="6.1" data-path="statistics.html"><a href="statistics.html#t-tests"><i class="fa fa-check"></i><b>6.1</b> t-tests</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="statistics.html"><a href="statistics.html#one-sample-t-test"><i class="fa fa-check"></i><b>6.1.1</b> one sample t-test</a></li>
+<li class="chapter" data-level="6.1.2" data-path="statistics.html"><a href="statistics.html#paired-sample-t-test"><i class="fa fa-check"></i><b>6.1.2</b> paired-sample t-test</a></li>
+<li class="chapter" data-level="6.1.3" data-path="statistics.html"><a href="statistics.html#independent-sample-t-test"><i class="fa fa-check"></i><b>6.1.3</b> Independent sample t-test</a></li>
+<li class="chapter" data-level="6.1.4" data-path="statistics.html"><a href="statistics.html#printing"><i class="fa fa-check"></i><b>6.1.4</b> printing</a></li>
+<li class="chapter" data-level="6.1.5" data-path="statistics.html"><a href="statistics.html#writing"><i class="fa fa-check"></i><b>6.1.5</b> writing</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="statistics.html"><a href="statistics.html#anova"><i class="fa fa-check"></i><b>6.2</b> ANOVA</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="statistics.html"><a href="statistics.html#between-subjects-1-factor"><i class="fa fa-check"></i><b>6.2.1</b> between-subjects 1 factor</a></li>
+<li class="chapter" data-level="6.2.2" data-path="statistics.html"><a href="statistics.html#between-subjects-2-factor"><i class="fa fa-check"></i><b>6.2.2</b> between-subjects 2 factor</a></li>
+<li class="chapter" data-level="6.2.3" data-path="statistics.html"><a href="statistics.html#repeated-measures-1-factor"><i class="fa fa-check"></i><b>6.2.3</b> repeated-measures 1 factor</a></li>
+<li class="chapter" data-level="6.2.4" data-path="statistics.html"><a href="statistics.html#repeated-measures-2-factor"><i class="fa fa-check"></i><b>6.2.4</b> repeated-measures 2 factor</a></li>
+<li class="chapter" data-level="6.2.5" data-path="statistics.html"><a href="statistics.html#papaja"><i class="fa fa-check"></i><b>6.2.5</b> papaja</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="statistics.html"><a href="statistics.html#linear-regression"><i class="fa fa-check"></i><b>6.3</b> Linear Regression</a></li>
+<li class="chapter" data-level="6.4" data-path="statistics.html"><a href="statistics.html#randomization-test"><i class="fa fa-check"></i><b>6.4</b> Randomization Test</a></li>
+<li class="chapter" data-level="6.5" data-path="statistics.html"><a href="statistics.html#correlation"><i class="fa fa-check"></i><b>6.5</b> Correlation</a></li>
+<li class="chapter" data-level="6.6" data-path="statistics.html"><a href="statistics.html#chi-square"><i class="fa fa-check"></i><b>6.6</b> Chi-square</a></li>
+<li class="chapter" data-level="6.7" data-path="statistics.html"><a href="statistics.html#binomial-test"><i class="fa fa-check"></i><b>6.7</b> binomial test</a></li>
+<li class="chapter" data-level="6.8" data-path="statistics.html"><a href="statistics.html#post-hoc-tests"><i class="fa fa-check"></i><b>6.8</b> Post-hoc tests</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="statistics.html"><a href="statistics.html#pairwise-t-tests"><i class="fa fa-check"></i><b>6.8.1</b> pairwise t-tests</a></li>
+<li class="chapter" data-level="6.8.2" data-path="statistics.html"><a href="statistics.html#tukey-hsd-test"><i class="fa fa-check"></i><b>6.8.2</b> tukey HSD test</a></li>
+<li class="chapter" data-level="6.8.3" data-path="statistics.html"><a href="statistics.html#fishers-lsd"><i class="fa fa-check"></i><b>6.8.3</b> Fishers LSD</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="statistics.html"><a href="statistics.html#linear-contrasts"><i class="fa fa-check"></i><b>6.9</b> Linear Contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>7</b> Simulation</a><ul>
+<li class="chapter" data-level="7.1" data-path="simulation.html"><a href="simulation.html#null-hypothesis"><i class="fa fa-check"></i><b>7.1</b> Null-hypothesis</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="simulation.html"><a href="simulation.html#null-for-a-t-test"><i class="fa fa-check"></i><b>7.1.1</b> Null for a t-test</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="simulation.html"><a href="simulation.html#alternative-hypothesis"><i class="fa fa-check"></i><b>7.2</b> Alternative hypothesis</a></li>
+<li class="chapter" data-level="7.3" data-path="simulation.html"><a href="simulation.html#power-and-effect-size"><i class="fa fa-check"></i><b>7.3</b> Power and Effect Size</a></li>
+<li class="chapter" data-level="7.4" data-path="simulation.html"><a href="simulation.html#power-analysis-with-r"><i class="fa fa-check"></i><b>7.4</b> Power analysis with R</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="simulation.html"><a href="simulation.html#pwr-package"><i class="fa fa-check"></i><b>7.4.1</b> pwr package</a></li>
+<li class="chapter" data-level="7.4.2" data-path="simulation.html"><a href="simulation.html#power-curves"><i class="fa fa-check"></i><b>7.4.2</b> power-curves</a></li>
+<li class="chapter" data-level="7.4.3" data-path="simulation.html"><a href="simulation.html#sample-size-planning"><i class="fa fa-check"></i><b>7.4.3</b> Sample-size planning</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="simulation.html"><a href="simulation.html#simulation-approach-to-power-calculations"><i class="fa fa-check"></i><b>7.5</b> Simulation approach to power calculations</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="simulation.html"><a href="simulation.html#simulated-power-for-a-t-test"><i class="fa fa-check"></i><b>7.5.1</b> Simulated power for a t-test</a></li>
+<li class="chapter" data-level="7.5.2" data-path="simulation.html"><a href="simulation.html#simulating-cell-size"><i class="fa fa-check"></i><b>7.5.2</b> Simulating cell-size</a></li>
+<li class="chapter" data-level="7.5.3" data-path="simulation.html"><a href="simulation.html#one-way-anova"><i class="fa fa-check"></i><b>7.5.3</b> One-Way ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="simulation.html"><a href="simulation.html#closing-thoughts"><i class="fa fa-check"></i><b>7.6</b> Closing thoughts</a></li>
+<li class="chapter" data-level="7.7" data-path="simulation.html"><a href="simulation.html#more-examples"><i class="fa fa-check"></i><b>7.7</b> More example(s)</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="simulation.html"><a href="simulation.html#correlation-between-traits-and-behavior"><i class="fa fa-check"></i><b>7.7.1</b> Correlation between traits and behavior</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Psyc 7709 R Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="statistics" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Statistics</h1>
+<p><strong>The most important thing about choosing statistics, is being able to justify the statistics that you choose.</strong></p>
+<p>There are many tools in the toolbox. There are many recommendations about what to do or not to do. It is a good idea to understand the statistics that you use, so that you can justify why you are using them for your analysis.</p>
+<div id="t-tests" class="section level2">
+<h2><span class="header-section-number">6.1</span> t-tests</h2>
+<div id="one-sample-t-test" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> one sample t-test</h3>
+<p>Set <code>mu</code> to test against a population value</p>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)
+
+<span class="co">#non-directional</span>
+<span class="kw">t.test</span>(x, <span class="dt">mu =</span> <span class="dv">2</span>)</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  x
+## t = 3.0794, df = 11, p-value = 0.01048
+## alternative hypothesis: true mean is not equal to 2
+## 95 percent confidence interval:
+##  2.237714 3.428952
+## sample estimates:
+## mean of x 
+##  2.833333</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(x, <span class="dt">mu =</span> <span class="dv">2</span>, <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>) <span class="co"># the default</span></code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  x
+## t = 3.0794, df = 11, p-value = 0.01048
+## alternative hypothesis: true mean is not equal to 2
+## 95 percent confidence interval:
+##  2.237714 3.428952
+## sample estimates:
+## mean of x 
+##  2.833333</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># directional</span>
+<span class="kw">t.test</span>(x, <span class="dt">mu =</span> <span class="dv">2</span>, <span class="dt">alternative =</span> <span class="st">&quot;greater&quot;</span>)</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  x
+## t = 3.0794, df = 11, p-value = 0.005241
+## alternative hypothesis: true mean is greater than 2
+## 95 percent confidence interval:
+##  2.34734     Inf
+## sample estimates:
+## mean of x 
+##  2.833333</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(x, <span class="dt">mu =</span> <span class="dv">2</span>, <span class="dt">alternative =</span> <span class="st">&quot;less&quot;</span>)</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  x
+## t = 3.0794, df = 11, p-value = 0.9948
+## alternative hypothesis: true mean is less than 2
+## 95 percent confidence interval:
+##      -Inf 3.319326
+## sample estimates:
+## mean of x 
+##  2.833333</code></pre>
+</div>
+<div id="paired-sample-t-test" class="section level3">
+<h3><span class="header-section-number">6.1.2</span> paired-sample t-test</h3>
+<p>Set <code>paired=TRUE</code></p>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)
+y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>)
+
+<span class="co">#non-directional</span>
+<span class="kw">t.test</span>(x, y, <span class="dt">paired=</span><span class="ot">TRUE</span>)</code></pre>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  x and y
+## t = 0.37796, df = 11, p-value = 0.7126
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.8038766  1.1372099
+## sample estimates:
+## mean of the differences 
+##               0.1666667</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(x, y, <span class="dt">paired=</span><span class="ot">TRUE</span>, <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>) <span class="co"># the default</span></code></pre>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  x and y
+## t = 0.37796, df = 11, p-value = 0.7126
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.8038766  1.1372099
+## sample estimates:
+## mean of the differences 
+##               0.1666667</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># directional</span>
+<span class="kw">t.test</span>(x, y, <span class="dt">paired=</span><span class="ot">TRUE</span>, <span class="dt">alternative =</span> <span class="st">&quot;greater&quot;</span>)</code></pre>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  x and y
+## t = 0.37796, df = 11, p-value = 0.3563
+## alternative hypothesis: true difference in means is greater than 0
+## 95 percent confidence interval:
+##  -0.6252441        Inf
+## sample estimates:
+## mean of the differences 
+##               0.1666667</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(x, y, <span class="dt">paired=</span><span class="ot">TRUE</span>, <span class="dt">alternative =</span> <span class="st">&quot;less&quot;</span>)</code></pre>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  x and y
+## t = 0.37796, df = 11, p-value = 0.6437
+## alternative hypothesis: true difference in means is less than 0
+## 95 percent confidence interval:
+##       -Inf 0.9585774
+## sample estimates:
+## mean of the differences 
+##               0.1666667</code></pre>
+</div>
+<div id="independent-sample-t-test" class="section level3">
+<h3><span class="header-section-number">6.1.3</span> Independent sample t-test</h3>
+<p>Note: Default is Welch test, set <code>var.equal=TRUE</code> for t-test</p>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)
+y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>)
+
+<span class="co">#non-directional</span>
+<span class="kw">t.test</span>(x, y, <span class="dt">var.equal=</span><span class="ot">TRUE</span>)</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  x and y
+## t = 0.40519, df = 22, p-value = 0.6893
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.6863784  1.0197117
+## sample estimates:
+## mean of x mean of y 
+##  2.833333  2.666667</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(x, y, <span class="dt">var.equal=</span><span class="ot">TRUE</span>, <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>) <span class="co"># the default</span></code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  x and y
+## t = 0.40519, df = 22, p-value = 0.6893
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.6863784  1.0197117
+## sample estimates:
+## mean of x mean of y 
+##  2.833333  2.666667</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># directional</span>
+<span class="kw">t.test</span>(x, y, <span class="dt">var.equal=</span><span class="ot">TRUE</span>, <span class="dt">alternative =</span> <span class="st">&quot;greater&quot;</span>)</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  x and y
+## t = 0.40519, df = 22, p-value = 0.3446
+## alternative hypothesis: true difference in means is greater than 0
+## 95 percent confidence interval:
+##  -0.5396454        Inf
+## sample estimates:
+## mean of x mean of y 
+##  2.833333  2.666667</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(x, y, <span class="dt">var.equal=</span><span class="ot">TRUE</span>, <span class="dt">alternative =</span> <span class="st">&quot;less&quot;</span>)</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  x and y
+## t = 0.40519, df = 22, p-value = 0.6554
+## alternative hypothesis: true difference in means is less than 0
+## 95 percent confidence interval:
+##       -Inf 0.8729787
+## sample estimates:
+## mean of x mean of y 
+##  2.833333  2.666667</code></pre>
+</div>
+<div id="printing" class="section level3">
+<h3><span class="header-section-number">6.1.4</span> printing</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
+
+t_results &lt;-<span class="st"> </span><span class="kw">t.test</span>(x, y, <span class="dt">var.equal=</span><span class="ot">TRUE</span>)
+knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">tidy</span>(t_results))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">estimate1</th>
+<th align="right">estimate2</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+<th align="right">parameter</th>
+<th align="right">conf.low</th>
+<th align="right">conf.high</th>
+<th align="left">method</th>
+<th align="left">alternative</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2.833333</td>
+<td align="right">2.666667</td>
+<td align="right">0.4051902</td>
+<td align="right">0.6892509</td>
+<td align="right">22</td>
+<td align="right">-0.6863784</td>
+<td align="right">1.019712</td>
+<td align="left">Two Sample t-test</td>
+<td align="left">two.sided</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="writing" class="section level3">
+<h3><span class="header-section-number">6.1.5</span> writing</h3>
+<p>The contents of R variables can be written into R Markdown documents.</p>
+<p>t(22) =0.41, p = 0.689</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># write your own function</span>
+report_t &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="kw">return</span>(<span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">&quot;t(&quot;</span>,<span class="kw">round</span>(x<span class="op">$</span>parameter, <span class="dt">digits=</span><span class="dv">2</span>),<span class="st">&quot;) &quot;</span>,
+        <span class="st">&quot;= &quot;</span>,<span class="kw">round</span>(x<span class="op">$</span>statistic, <span class="dt">digits=</span><span class="dv">2</span>),<span class="st">&quot;, &quot;</span>,
+        <span class="st">&quot;p = &quot;</span>,<span class="kw">round</span>(x<span class="op">$</span>p.value, <span class="dt">digits=</span><span class="dv">3</span>)), <span class="dt">collapse=</span><span class="st">&quot;&quot;</span>))
+}
+<span class="kw">report_t</span>(t_results)</code></pre>
+<pre><code>## [1] &quot;t(22) = 0.41, p = 0.689&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">t_results</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  x and y
+## t = 0.40519, df = 22, p-value = 0.6893
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.6863784  1.0197117
+## sample estimates:
+## mean of x mean of y 
+##  2.833333  2.666667</code></pre>
+<p>The results of my t-test were t(22) = 0.41, p = 0.689.</p>
+</div>
+</div>
+<div id="anova" class="section level2">
+<h2><span class="header-section-number">6.2</span> ANOVA</h2>
+<p>Requires data to be in long-format.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># example creation of 2x2 data </span>
+Subjects &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dt">each=</span><span class="dv">4</span>)
+Factor1 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>), <span class="dt">each =</span> <span class="dv">2</span>), <span class="dv">10</span>)
+Factor2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>), <span class="dv">2</span>), <span class="dv">10</span>)
+DV &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">40</span>,<span class="dv">0</span>,<span class="dv">1</span>)
+
+all_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Subjects =</span> <span class="kw">as.factor</span>(Subjects),
+                       DV,
+                       Factor1,
+                       Factor2)</code></pre>
+<div id="between-subjects-1-factor" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> between-subjects 1 factor</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># run anova</span>
+aov_out &lt;-<span class="st"> </span><span class="kw">aov</span>(DV<span class="op">~</span>Factor1, all_data)
+
+<span class="co"># summary</span>
+<span class="kw">summary</span>(aov_out)</code></pre>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Factor1      1    0.0  0.0002       0  0.989
+## Residuals   38   39.2  1.0315</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># kable xtable printing</span>
+<span class="kw">library</span>(xtable)
+knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">xtable</span>(<span class="kw">summary</span>(aov_out)))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Factor1</td>
+<td align="right">1</td>
+<td align="right">0.0001994</td>
+<td align="right">0.0001994</td>
+<td align="right">0.0001934</td>
+<td align="right">0.9889782</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">38</td>
+<td align="right">39.1959700</td>
+<td align="right">1.0314729</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print means</span>
+<span class="kw">print</span>(<span class="kw">model.tables</span>(aov_out,<span class="st">&quot;means&quot;</span>), <span class="dt">format=</span><span class="st">&quot;markdown&quot;</span>)</code></pre>
+<pre><code>## Tables of means
+## Grand mean
+##            
+## -0.1229227 
+## 
+##  Factor1 
+## Factor1
+##        A        B 
+## -0.12069 -0.12516</code></pre>
+</div>
+<div id="between-subjects-2-factor" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> between-subjects 2 factor</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># run anova</span>
+aov_out &lt;-<span class="st"> </span><span class="kw">aov</span>(DV<span class="op">~</span>Factor1<span class="op">*</span>Factor2, all_data)
+
+<span class="co"># summary</span>
+<span class="kw">summary</span>(aov_out)</code></pre>
+<pre><code>##                 Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Factor1          1   0.00  0.0002   0.000  0.989
+## Factor2          1   1.40  1.3974   1.345  0.254
+## Factor1:Factor2  1   0.39  0.3929   0.378  0.542
+## Residuals       36  37.41  1.0390</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># kable xtable printing</span>
+<span class="kw">library</span>(xtable)
+knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">xtable</span>(<span class="kw">summary</span>(aov_out)))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Factor1</td>
+<td align="right">1</td>
+<td align="right">0.0001994</td>
+<td align="right">0.0001994</td>
+<td align="right">0.0001920</td>
+<td align="right">0.9890224</td>
+</tr>
+<tr class="even">
+<td>Factor2</td>
+<td align="right">1</td>
+<td align="right">1.3974247</td>
+<td align="right">1.3974247</td>
+<td align="right">1.3449135</td>
+<td align="right">0.2538033</td>
+</tr>
+<tr class="odd">
+<td>Factor1:Factor2</td>
+<td align="right">1</td>
+<td align="right">0.3929491</td>
+<td align="right">0.3929491</td>
+<td align="right">0.3781832</td>
+<td align="right">0.5424451</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">36</td>
+<td align="right">37.4055962</td>
+<td align="right">1.0390443</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print means</span>
+<span class="kw">print</span>(<span class="kw">model.tables</span>(aov_out,<span class="st">&quot;means&quot;</span>), <span class="dt">format=</span><span class="st">&quot;markdown&quot;</span>)</code></pre>
+<pre><code>## Tables of means
+## Grand mean
+##            
+## -0.1229227 
+## 
+##  Factor1 
+## Factor1
+##        A        B 
+## -0.12069 -0.12516 
+## 
+##  Factor2 
+## Factor2
+##        1        2 
+## -0.30983  0.06399 
+## 
+##  Factor1:Factor2 
+##        Factor2
+## Factor1 1       2      
+##       A -0.4067  0.1653
+##       B -0.2130 -0.0374</code></pre>
+</div>
+<div id="repeated-measures-1-factor" class="section level3">
+<h3><span class="header-section-number">6.2.3</span> repeated-measures 1 factor</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># run anova</span>
+aov_out &lt;-<span class="st"> </span><span class="kw">aov</span>(DV<span class="op">~</span>Factor1 <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(Subjects<span class="op">/</span>Factor1), all_data)
+
+<span class="co"># summary</span>
+<span class="kw">summary</span>(aov_out)</code></pre>
+<pre><code>## 
+## Error: Subjects
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Residuals  9  12.03   1.337               
+## 
+## Error: Subjects:Factor1
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Factor1    1   0.00  0.0002       0  0.991
+## Residuals  9  13.17  1.4632               
+## 
+## Error: Within
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Residuals 20  13.99  0.6997</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># kable xtable printing</span>
+<span class="kw">library</span>(xtable)
+knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">xtable</span>(<span class="kw">summary</span>(aov_out)))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Residuals</td>
+<td align="right">9</td>
+<td align="right">12.0330167</td>
+<td align="right">1.3370019</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td>Factor1</td>
+<td align="right">1</td>
+<td align="right">0.0001994</td>
+<td align="right">0.0001994</td>
+<td align="right">0.0001363</td>
+<td align="right">0.9909394</td>
+</tr>
+<tr class="odd">
+<td>Residuals1</td>
+<td align="right">9</td>
+<td align="right">13.1683734</td>
+<td align="right">1.4631526</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td>Residuals2</td>
+<td align="right">20</td>
+<td align="right">13.9945800</td>
+<td align="right">0.6997290</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print means</span>
+<span class="kw">print</span>(<span class="kw">model.tables</span>(aov_out,<span class="st">&quot;means&quot;</span>), <span class="dt">format=</span><span class="st">&quot;markdown&quot;</span>)</code></pre>
+<pre><code>## Tables of means
+## Grand mean
+##            
+## -0.1229227 
+## 
+##  Factor1 
+## Factor1
+##        A        B 
+## -0.12069 -0.12516</code></pre>
+</div>
+<div id="repeated-measures-2-factor" class="section level3">
+<h3><span class="header-section-number">6.2.4</span> repeated-measures 2 factor</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># run anova</span>
+aov_out &lt;-<span class="st"> </span><span class="kw">aov</span>(DV<span class="op">~</span>Factor1<span class="op">*</span>Factor2 <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(Subjects<span class="op">/</span>(Factor1<span class="op">*</span>Factor2)), all_data)
+
+<span class="co"># summary</span>
+<span class="kw">summary</span>(aov_out)</code></pre>
+<pre><code>## 
+## Error: Subjects
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Residuals  9  12.03   1.337               
+## 
+## Error: Subjects:Factor1
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Factor1    1   0.00  0.0002       0  0.991
+## Residuals  9  13.17  1.4632               
+## 
+## Error: Subjects:Factor2
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## Factor2    1  1.397  1.3974   5.152 0.0494 *
+## Residuals  9  2.441  0.2713                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: Subjects:Factor1:Factor2
+##                 Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Factor1:Factor2  1  0.393  0.3929   0.362  0.562
+## Residuals        9  9.763  1.0848</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># kable xtable printing</span>
+<span class="kw">library</span>(xtable)
+knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">xtable</span>(<span class="kw">summary</span>(aov_out)))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Residuals</td>
+<td align="right">9</td>
+<td align="right">12.0330167</td>
+<td align="right">1.3370019</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td>Factor1</td>
+<td align="right">1</td>
+<td align="right">0.0001994</td>
+<td align="right">0.0001994</td>
+<td align="right">0.0001363</td>
+<td align="right">0.9909394</td>
+</tr>
+<tr class="odd">
+<td>Residuals1</td>
+<td align="right">9</td>
+<td align="right">13.1683734</td>
+<td align="right">1.4631526</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td>Factor2</td>
+<td align="right">1</td>
+<td align="right">1.3974247</td>
+<td align="right">1.3974247</td>
+<td align="right">5.1517609</td>
+<td align="right">0.0493833</td>
+</tr>
+<tr class="odd">
+<td>Residuals2</td>
+<td align="right">9</td>
+<td align="right">2.4412667</td>
+<td align="right">0.2712519</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td>Factor1:Factor2</td>
+<td align="right">1</td>
+<td align="right">0.3929491</td>
+<td align="right">0.3929491</td>
+<td align="right">0.3622415</td>
+<td align="right">0.5621171</td>
+</tr>
+<tr class="odd">
+<td>Residuals</td>
+<td align="right">9</td>
+<td align="right">9.7629394</td>
+<td align="right">1.0847710</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print means</span>
+<span class="kw">print</span>(<span class="kw">model.tables</span>(aov_out,<span class="st">&quot;means&quot;</span>), <span class="dt">format=</span><span class="st">&quot;markdown&quot;</span>)</code></pre>
+<pre><code>## Tables of means
+## Grand mean
+##            
+## -0.1229227 
+## 
+##  Factor1 
+## Factor1
+##        A        B 
+## -0.12069 -0.12516 
+## 
+##  Factor2 
+## Factor2
+##        1        2 
+## -0.30983  0.06399 
+## 
+##  Factor1:Factor2 
+##        Factor2
+## Factor1 1       2      
+##       A -0.4067  0.1653
+##       B -0.2130 -0.0374</code></pre>
+</div>
+<div id="papaja" class="section level3">
+<h3><span class="header-section-number">6.2.5</span> papaja</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(papaja)
+
+apa_stuff &lt;-<span class="st"> </span><span class="kw">apa_print.aov</span>(aov_out)</code></pre>
+<p>The main effect for factor 1 was, <span class="math inline">\(F(1, 9) = 0.00\)</span>, <span class="math inline">\(\mathit{MSE} = 1.46\)</span>, <span class="math inline">\(p = .991\)</span>. The main effect for factor 2 was, <span class="math inline">\(F(1, 9) = 5.15\)</span>, <span class="math inline">\(\mathit{MSE} = 0.27\)</span>, <span class="math inline">\(p = .049\)</span>. The interaction was, <span class="math inline">\(F(1, 9) = 0.36\)</span>, <span class="math inline">\(\mathit{MSE} = 1.08\)</span>, <span class="math inline">\(p = .562\)</span></p>
+</div>
+</div>
+<div id="linear-regression" class="section level2">
+<h2><span class="header-section-number">6.3</span> Linear Regression</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(DV<span class="op">~</span>Factor1, all_data)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = DV ~ Factor1, data = all_data)
+## 
+## Coefficients:
+## (Intercept)     Factor1B  
+##   -0.120690    -0.004466</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(DV<span class="op">~</span>Factor1, all_data))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = DV ~ Factor1, data = all_data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.20811 -0.68965 -0.04401  0.51312  2.29360 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept) -0.120690   0.227098  -0.531    0.598
+## Factor1B    -0.004466   0.321166  -0.014    0.989
+## 
+## Residual standard error: 1.016 on 38 degrees of freedom
+## Multiple R-squared:  5.088e-06,  Adjusted R-squared:  -0.02631 
+## F-statistic: 0.0001934 on 1 and 38 DF,  p-value: 0.989</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(DV<span class="op">~</span>Factor1<span class="op">+</span>Factor2, all_data)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = DV ~ Factor1 + Factor2, data = all_data)
+## 
+## Coefficients:
+## (Intercept)     Factor1B     Factor22  
+##   -0.307600    -0.004466     0.373821</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(DV<span class="op">~</span>Factor1<span class="op">+</span>Factor2, all_data))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = DV ~ Factor1 + Factor2, data = all_data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.39502 -0.62616 -0.04727  0.58750  2.32887 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept) -0.307600   0.276801  -1.111    0.274
+## Factor1B    -0.004466   0.319622  -0.014    0.989
+## Factor22     0.373821   0.319622   1.170    0.250
+## 
+## Residual standard error: 1.011 on 37 degrees of freedom
+## Multiple R-squared:  0.03566,    Adjusted R-squared:  -0.01647 
+## F-statistic: 0.684 on 2 and 37 DF,  p-value: 0.5108</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(DV<span class="op">~</span>Factor1<span class="op">*</span>Factor2, all_data)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = DV ~ Factor1 * Factor2, data = all_data)
+## 
+## Coefficients:
+##       (Intercept)           Factor1B           Factor22  
+##           -0.4067             0.1938             0.5721  
+## Factor1B:Factor22  
+##           -0.3965</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(DV<span class="op">~</span>Factor1<span class="op">*</span>Factor2, all_data))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = DV ~ Factor1 * Factor2, data = all_data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.29590 -0.60082 -0.00029  0.49313  2.42798 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)        -0.4067     0.3223  -1.262    0.215
+## Factor1B            0.1938     0.4559   0.425    0.673
+## Factor22            0.5721     0.4559   1.255    0.218
+## Factor1B:Factor22  -0.3965     0.6447  -0.615    0.542
+## 
+## Residual standard error: 1.019 on 36 degrees of freedom
+## Multiple R-squared:  0.04568,    Adjusted R-squared:  -0.03384 
+## F-statistic: 0.5744 on 3 and 36 DF,  p-value: 0.6355</code></pre>
+</div>
+<div id="randomization-test" class="section level2">
+<h2><span class="header-section-number">6.4</span> Randomization Test</h2>
+<pre class="sourceCode r"><code class="sourceCode r">A &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>)
+B &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">16</span>,<span class="dv">18</span>,<span class="dv">20</span>)
+
+all &lt;-<span class="st"> </span><span class="kw">c</span>(A,B)
+
+mean_difference &lt;-<span class="st"> </span><span class="kw">c</span>()
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10000</span>){
+  shuffle &lt;-<span class="st"> </span><span class="kw">sample</span>(all)
+  newA &lt;-<span class="st"> </span>shuffle[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]
+  newB &lt;-<span class="st"> </span>shuffle[<span class="dv">11</span><span class="op">:</span><span class="dv">20</span>]
+  mean_difference[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(newB)<span class="op">-</span><span class="kw">mean</span>(newA)
+}
+
+observed &lt;-<span class="st"> </span><span class="kw">mean</span>(B)<span class="op">-</span><span class="kw">mean</span>(A)
+<span class="kw">length</span>(mean_difference[mean_difference <span class="op">&gt;=</span><span class="st"> </span>observed])<span class="op">/</span><span class="dv">10000</span></code></pre>
+<pre><code>## [1] 0.0112</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(EnvStats)
+
+<span class="kw">twoSamplePermutationTestLocation</span>(<span class="dt">x=</span>B, <span class="dt">y=</span>A, <span class="dt">fcn =</span> <span class="st">&quot;mean&quot;</span>, 
+                                 <span class="dt">alternative =</span> <span class="st">&quot;greater&quot;</span>, 
+                                 <span class="dt">mu1.minus.mu2 =</span> <span class="dv">0</span>, 
+                                 <span class="dt">paired =</span> <span class="ot">FALSE</span>, 
+                                 <span class="dt">exact =</span> <span class="ot">FALSE</span>, 
+                                 <span class="dt">n.permutations =</span> <span class="dv">10000</span>, 
+                                 <span class="dt">seed =</span> <span class="ot">NULL</span>, 
+                                 <span class="dt">tol =</span> <span class="kw">sqrt</span>(.Machine<span class="op">$</span>double.eps))</code></pre>
+<pre><code>## 
+## Results of Hypothesis Test
+## --------------------------
+## 
+## Null Hypothesis:                 mu.x-mu.y = 0
+## 
+## Alternative Hypothesis:          True mu.x-mu.y is greater than 0
+## 
+## Test Name:                       Two-Sample Permutation Test
+##                                  Based on Differences in Means
+##                                  (Based on Sampling
+##                                  Permutation Distribution
+##                                  10000 Times)
+## 
+## Estimated Parameter(s):          mean of x = 11.0
+##                                  mean of y =  5.5
+## 
+## Data:                            x = B
+##                                  y = A
+## 
+## Sample Sizes:                    nx = 10
+##                                  ny = 10
+## 
+## Test Statistic:                  mean.x - mean.y = 5.5
+## 
+## P-value:                         0.0117</code></pre>
+</div>
+<div id="correlation" class="section level2">
+<h2><span class="header-section-number">6.5</span> Correlation</h2>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">1</span>)
+y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">1</span>)
+<span class="kw">cor</span>(x,y)</code></pre>
+<pre><code>## [1] -0.2219113</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">ranks1 &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) 
+ranks2 &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)
+<span class="kw">cor</span>(ranks1,ranks2, <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>)</code></pre>
+<pre><code>## [1] 0.2484848</code></pre>
+</div>
+<div id="chi-square" class="section level2">
+<h2><span class="header-section-number">6.6</span> Chi-square</h2>
+<pre class="sourceCode r"><code class="sourceCode r">M &lt;-<span class="st"> </span><span class="kw">as.table</span>(<span class="kw">rbind</span>(<span class="kw">c</span>(<span class="dv">762</span>, <span class="dv">327</span>, <span class="dv">468</span>), <span class="kw">c</span>(<span class="dv">484</span>, <span class="dv">239</span>, <span class="dv">477</span>)))
+<span class="kw">dimnames</span>(M) &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">gender =</span> <span class="kw">c</span>(<span class="st">&quot;F&quot;</span>, <span class="st">&quot;M&quot;</span>),
+                    <span class="dt">party =</span> <span class="kw">c</span>(<span class="st">&quot;Democrat&quot;</span>,<span class="st">&quot;Independent&quot;</span>, <span class="st">&quot;Republican&quot;</span>))
+(Xsq &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(M))</code></pre>
+<pre><code>## 
+## Results of Hypothesis Test
+## --------------------------
+## 
+## Alternative Hypothesis:          
+## 
+## Test Name:                       Pearson&#39;s Chi-squared test
+## 
+## Data:                            M
+## 
+## Test Statistic:                  X-squared = 30.07015
+## 
+## Test Statistic Parameter:        df = 2
+## 
+## P-value:                         2.953589e-07</code></pre>
+</div>
+<div id="binomial-test" class="section level2">
+<h2><span class="header-section-number">6.7</span> binomial test</h2>
+<pre class="sourceCode r"><code class="sourceCode r">number_of_successes &lt;-<span class="st"> </span><span class="dv">100</span>
+trials &lt;-<span class="st"> </span><span class="dv">150</span>
+<span class="kw">binom.test</span>(<span class="dt">x=</span>number_of_successes, <span class="dt">n=</span>trials, <span class="dt">p =</span> <span class="fl">0.5</span>,
+           <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,
+           <span class="dt">conf.level =</span> <span class="fl">0.95</span>)</code></pre>
+<pre><code>## 
+## Results of Hypothesis Test
+## --------------------------
+## 
+## Null Hypothesis:                 probability of success = 0.5
+## 
+## Alternative Hypothesis:          True probability of success is not equal to 0.5
+## 
+## Test Name:                       Exact binomial test
+## 
+## Estimated Parameter(s):          probability of success = 0.6666667
+## 
+## Data:                            number_of_successes and trials
+## 
+## Test Statistic:                  number of successes = 100
+## 
+## Test Statistic Parameter:        number of trials = 150
+## 
+## P-value:                         5.447533e-05
+## 
+## 95% Confidence Interval:         LCL = 0.5851570
+##                                  UCL = 0.7414436</code></pre>
+</div>
+<div id="post-hoc-tests" class="section level2">
+<h2><span class="header-section-number">6.8</span> Post-hoc tests</h2>
+<p>Many kinds of post-hoc tests can be done in R using base R functions, or functions from other packages.</p>
+<p>At the same time, it is common for post-hoc comparison functions to be limited and specific in their functionality. So, if you can’t find an existing function to complete the analysis you want, you may have to modify, extend, or write your own function to do the job.</p>
+<div id="pairwise-t-tests" class="section level3">
+<h3><span class="header-section-number">6.8.1</span> pairwise t-tests</h3>
+<p>Performs all possible t-tests between the levels of a grouping factor. Can implement different corrections for multiple comparisons.</p>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>airquality <span class="co">#loads the airquality data from base R</span>
+df<span class="op">$</span>Month &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>Month)
+
+<span class="co"># default uses holm correction</span>
+<span class="kw">pairwise.t.test</span>(df<span class="op">$</span>Ozone,df<span class="op">$</span>Month)</code></pre>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  df$Ozone and df$Month 
+## 
+##   5       6       7       8      
+## 6 1.00000 -       -       -      
+## 7 0.00026 0.05113 -       -      
+## 8 0.00019 0.04987 1.00000 -      
+## 9 1.00000 1.00000 0.00488 0.00388
+## 
+## P value adjustment method: holm</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># use bonferroni correction</span>
+<span class="kw">pairwise.t.test</span>(df<span class="op">$</span>Ozone,df<span class="op">$</span>Month, <span class="dt">p.adj=</span><span class="st">&quot;bonf&quot;</span>)</code></pre>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  df$Ozone and df$Month 
+## 
+##   5       6       7       8      
+## 6 1.00000 -       -       -      
+## 7 0.00029 0.10225 -       -      
+## 8 0.00019 0.08312 1.00000 -      
+## 9 1.00000 1.00000 0.00697 0.00485
+## 
+## P value adjustment method: bonferroni</code></pre>
+</div>
+<div id="tukey-hsd-test" class="section level3">
+<h3><span class="header-section-number">6.8.2</span> tukey HSD test</h3>
+<p>notes: the warpbreaks data.frame should be available in base R, you do not need to load it to be able to use it.</p>
+<p>Doesn’t work with repeated measures ANOVAs.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fm1 &lt;-<span class="st"> </span><span class="kw">aov</span>(breaks <span class="op">~</span><span class="st"> </span>wool <span class="op">+</span><span class="st"> </span>tension, <span class="dt">data =</span> warpbreaks))</code></pre>
+<pre><code>##             Df Sum Sq Mean Sq F value  Pr(&gt;F)   
+## wool         1    451   450.7   3.339 0.07361 . 
+## tension      2   2034  1017.1   7.537 0.00138 **
+## Residuals   50   6748   135.0                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">TukeyHSD</span>(fm1, <span class="st">&quot;tension&quot;</span>, <span class="dt">ordered =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+##     factor levels have been ordered
+## 
+## Fit: aov(formula = breaks ~ wool + tension, data = warpbreaks)
+## 
+## $tension
+##          diff        lwr      upr     p adj
+## M-H  4.722222 -4.6311985 14.07564 0.4474210
+## L-H 14.722222  5.3688015 24.07564 0.0011218
+## L-M 10.000000  0.6465793 19.35342 0.0336262</code></pre>
+</div>
+<div id="fishers-lsd" class="section level3">
+<h3><span class="header-section-number">6.8.3</span> Fishers LSD</h3>
+<p>Explanation of Fisher’s least significant difference test.
+<a href="https://www.utd.edu/~herve/abdi-LSD2010-pretty.pdf">https://www.utd.edu/~herve/abdi-LSD2010-pretty.pdf</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(agricolae)
+
+<span class="kw">data</span>(sweetpotato)
+model &lt;-<span class="st"> </span><span class="kw">aov</span>(yield<span class="op">~</span>virus, <span class="dt">data=</span>sweetpotato)
+out   &lt;-<span class="st"> </span><span class="kw">LSD.test</span>(model,<span class="st">&quot;virus&quot;</span>, <span class="dt">p.adj=</span><span class="st">&quot;bonferroni&quot;</span>)</code></pre>
+</div>
+</div>
+<div id="linear-contrasts" class="section level2">
+<h2><span class="header-section-number">6.9</span> Linear Contrasts</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create data for a one-way BW subjects, 4 groups</span>
+A &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">mean=</span><span class="dv">100</span>, <span class="dt">sd=</span><span class="dv">25</span>)
+B &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">mean=</span><span class="dv">120</span>, <span class="dt">sd=</span><span class="dv">25</span>)
+C &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">mean=</span><span class="dv">140</span>, <span class="dt">sd=</span><span class="dv">25</span>)
+D &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">mean=</span><span class="dv">80</span>, <span class="dt">sd=</span><span class="dv">25</span>)
+
+DV &lt;-<span class="st"> </span><span class="kw">c</span>(A,B,C,D)
+Conditions &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>), <span class="dt">each=</span><span class="dv">10</span>))
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(DV,Conditions)
+
+<span class="co"># one-way ANOVA</span>
+aov_out &lt;-<span class="st"> </span><span class="kw">aov</span>(DV<span class="op">~</span>Conditions, df)
+<span class="kw">summary</span>(aov_out)</code></pre>
+<pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Conditions   3  26299    8766   7.787 0.000392 ***
+## Residuals   36  40527    1126                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># look at the order of levels</span>
+<span class="kw">levels</span>(df<span class="op">$</span>Conditions)</code></pre>
+<pre><code>## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># set up linear contrasts</span>
+c1 &lt;-<span class="st"> </span><span class="kw">c</span>(.<span class="dv">5</span>, <span class="fl">-.5</span>, <span class="fl">-.5</span>, <span class="fl">.5</span>) <span class="co"># AD vs. BC</span>
+c2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">-1</span>) <span class="co"># C vs. D</span>
+c3 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">-1</span>, <span class="dv">1</span>, <span class="dv">0</span>) <span class="co"># B vs. C</span>
+
+<span class="co"># create a contrast matrix</span>
+mat &lt;-<span class="st"> </span><span class="kw">cbind</span>(c1,c2,c3)
+
+<span class="co"># assign the contrasts to the group</span>
+<span class="kw">contrasts</span>(df<span class="op">$</span>Conditions) &lt;-<span class="st"> </span>mat
+
+<span class="co"># run the ANOVA</span>
+aov_out &lt;-<span class="st"> </span><span class="kw">aov</span>(DV<span class="op">~</span>Conditions, df)
+
+<span class="co"># print the contrasts, add names for the contrasts</span>
+<span class="kw">summary.aov</span>(aov_out, <span class="dt">split=</span><span class="kw">list</span>(<span class="dt">Conditions=</span><span class="kw">list</span>(<span class="st">&quot;AD vs. BC&quot;</span>=<span class="dv">1</span>, <span class="st">&quot;C vs. D&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;B vs. C&quot;</span>=<span class="dv">3</span>))) </code></pre>
+<pre><code>##                         Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Conditions               3  26299    8766   7.787 0.000392 ***
+##   Conditions: AD vs. BC  1  18467   18467  16.404 0.000260 ***
+##   Conditions: C vs. D    1   7732    7732   6.868 0.012772 *  
+##   Conditions: B vs. C    1    101     101   0.089 0.766677    
+## Residuals               36  40527    1126                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-wrangling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="simulation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/05-Statistics.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["7709Rbook.pdf", "7709Rbook.epub"],
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

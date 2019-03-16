@@ -11,3 +11,8 @@ ggpubr
 data.table
 foreign
 xtable
+broom
+papaja
+EnvStats
+agricolae
+pwr
