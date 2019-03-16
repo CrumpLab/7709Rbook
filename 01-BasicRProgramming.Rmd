@@ -1,0 +1,690 @@
+# Basic Programming in R
+
+
+This .rmd goes along with the building blocks screencast. Basic coding in R involves creating variables to store information, and then systematically manipulating the contents of variables to solve particular problems. Some of the basic coding building blocks are **variables**, **logic**, and **loops**. These three elements are combined together to produce an algorithm (set of steps) to solve a problem.
+
+## Variables
+
+Below is code block contains 1 line that does a bunch of things. 
+
+1. It creates a variable with the name `variable_name`
+2. It stores the number 1 inside the variable using the assignment operator `<-`, which looks like an arrow (think: a 1 goes into the variable)
+3. The hashtag allows us to comment the line to say what is happening. Anything after the comment turns green, and R does not attempt to run this part as code. Comments can be useful for helping other people read the code
+4. When you run this line, you will see a new variable listed in the Environment pane in R-studio
+
+```{r}
+variable_name <- 1 #comment, this line stores a 1 in variable_name
+```
+
+Variables can have most any name, but they can't start with a number, special character or contain a space.
+
+```{r, eval=FALSE}
+# neither of these lines work, they will throw an error
+1s <- 3
+my variable <- 1
+!s <- 1
+```
+
+It is good practice to use descriptive variable names that tell you and anyone else reading the code what the variable is storing. Let's say you want to create three variables for storing your first name, last name, and favorite color. Here are good and bad examples:
+
+```{r}
+# good examples
+first_name <- "Matt"
+last_name <- "Crump"
+favorite_color <- "hot pink"
+
+# bad examples
+a <- "Matt"
+temp_var <- "Crump"
+cl <- "hot pink"
+```
+
+### Style guide
+
+It is a good idea to learn how to write good-looking code. This makes your code easier to read and easier for you and others to understand. There are different opinions about the style you should adopt. I recommend that you adopt the conventions in the tidyverse style guide, [https://style.tidyverse.org](https://style.tidyverse.org). And, I will try to follow that style guide in examples that I make.
+
+### Double-checking your variable works
+
+As mentioned previously, if you have made a new variable, you should be able to see it listed in the Environment tab. You can also type the name of the variable into the console and press enter. If the variable exists, the console will print the contents of the variable. 
+
+```{r}
+# Writing the variable name will cause R to print out it's contents
+first_name
+```
+
+You can also use the `print()` function to accomplish the same goal.
+
+```{r}
+print(first_name)
+```
+
+### Changing the contents of a variable
+
+Any time you assign `<-` something new into an existing variable, the contents of the variable will change. 
+
+Below we have three lines of code. By running this code block, R will follow the instructions in order. It will run the first line, then the second line, then the third line. 
+
+```{r}
+first_name <- "Matt"
+first_name <- "A"
+first_name <- "B"
+```
+
+What is the final contents of the variable `first_name`? It will be the last thing that was put into that variable, in this case a B.
+
+We can check that by printing out `first_name`.
+
+```{r}
+first_name
+```
+
+### Properties of variables
+
+As we go along we will learn about different kinds of variables in R. Each of them allow you to store different kinds of information in different formats. To illustrate the idea of different formats let's look at these two variables.
+
+```{r}
+a_number <- 1
+a_character <- "1"
+```
+
+You can use the `class()` function to find out information about variables in R. 
+
+```{r}
+class(a_number)
+```
+
+Notice that `a_number` has the class `numeric`. This means that R will treat the contents as a number.
+
+```{r}
+class(a_character)
+```
+
+However, `a_character` has a the class `character`. This means that R will treat the contents as text.
+
+If two variables contain numbers, then you can do math using the variables
+```{r}
+a <- 1
+b <- 2
+a+b
+```
+
+If the variables contain text, then math won't work
+
+```{r, eval=FALSE}
+a <- "1"
+b <- "2"
+a+b
+```
+
+### Converting between numeric and character
+
+In some cases R will allow you to convert variable classes. For example, if you have a numeric variable, you can convert it to a character. Below, we put a 1 into `a`, then show it is a numeric. Afterward, we use the `as.character()` function to convert `a` into a character, and then show that `a` is now a character, rather than a number
+
+```{r}
+a <- 1
+class(a)
+a <- as.character(a)
+class(a)
+```
+
+### converting between character and numeric
+
+`as.numeric` can convert text into numbers, but the text needs to be a numeral in order for this to work
+
+```{r}
+a <- "1" 
+class(a)
+a <- as.numeric(1)
+class(a)
+```
+
+This won't work. R doesn't know that "one" means 1. So, it will return NA, which stands for not available.
+
+```{r, eval=FALSE}
+a <- "one"
+a <- as.numeric(a)
+```
+
+
+## Vectors
+
+You will often want to store more than one thing inside a variable. One way to do this is using a vector. A vector can contain multiple elements, all of the same class.
+
+Create a vector using the `c()` function.
+
+```{r}
+some_numbers <- c(4,5,3,7,8,2,1,4,5,6,4)
+```
+
+If we print `some_numbers`, we can see it contains all the numbers we put into it.
+
+```{r}
+some_numbers
+```
+
+### indexing
+
+Once you have some numbers inside a vector, you may want to access individual elements. R uses square brackets `[]` for indexing particular slots in the vector (e.g., the number in a particular position from first to last in the vector)
+
+```{r}
+some_numbers[1] # returns first number
+some_numbers[2] # returns second number
+some_numbers[1:3] # returns the first three numbers
+```
+
+R has really powerful indexing abilities. For example, consider the following:
+
+```{r}
+some_numbers[c(2,4)]
+```
+
+We have put a vector `c(2,4)` inside the square brackets. This will allow us to return the contents in slot 2, and 4 of the vector. 
+
+What about this one?
+
+```{r}
+some_numbers[c(1,1,1)]
+```
+
+We have put a vector `c(1,1,1)` inside the square brackets. This will allow us to return the contents in slot 1 three times.
+
+We haven't covered logic statements yet, but it is worth pointing out that you can use logical indexing in R. For example, the following will return elements in the vector that are larger than a particular value.
+
+```{r}
+some_numbers[some_numbers > 4]
+```
+
+### assignment and indexing
+
+You can replace the contents of a vector at particular position using indexing.
+
+Here we remind ourselves of the original list of numbers inside `some_numbers`. Then we replace the number in position 1 with a 9, and print the variable to check that the replacement worked.
+
+```{r}
+some_numbers <- c(4,5,3,7,8,2,1,4,5,6,4)
+some_numbers[1] <- 9
+some_numbers
+```
+
+
+
+### c is for combine
+
+The `c()` function stands for combine. We are telling R to combine all of the elements inside the function into a vector.
+
+```{r}
+# combines the numbers 1-5 into a
+a <- c(1,2,3,4,5)
+
+# combine a with a 6 on the end
+# append to the last part of the vector
+a<- c(a, 6)
+
+# multiple combines
+b <- c(c(1,2,3),c(9,10,11))
+```
+
+
+## Loops
+
+Check R help for on Control Flow `?Control`.
+
+`for(){}`
+`for(loop control){do something each iteration}`
+
+```{r, eval=F}
+for(iterator in vector){
+  #do something
+}
+```
+
+Loop control is defined in between the parentheses. The name of the iterator is placed on the left of `in`(can be assigned any name you want, does not need to be declared in advance). During the execution of the loop, the iterator takes on the values inside the vector which is placed on the right side of `in`. Specifically, the following is happening.
+
+Loop steps: 
+  1. iterator <- vector[1]
+  2. iterator <- vector[2]
+  3. iterator <- vector[3]
+  4. etc.
+  
+The loop will automatically stop once it reaches the last item in the vector. The loop can be stopped before that using the `break` command.
+
+```{r}
+# Make a loop do something 5 times
+# i is the iterator
+# 1:5 creates a vector with 5 numbers in it, 1, 2, 3, 4, 5
+# the loop will run 5 times, because there are five things to assign to i
+for(i in 1:5){
+  print(5)
+}
+```
+
+```{r}
+# show the value of i each step of the loop
+for(i in 1:5){
+  print(i)
+}
+
+```
+
+```{r}
+# define the vector to loop over in advance
+my_sequence <- 1:5
+for(i in my_sequence){
+  print(i)
+}
+```
+
+```{r}
+# Reminder that i becomes the next value in the vector
+# your vector can have any order 
+my_sequence <- c(1,5,2,3,4)
+for(i in my_sequence){
+  print(i)
+}
+```
+
+```{r}
+# index vector does not need to be numbers
+my_things <- c("A","B","C","D")
+for(i in my_things){
+  print(i)
+}
+```
+
+### Breaking a loop
+
+`break` stops a loop. Used with logical statements to define the conditions necessary to cause the break.
+
+```{r}
+for(i in 1:10){
+  if(i <5){
+    print(i)
+  } else{
+    break
+  }
+}
+```
+
+### While loops
+
+While loops run until a logical condition is met. Here there is no iterator, just a logic statement that needs to be met. 
+
+This one prints i while i is less than 6. As soon as i becomes "not less than 6", then the loop stops. Critically, inside the loop, the value of i increases each iteration. 
+
+```{r}
+i <- 1 # create an variable
+while (i < 6) {
+  print(i)
+  i = i+1 #add one eachs step of the loop
+}
+```
+
+### Repeat loops
+
+Similar to while, but let's do things until a condition is met.
+
+```{r}
+i<-0
+repeat{
+  i<-i+1
+  print(i)
+  if(i==5){
+    break
+  }
+}
+```
+
+
+### Examples
+
+Braces are not needed on one line
+
+```{r}
+for(i in 1:5) print(i)
+```
+
+Using the value of the iterator to assign in values systematically to another variable.
+
+```{r}
+# put 1 into the first five positions of x
+x <- c() # create empty vector
+for(i in 1:5){
+  x[i] <- 1  # assign 1 to the ith slot in x
+}
+x
+
+# put the numbers 1-5 in the first 5 positions of x
+x <-c()
+for(i in 1:5){
+  x[i] <- i
+}
+x
+```
+
+Make your own counter, when you need one
+
+```{r}
+a <- c(1,4,3,5,7,6,8,2)
+odd <- c()
+counter <- 0
+for(i in a){  # i will the values of a in each position
+  counter <- counter+1
+  if(i%%2 != 0){
+    odd[counter] <- "odd"
+  } else {
+    odd[counter] <- "even"
+  }
+}
+odd
+
+# An alternative strategy
+
+a <- c(1,4,3,5,7,6,8,2)
+odd <- c()
+# 1:length(a) creates a sequence from 1 to length
+for(i in 1:length(a)){  
+  if(a[i]%%2 != 0){
+    odd[i] <- "odd"
+  } else {
+    odd[i] <- "even"
+  }
+}
+odd
+
+```
+
+Nesting loops
+
+```{r}
+
+for(i in 1:5){
+  for(j in 1:5){
+   print(c(i,j))
+  }
+}
+
+# example of using nested loops to fill the contents
+# of a matrix
+
+my_matrix <- matrix(0,ncol=5,nrow=5)
+for(i in 1:5){
+  for(j in 1:5){
+   my_matrix[i,j] <- i*j
+  }
+}
+my_matrix
+
+```
+
+break exits out of the immediate loop
+
+```{r}
+# the inside loop stops when i+j is greater than 5
+# the outside loop keeps going
+
+sum_of_i_j <- c()
+counter <- 0
+for(i in 1:5){
+  for(j in 1:5){
+    counter <- counter+1
+    sum_of_i_j[counter] <- i+j
+    if(i+j > 5){
+      break
+    }
+  }
+}
+sum_of_i_j
+```
+
+
+## Logical comparison
+
+Logic statements are used to compare two things, or two sets of things. The output of comparison is a TRUE or FALSE statment. If many things are being compared at once, the output could be many TRUE or FALSE statements for each comparison
+
+### equal to
+
+```{r}
+1==1 # is 1 equal to 1?
+1==2 # is 1 equal to 2?
+
+c(1,2,3) == c(2,1,3) # compares each element with each element
+1 == c(2,1,3)
+```
+
+### not equal to
+
+```{r}
+1!=1 # is 1 equal to 1?
+1!=2 # is 1 equal to 2?
+
+c(1,2,3) != c(2,1,3) # compares each element with each element
+1 != c(2,1,3)
+```
+
+### Greater than/ less than
+
+```{r}
+
+1 > 1 # is 1 greater than 1?
+5 > 1 # is 5 greater than 1?
+3 < 2 # is 3 less than 2?
+3 < 1 # is 3 less than 1?
+
+c(1,2,3) > c(2,1,3) # ask the question element by element
+c(1,2,3) < c(2,1,3)
+
+2 > c(1,2,3) # is greater than each of the numbers
+```
+
+### >= <=
+
+Is something greater than or equal to something else
+
+```{r}
+1 >= 1 # is 1 greater than 1?
+5 >= 1 # is 5 greater than 1?
+3 <= 2 # is 3 less than 2?
+3 <= 1 # is 3 less than 1?
+
+c(1,2,3) >= c(2,1,3) # ask the question element by element
+c(1,2,3) <= c(2,1,3)
+
+2 >= c(1,2,3) # is greater than each of the numbers
+```
+
+### AND
+
+The ampersand `&` is used for AND, which allows use to evaluate whether two or more properties are all TRUE.
+
+```{r}
+# is 16 divisible by 4 AND 8
+16%%4 == 0 & 16%%8 ==0
+
+# is 16 divisible by 4 AND 3
+16%%4 == 0 & 16%%3 ==0
+
+# is 16 divisible by 8 and 4 and 2
+16%%4 == 0 & 16%%8 ==0 & 16%%2 ==0
+```
+
+### OR
+
+The `|` is used for OR, which allows use to evaluate at least one of the properties is TRUE.
+
+```{r}
+# is 16 divisible by 4 OR 8
+16%%4 == 0 | 16%%8 ==0
+
+# is 16 divisible by 4 OR 3
+# it is divisible by 4, so the answer is TRUE
+# because at least one of the comparisons is TRUE
+16%%4 == 0 | 16%%3 ==0
+```
+
+### TRUE FALSE
+
+When R returns values as TRUE or FALSE, it return a logical variable. It also treats TRUE as a 1, and FALSE as a 0. In the example below we see it is possible sum up a logical variable with multiple TRUE and FALSE entries.
+
+```{r}
+c(1,2,3) == c(1,2,3)
+sum(c(1,2,3) == c(1,2,3))
+
+c(1,2,3) == c(2,1,3)
+sum(c(1,2,3) == c(2,1,3))
+```
+
+
+## IF ELSE
+
+A carnival operator needs to check if people are taller than a line to see if they can ride the ride. Every time someone goes through the gate, they run an IF ELSE control structure in their head. IF the person is taller than the line, then they can go on the ride; ELSE (otherwise) the person can not go on the ride. 
+
+In other words, IF the situation is X, then do something; ELSE (if the situation is not X), then do something different.
+
+IF and ELSE statements let us specify the conditions when specific actions are taken. Generally, IF and ELSE statements are used inside loops (for, or while, or repeat loops), because at each step or iteration of the loop, we want to check something, and then do something.
+
+Consider this:
+
+```{r}
+a <- 1 # define a to be a 1
+if(a==1){  
+  print(a) # this is what happens if a==1
+} else {
+  print("A is not 1") # this is what happens if a is not 1
+}
+
+
+a <- 2 # define a to be a 1
+if(a==1){  
+  print(a) # this is what happens if a==1
+} else {
+  print("A is not 1") # this is what happens if a is not 1
+}
+```
+
+Normally we find IF and ELSE in a loop like this:
+
+```{r}
+a <- c(1,0,1,0,0,0,1) # make a variable contain 1s and 0s
+
+# write a loop to check each element in the variable
+# and do different things depending on the element
+
+for(i in a){
+  if(i == 1){
+    print("I'm a 1") # what to do when i is 1
+  } else {
+    print("I'm not a 1") # what to do when i is not 1
+  }
+}
+
+```
+
+We can have multiple conditions in our if statements. 
+
+```{r}
+a <- c(1,2,3,1,2,0,1) # make a variable contain 1s and 0s
+
+# write a loop to check each element in the variable
+# and do different things depending on the element
+
+for(i in a){
+  if(i == 1){
+    print("I'm a 1") # what to do when i is 1
+  } else if (i==2){
+    print("I'm a 2") # what to do when i is 2
+  } else if (i==3){
+    print("I'm a 3") # what to do when i is 3
+  } else {
+    print("I'm not any of the above") #what to do when none are true
+  }
+}
+
+```
+
+## Functions
+
+This section discusses the syntax for writing custom functions in R.
+
+### function syntax
+
+```{r, eval=FALSE}
+function_name <- function(input1,input2){
+  #code here
+  return(something)
+}
+```
+
+### example functions
+
+This function has no input between the `()`. Whenever you run this function, it will simply return whatever is placed inside the `return` statement.
+
+```{r}
+# define the function
+print_hello_world <- function(){
+  return(print("hello world"))
+}
+
+# use the function
+print_hello_world()
+```
+
+This function simply takes an input, and then returns the input without modifying it. 
+
+```{r}
+return_input <- function(input){
+  return(input)
+}
+
+# the variable input is assigned a 1
+# then we return(input), which will result in a 1
+# because the function internally assigns 1 to the input
+return_input(1)
+
+a <- "something"
+return_input(a)
+```
+
+This function takes an input, then creates an internal variable called temp and assigns input+1. Then the contents of temp is returned. Note there, is no checking of the input, so it will return an erro if you input a character (can't add one to a character in R)
+
+```{r, error=TRUE}
+add_one <- function(input){
+  temp <- input+1
+  return(temp)
+}
+
+add_one(1)
+add_one("a")
+```
+
+This function adds some input checking. We only add one if the input is a numeric type. Otheriwse, we use `stop()` to return an error message to the console
+
+```{r, error=TRUE}
+add_one <- function(input){
+  if(class(input) == "numeric"){
+    temp <- input+1
+    return(temp)
+  } else {
+    return(stop("input must be numeric"))
+  }
+}
+
+add_one(1)
+add_one("a")
+```
+
+A function with three inputs
+
+```{r}
+add_multiply <- function(input, x_plus,x_times){
+  temp <- (input+x_plus)*x_times
+  return(temp)
+}
+
+# input is 1
+# x_plus <- 2
+# x_times <- 3
+# will return (1+2)*3 = 9
+add_multiply(1,2,3)
+
+
+```

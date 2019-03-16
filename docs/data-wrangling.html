@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 5 Data-Wrangling | Psyc 7709 R Book</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 5 Data-Wrangling | Psyc 7709 R Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Data-Wrangling | Psyc 7709 R Book" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Matthew Crump">
+
+
+<meta name="date" content="2019-03-16">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="data-visualization-ggplot2.html">
+<link rel="next" href="references.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
+<li class="chapter" data-level="2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html"><i class="fa fa-check"></i><b>2</b> Basic Programming in R</a><ul>
+<li class="chapter" data-level="2.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#variables"><i class="fa fa-check"></i><b>2.1</b> Variables</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#style-guide"><i class="fa fa-check"></i><b>2.1.1</b> Style guide</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#double-checking-your-variable-works"><i class="fa fa-check"></i><b>2.1.2</b> Double-checking your variable works</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#changing-the-contents-of-a-variable"><i class="fa fa-check"></i><b>2.1.3</b> Changing the contents of a variable</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#properties-of-variables"><i class="fa fa-check"></i><b>2.1.4</b> Properties of variables</a></li>
+<li class="chapter" data-level="2.1.5" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#converting-between-numeric-and-character"><i class="fa fa-check"></i><b>2.1.5</b> Converting between numeric and character</a></li>
+<li class="chapter" data-level="2.1.6" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#converting-between-character-and-numeric"><i class="fa fa-check"></i><b>2.1.6</b> converting between character and numeric</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#vectors"><i class="fa fa-check"></i><b>2.2</b> Vectors</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#indexing"><i class="fa fa-check"></i><b>2.2.1</b> indexing</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#assignment-and-indexing"><i class="fa fa-check"></i><b>2.2.2</b> assignment and indexing</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#c-is-for-combine"><i class="fa fa-check"></i><b>2.2.3</b> c is for combine</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#loops"><i class="fa fa-check"></i><b>2.3</b> Loops</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#breaking-a-loop"><i class="fa fa-check"></i><b>2.3.1</b> Breaking a loop</a></li>
+<li class="chapter" data-level="2.3.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#while-loops"><i class="fa fa-check"></i><b>2.3.2</b> While loops</a></li>
+<li class="chapter" data-level="2.3.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#repeat-loops"><i class="fa fa-check"></i><b>2.3.3</b> Repeat loops</a></li>
+<li class="chapter" data-level="2.3.4" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#examples"><i class="fa fa-check"></i><b>2.3.4</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#logical-comparison"><i class="fa fa-check"></i><b>2.4</b> Logical comparison</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#equal-to"><i class="fa fa-check"></i><b>2.4.1</b> equal to</a></li>
+<li class="chapter" data-level="2.4.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#not-equal-to"><i class="fa fa-check"></i><b>2.4.2</b> not equal to</a></li>
+<li class="chapter" data-level="2.4.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#greater-than-less-than"><i class="fa fa-check"></i><b>2.4.3</b> Greater than/ less than</a></li>
+<li class="chapter" data-level="2.4.4" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#section"><i class="fa fa-check"></i><b>2.4.4</b> &gt;= &lt;=</a></li>
+<li class="chapter" data-level="2.4.5" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#and"><i class="fa fa-check"></i><b>2.4.5</b> AND</a></li>
+<li class="chapter" data-level="2.4.6" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#or"><i class="fa fa-check"></i><b>2.4.6</b> OR</a></li>
+<li class="chapter" data-level="2.4.7" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#true-false"><i class="fa fa-check"></i><b>2.4.7</b> TRUE FALSE</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#if-else"><i class="fa fa-check"></i><b>2.5</b> IF ELSE</a></li>
+<li class="chapter" data-level="2.6" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#functions"><i class="fa fa-check"></i><b>2.6</b> Functions</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#function-syntax"><i class="fa fa-check"></i><b>2.6.1</b> function syntax</a></li>
+<li class="chapter" data-level="2.6.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#example-functions"><i class="fa fa-check"></i><b>2.6.2</b> example functions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html"><i class="fa fa-check"></i><b>3</b> Programming Challenges for learning the fundamentals</a><ul>
+<li class="chapter" data-level="3.1" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#tips-for-approaching-the-problems"><i class="fa fa-check"></i><b>3.1</b> Tips for Approaching the Problems</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#rstudios-text-editor"><i class="fa fa-check"></i><b>3.1.1</b> Rstudio’s Text editor</a></li>
+<li class="chapter" data-level="3.1.2" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#use-informative-variable-names."><i class="fa fa-check"></i><b>3.1.2</b> Use informative variable names.</a></li>
+<li class="chapter" data-level="3.1.3" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#use-comments."><i class="fa fa-check"></i><b>3.1.3</b> Use comments.</a></li>
+<li class="chapter" data-level="3.1.4" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#r-markdown."><i class="fa fa-check"></i><b>3.1.4</b> R Markdown.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#easier-problems"><i class="fa fa-check"></i><b>3.2</b> Easier Problems</a></li>
+<li class="chapter" data-level="3.3" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#harder-problems"><i class="fa fa-check"></i><b>3.3</b> Harder Problems</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html"><i class="fa fa-check"></i><b>4</b> Data visualization (ggplot2)</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ggplot2-resources"><i class="fa fa-check"></i><b>4.1</b> ggplot2 resources</a></li>
+<li class="chapter" data-level="4.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#example-code"><i class="fa fa-check"></i><b>4.2</b> Example code</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#scatterplot"><i class="fa fa-check"></i><b>4.2.1</b> Scatterplot</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#bar-graph"><i class="fa fa-check"></i><b>4.2.2</b> bar graph</a></li>
+<li class="chapter" data-level="4.2.3" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#line-graph"><i class="fa fa-check"></i><b>4.2.3</b> Line Graph</a></li>
+<li class="chapter" data-level="4.2.4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#histogram"><i class="fa fa-check"></i><b>4.2.4</b> Histogram</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#advanced-ggplot"><i class="fa fa-check"></i><b>4.3</b> Advanced ggplot</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#add-on-packages"><i class="fa fa-check"></i><b>4.3.1</b> Add-on packages</a></li>
+<li class="chapter" data-level="4.3.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#figure-output-tips"><i class="fa fa-check"></i><b>4.3.2</b> Figure Output tips</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#knitr-options"><i class="fa fa-check"></i><b>4.4</b> knitr options</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#knitr-figure-output-defaults"><i class="fa fa-check"></i><b>4.4.1</b> knitr figure output defaults</a></li>
+<li class="chapter" data-level="4.4.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#figure-output-per-code-block"><i class="fa fa-check"></i><b>4.4.2</b> figure output per code block</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#data-vis-assignment-with-solutions"><i class="fa fa-check"></i><b>4.5</b> Data-vis assignment with solutions</a></li>
+<li class="chapter" data-level="4.6" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#list-of-figures-to-reproduce"><i class="fa fa-check"></i><b>4.6</b> List of Figures to reproduce</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>5</b> Data-Wrangling</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-wrangling.html"><a href="data-wrangling.html#what-is-data-wrangling"><i class="fa fa-check"></i><b>5.1</b> What is Data-wrangling</a></li>
+<li class="chapter" data-level="5.2" data-path="data-wrangling.html"><a href="data-wrangling.html#dplyr-basics"><i class="fa fa-check"></i><b>5.2</b> dplyr basics</a></li>
+<li class="chapter" data-level="5.3" data-path="data-wrangling.html"><a href="data-wrangling.html#basic-dataframe-stuff-without-dplyr"><i class="fa fa-check"></i><b>5.3</b> basic dataframe stuff without dplyr</a></li>
+<li class="chapter" data-level="5.4" data-path="data-wrangling.html"><a href="data-wrangling.html#a-couple-questions"><i class="fa fa-check"></i><b>5.4</b> A couple questions:</a></li>
+<li class="chapter" data-level="5.5" data-path="data-wrangling.html"><a href="data-wrangling.html#dplyr-style"><i class="fa fa-check"></i><b>5.5</b> dplyr style</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="data-wrangling.html"><a href="data-wrangling.html#quick-example"><i class="fa fa-check"></i><b>5.5.1</b> quick example</a></li>
+<li class="chapter" data-level="5.5.2" data-path="data-wrangling.html"><a href="data-wrangling.html#filter"><i class="fa fa-check"></i><b>5.5.2</b> filter</a></li>
+<li class="chapter" data-level="5.5.3" data-path="data-wrangling.html"><a href="data-wrangling.html#group_by-and-summarise"><i class="fa fa-check"></i><b>5.5.3</b> group_by and summarise</a></li>
+<li class="chapter" data-level="5.5.4" data-path="data-wrangling.html"><a href="data-wrangling.html#focus-on-summarise"><i class="fa fa-check"></i><b>5.5.4</b> focus on summarise</a></li>
+<li class="chapter" data-level="5.5.5" data-path="data-wrangling.html"><a href="data-wrangling.html#mutate"><i class="fa fa-check"></i><b>5.5.5</b> Mutate</a></li>
+<li class="chapter" data-level="5.5.6" data-path="data-wrangling.html"><a href="data-wrangling.html#select"><i class="fa fa-check"></i><b>5.5.6</b> Select</a></li>
+<li class="chapter" data-level="5.5.7" data-path="data-wrangling.html"><a href="data-wrangling.html#star-wars-questions-and-answers"><i class="fa fa-check"></i><b>5.5.7</b> Star wars questions and answers</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="data-wrangling.html"><a href="data-wrangling.html#data-input"><i class="fa fa-check"></i><b>5.6</b> Data input</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="data-wrangling.html"><a href="data-wrangling.html#other-helpful-libraries-for-reading-in-files"><i class="fa fa-check"></i><b>5.6.1</b> Other helpful libraries for reading in files</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="data-wrangling.html"><a href="data-wrangling.html#example-analysis"><i class="fa fa-check"></i><b>5.7</b> Example Analysis</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="data-wrangling.html"><a href="data-wrangling.html#load-the-data-and-libraries-you-will-use"><i class="fa fa-check"></i><b>5.7.1</b> Load the data and libraries you will use</a></li>
+<li class="chapter" data-level="5.7.2" data-path="data-wrangling.html"><a href="data-wrangling.html#pre-processing"><i class="fa fa-check"></i><b>5.7.2</b> Pre-processing</a></li>
+<li class="chapter" data-level="5.7.3" data-path="data-wrangling.html"><a href="data-wrangling.html#checks"><i class="fa fa-check"></i><b>5.7.3</b> Checks</a></li>
+<li class="chapter" data-level="5.7.4" data-path="data-wrangling.html"><a href="data-wrangling.html#exclusion"><i class="fa fa-check"></i><b>5.7.4</b> Exclusion</a></li>
+<li class="chapter" data-level="5.7.5" data-path="data-wrangling.html"><a href="data-wrangling.html#analysis"><i class="fa fa-check"></i><b>5.7.5</b> Analysis</a></li>
+<li class="chapter" data-level="5.7.6" data-path="data-wrangling.html"><a href="data-wrangling.html#table-of-2x2-means"><i class="fa fa-check"></i><b>5.7.6</b> table of 2x2 means</a></li>
+<li class="chapter" data-level="5.7.7" data-path="data-wrangling.html"><a href="data-wrangling.html#plot-of-2x2-means"><i class="fa fa-check"></i><b>5.7.7</b> plot of 2x2 means</a></li>
+<li class="chapter" data-level="5.7.8" data-path="data-wrangling.html"><a href="data-wrangling.html#repeated-measure-anova"><i class="fa fa-check"></i><b>5.7.8</b> Repeated measure ANOVA</a></li>
+<li class="chapter" data-level="5.7.9" data-path="data-wrangling.html"><a href="data-wrangling.html#example-write-up"><i class="fa fa-check"></i><b>5.7.9</b> Example Write-Up</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Psyc 7709 R Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-wrangling" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Data-Wrangling</h1>
+<div id="what-is-data-wrangling" class="section level2">
+<h2><span class="header-section-number">5.1</span> What is Data-wrangling</h2>
+<p>Data-wrangling is the general process of organizing and transforming data into various formats. For example, loading data into R, pre-processing it to get rid of things you don’t want and keep the things you want, add new things you might want that, arranging the data in different ways to accomplish different kinds of tasks, grouping the data, and summarizing the data, are all common data-wrangling activities. Real-world data often has many imperfections, so data-wrangling is necessary to get the data into a state that is readily analyzable.</p>
+<p>We will mainly go over the <code>dplyr</code> package, which has a number of fantastic and relatively easy to use tools for data-wrangling. At the same time, it worth developigng your basic programming skills (using loops and logic), as they are also indispensable for solving unusual data-wrangling problems.</p>
+</div>
+<div id="dplyr-basics" class="section level2">
+<h2><span class="header-section-number">5.2</span> dplyr basics</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5PdHgYpM-1k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<ol style="list-style-type: decimal">
+<li><a href="https://dplyr.tidyverse.org">Dplyr reference</a></li>
+<li><a href="http://r4ds.had.co.nz/transform.html">Hadley Wickham’s, R for Data Science, Chapter 5 Data transformation</a></li>
+<li><a href="https://resources.rstudio.com/rstudio-cheatsheets/data-import-cheat-sheet">Data import Cheatsheet</a></li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr) <span class="co">#load the package (make sure it is installed first)</span>
+df &lt;-<span class="st"> </span>starwars <span class="co"># dplyr comes with a data.frame called starwars</span></code></pre>
+<p>Take a look at that data in df, what do you see? It lists various characters from starwars, along with many columns that code for different properties of each character</p>
+</div>
+<div id="basic-dataframe-stuff-without-dplyr" class="section level2">
+<h2><span class="header-section-number">5.3</span> basic dataframe stuff without dplyr</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># addressing specific columns</span>
+df<span class="op">$</span>name 
+df<span class="op">$</span>height
+df<span class="op">$</span>mass
+
+<span class="co"># addressing columns and rows without names</span>
+df[<span class="dv">1</span>,] <span class="co"># row 1</span>
+df[,<span class="dv">1</span>] <span class="co"># column 1</span>
+df[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,] <span class="co"># all of the data in rows 1:4</span>
+df[,<span class="dv">4</span><span class="op">:</span><span class="dv">5</span>] <span class="co"># all of the data in columns 4:5</span>
+df[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">6</span><span class="op">:</span><span class="dv">7</span>] <span class="co"># the data in rows 1 to 3, for column 6 and 7 only</span>
+
+<span class="co"># finding a row(s) with specific info</span>
+df[df<span class="op">$</span>name<span class="op">==</span><span class="st">&quot;Luke Skywalker&quot;</span>,]
+df[df<span class="op">$</span>height <span class="op">&gt;</span><span class="st"> </span><span class="dv">180</span>,]
+df[df<span class="op">$</span>height <span class="op">&lt;</span><span class="st"> </span><span class="dv">180</span> <span class="op">&amp;</span><span class="st"> </span>df<span class="op">$</span>height <span class="op">&gt;</span><span class="st"> </span><span class="dv">70</span>,]
+
+<span class="co">#replace a particular value</span>
+df[<span class="dv">1</span>,<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">173</span> <span class="co">#changes the cell in row 1 column 2</span>
+
+<span class="co"># size of dataframe</span>
+<span class="kw">dim</span>(df) <span class="co">#c(number of rows, number of columns)</span>
+
+<span class="co"># cbind to add a column to a data.frame</span>
+df &lt;-<span class="st"> </span><span class="kw">cbind</span>(df, <span class="dt">random_number=</span><span class="kw">runif</span>(<span class="kw">dim</span>(df)[<span class="dv">1</span>],<span class="dv">0</span>,<span class="dv">1</span>))
+
+<span class="co"># rbind to add rows</span>
+<span class="co"># this creates a new data frame, binding together the rows 1-2, and 5-6</span>
+<span class="co"># note: all of the columns need to be the same</span>
+new_df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,],df[<span class="dv">5</span><span class="op">:</span><span class="dv">6</span>,]) 
+
+<span class="co"># convert a character vector to a factor</span>
+df<span class="op">$</span>species &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>species)
+<span class="kw">levels</span>(df<span class="op">$</span>species)
+<span class="kw">levels</span>(df<span class="op">$</span>species)[<span class="dv">3</span>] &lt;-<span class="st"> &quot;hello&quot;</span> <span class="co"># renames the third level, which get&#39;s applied to all listings in the df</span></code></pre>
+</div>
+<div id="a-couple-questions" class="section level2">
+<h2><span class="header-section-number">5.4</span> A couple questions:</h2>
+<ol style="list-style-type: decimal">
+<li>What are the names of all the characters who are taller than 80, shorter than 140, and are female?</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r">df[df<span class="op">$</span>height <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span> <span class="op">&amp;</span>
+<span class="st">     </span>df<span class="op">$</span>height <span class="op">&lt;</span><span class="st"> </span><span class="dv">170</span> <span class="op">&amp;</span>
+<span class="st">     </span>df<span class="op">$</span>gender <span class="op">==</span><span class="st"> &quot;female&quot;</span>, ]<span class="op">$</span>name</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>How many characters have Tatooine for their homeworld?</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r">df[df<span class="op">$</span>homeworld<span class="op">==</span><span class="st">&quot;Tatooine&quot;</span>,]
+<span class="kw">dim</span>(df[df<span class="op">$</span>homeworld<span class="op">==</span><span class="st">&quot;Tatooine&quot;</span>,])[<span class="dv">1</span>] <span class="co"># counts the NAs</span>
+
+tatooine &lt;-<span class="st"> </span>df[df<span class="op">$</span>homeworld<span class="op">==</span><span class="st">&quot;Tatooine&quot;</span>,]
+tatooine[<span class="kw">is.na</span>(tatooine<span class="op">$</span>name)<span class="op">==</span><span class="ot">FALSE</span>,]
+<span class="kw">dim</span>(tatooine[<span class="kw">is.na</span>(tatooine<span class="op">$</span>name)<span class="op">==</span><span class="ot">FALSE</span>,])[<span class="dv">1</span>]</code></pre>
+</div>
+<div id="dplyr-style" class="section level2">
+<h2><span class="header-section-number">5.5</span> dplyr style</h2>
+<p>We now look at dplyr and pipes. The idea here is that we start with a dataframe, then systematically transform one step at a time. At each step we pass the data in it’s new state to the next step. The passing is called piping the data. There is a special operator for this <code>%&gt;%</code></p>
+<div id="quick-example" class="section level3">
+<h3><span class="header-section-number">5.5.1</span> quick example</h3>
+<p>We start with the entire dataframe <code>df</code>. Then we select only the rows where the height is taller than 100. Then we group by homeworld, and compute the mean birth year. What we get is a new data.frame, showing the mean birth years for each homeworld.</p>
+<p>This is a common refrain:</p>
+<p>Dataframe %&gt;% filter %&gt;% group_by %&gt;% summarise</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+
+new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">            </span><span class="kw">filter</span>(height <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span>) <span class="op">%&gt;%</span>
+<span class="st">            </span><span class="kw">group_by</span>(homeworld) <span class="op">%&gt;%</span>
+<span class="st">            </span><span class="kw">summarise</span>(<span class="dt">mean_birth_year =</span> <span class="kw">mean</span>(birth_year,<span class="dt">na.rm=</span><span class="ot">TRUE</span>))</code></pre>
+</div>
+<div id="filter" class="section level3">
+<h3><span class="header-section-number">5.5.2</span> filter</h3>
+<p>We can filter the data by properties of particular columns</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make a new dataframe that only include rows where the height is greater than 120</span>
+new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">filter</span>(height <span class="op">&gt;</span><span class="st"> </span><span class="dv">120</span>)
+
+<span class="co"># multiple filters are seperated by a comma</span>
+new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">filter</span>(height <span class="op">&gt;</span><span class="st"> </span><span class="dv">120</span>,
+               height <span class="op">&lt;</span><span class="st"> </span><span class="dv">180</span>,
+               birth_year <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>)
+
+<span class="co"># more examples of differen logical operators</span>
+new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> &quot;male&quot;</span>) <span class="co"># == equals identity (same as)</span>
+
+new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">filter</span>(gender <span class="op">!=</span><span class="st"> &quot;male&quot;</span>) <span class="co"># != not equal to</span>
+
+new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">filter</span>(eye_color <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;yellow&quot;</span>) <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>) <span class="co"># looks for matches to blue and yellow</span>
+
+<span class="co"># &lt;= less than or equal to</span>
+<span class="co"># &gt;= greater than or equal to</span>
+new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">filter</span>(height <span class="op">&gt;=</span><span class="st"> </span><span class="dv">120</span>,
+               height <span class="op">&lt;=</span><span class="st"> </span><span class="dv">180</span>) 
+
+new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">filter</span>(height <span class="op">&gt;</span><span class="st"> </span><span class="dv">120</span> <span class="op">&amp;</span><span class="st"> </span>height <span class="op">&lt;</span><span class="st"> </span><span class="dv">180</span>) <span class="co"># &amp;  AND</span>
+
+new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">filter</span>(skin_color <span class="op">==</span><span class="st"> &quot;fair&quot;</span> <span class="op">|</span><span class="st"> </span>skin_color <span class="op">==</span><span class="st"> &quot;gold&quot;</span>) <span class="co"># | OR</span></code></pre>
+</div>
+<div id="group_by-and-summarise" class="section level3">
+<h3><span class="header-section-number">5.5.3</span> group_by and summarise</h3>
+<p><code>group_by()</code> let’s us grab parts of the data based on the levels in the column</p>
+<p><code>summarise()</code> applies a function to each of the groups that are created</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># counts the number of names, for each hair color</span>
+new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">          </span><span class="kw">group_by</span>(hair_color) <span class="op">%&gt;%</span>
+<span class="st">          </span><span class="kw">summarise</span>(<span class="dt">counts=</span><span class="kw">length</span>(name))
+
+<span class="co"># counts names, for each combination of hair and eye color</span>
+new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">          </span><span class="kw">group_by</span>(hair_color,eye_color) <span class="op">%&gt;%</span>
+<span class="st">          </span><span class="kw">summarise</span>(<span class="dt">counts=</span><span class="kw">length</span>(name))</code></pre>
+</div>
+<div id="focus-on-summarise" class="section level3">
+<h3><span class="header-section-number">5.5.4</span> focus on summarise</h3>
+<p><code>summarise</code> is very powerful. Using summarise we can apply any function we want to each of the groups. This includes intrinsic R functions, and functions of our own design. And, we can add as many as we want. What we get back are new dataframes with columns for each group, and new columns with variables containing the data we want from the analysis</p>
+<pre class="sourceCode r"><code class="sourceCode r">new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">          </span><span class="kw">group_by</span>(hair_color,eye_color) <span class="op">%&gt;%</span>
+<span class="st">          </span><span class="kw">summarise</span>(<span class="dt">mean_years =</span> <span class="kw">mean</span>(birth_year,<span class="dt">na.rm=</span><span class="ot">TRUE</span>),
+                    <span class="dt">sd_years =</span> <span class="kw">sd</span>(birth_year,<span class="dt">na.rm=</span><span class="ot">TRUE</span>),
+                    <span class="dt">counts =</span> <span class="kw">length</span>(name))</code></pre>
+</div>
+<div id="mutate" class="section level3">
+<h3><span class="header-section-number">5.5.5</span> Mutate</h3>
+<p>Use mutate to change or add a column</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># change numbers in the height column by subtracting 100</span>
+new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">            </span><span class="kw">mutate</span>(<span class="dt">height=</span>height<span class="dv">-100</span>)
+
+<span class="co"># make a new column dividing height by mass</span>
+new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">            </span><span class="kw">mutate</span>(<span class="dt">hm_ratio =</span> height<span class="op">/</span>mass)</code></pre>
+</div>
+<div id="select" class="section level3">
+<h3><span class="header-section-number">5.5.6</span> Select</h3>
+<p>Use select to select columns of interest and return a dataframe only with those columns</p>
+<pre class="sourceCode r"><code class="sourceCode r">new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">            </span><span class="kw">select</span>(name,height,mass)</code></pre>
+</div>
+<div id="star-wars-questions-and-answers" class="section level3">
+<h3><span class="header-section-number">5.5.7</span> Star wars questions and answers</h3>
+<ol style="list-style-type: decimal">
+<li>use dplyr to find how many movies each character appeared in. Return a table that lists the names, and the number of films</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># two ways to do the same thing</span>
+new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">            </span><span class="kw">select</span>(name,films) <span class="op">%&gt;%</span>
+<span class="st">            </span><span class="kw">group_by</span>(name) <span class="op">%&gt;%</span>
+<span class="st">            </span><span class="kw">mutate</span>(<span class="dt">films =</span> <span class="kw">length</span>(<span class="kw">unlist</span>(films)))
+
+new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">            </span><span class="kw">select</span>(name,films) <span class="op">%&gt;%</span>
+<span class="st">            </span><span class="kw">group_by</span>(name) <span class="op">%&gt;%</span>
+<span class="st">            </span><span class="kw">summarise</span>(<span class="dt">films =</span> <span class="kw">length</span>(<span class="kw">unlist</span>(films)))</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>How many characters are in each movie?</li>
+</ol>
+<ul>
+<li>dplyr isn’t always necessary for every question</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(<span class="kw">unlist</span>(df<span class="op">$</span>films))</code></pre>
+<pre><code>## 
+##              A New Hope    Attack of the Clones      Return of the Jedi 
+##                      18                      40                      20 
+##     Revenge of the Sith The Empire Strikes Back       The Force Awakens 
+##                      34                      16                      11 
+##      The Phantom Menace 
+##                      34</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>What is the mean height and mass of characters with blue eyes?</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r">new_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">            </span><span class="kw">filter</span>(eye_color<span class="op">==</span><span class="st">&quot;blue&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">            </span><span class="kw">summarise</span>(<span class="dt">mean_height =</span> <span class="kw">mean</span>(height,<span class="dt">na.rm=</span><span class="ot">TRUE</span>),
+                      <span class="dt">mean_mass =</span> <span class="kw">mean</span>(mass,<span class="dt">na.rm=</span><span class="ot">TRUE</span>))</code></pre>
+</div>
+</div>
+<div id="data-input" class="section level2">
+<h2><span class="header-section-number">5.6</span> Data input</h2>
+<p>Before we wrangle with data, we need to get it into R. There are many ways to do that.</p>
+<p>All of the following examples assume you have a data folder in your workspace that contains all the data files we will be using. Download this .zip file <a href="https://github.com/CrumpLab/statisticsLab/raw/master/RstudioCloud.zip">https://github.com/CrumpLab/statisticsLab/raw/master/RstudioCloud.zip</a>. Unzip the file. Then copy the data folder into your R markdown project folder.</p>
+<p><strong>WARNING:</strong> loading files requires you to tell R exactly where the file is on your computer. This can involve specifying the entire file path (the drive, all of the folder, and then the filename). These examples avoid this complete filename nonsense by putting the files in a data folder in your R project folder. Then, we just need to specify the folder and the filename. In this case, the folder will always be data. In general, R by default attempts to load files from the current working directory, which is automatically set to your project folder when you are working in an R-studio project.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># loading a csv file using read.csv</span>
+hsq &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/hsq.csv&quot;</span>)
+
+<span class="co"># alternative using fread</span>
+<span class="kw">library</span>(data.table)
+hsq &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/hsq.csv&quot;</span>) <span class="co"># creates a data.table, similar to a data.frame</span>
+
+<span class="co"># loading an SPSS sav file</span>
+<span class="kw">library</span>(foreign)
+spss &lt;-<span class="st"> </span><span class="kw">read.spss</span>(<span class="st">&quot;data/02_NYC_Salary_City_2016.sav&quot;</span>,
+                  <span class="dt">to.data.frame=</span><span class="ot">TRUE</span>)</code></pre>
+<div id="other-helpful-libraries-for-reading-in-files" class="section level3">
+<h3><span class="header-section-number">5.6.1</span> Other helpful libraries for reading in files</h3>
+<ol style="list-style-type: decimal">
+<li>libary <code>readxl</code> let’s you read in excel files</li>
+<li>library <code>googlesheets</code> let’s you read in google spreadsheets</li>
+<li>function <code>scan</code> is a powerful and all purpose text input function, often helpful in very messy situations where you want to read in line-by-line</li>
+<li><code>load</code> for R data files</li>
+<li>there are several <code>read.</code> functions for specific situations.</li>
+<li>library <code>jsonlite</code> for json data structures</li>
+<li>and many more, this is really something that you will learn more about on a case-by-case basis as you have to deal with particular data formats.</li>
+</ol>
+</div>
+</div>
+<div id="example-analysis" class="section level2">
+<h2><span class="header-section-number">5.7</span> Example Analysis</h2>
+<p>This example is taken from <a href="https://crumplab.github.io/statisticsLab/lab-10-factorial-anova.html#r-10">https://crumplab.github.io/statisticsLab/lab-10-factorial-anova.html#r-10</a>. The data file is <code>stroop_stand.csv</code>, and can be found here <a href="https://github.com/CrumpLab/statisticsLab/tree/master/data">https://github.com/CrumpLab/statisticsLab/tree/master/data</a></p>
+<div id="load-the-data-and-libraries-you-will-use" class="section level3">
+<h3><span class="header-section-number">5.7.1</span> Load the data and libraries you will use</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(data.table)
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(ggplot2)
+all_data &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/stroop_stand.csv&quot;</span>)</code></pre>
+</div>
+<div id="pre-processing" class="section level3">
+<h3><span class="header-section-number">5.7.2</span> Pre-processing</h3>
+<p>Pre-processing can include many steps. Here, we convert the data from wide to long format, and make a new data frame.</p>
+<pre class="sourceCode r"><code class="sourceCode r">RTs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">as.numeric</span>(<span class="kw">unlist</span>(all_data[,<span class="dv">1</span>])),
+         <span class="kw">as.numeric</span>(<span class="kw">unlist</span>(all_data[,<span class="dv">2</span>])),
+         <span class="kw">as.numeric</span>(<span class="kw">unlist</span>(all_data[,<span class="dv">3</span>])),
+         <span class="kw">as.numeric</span>(<span class="kw">unlist</span>(all_data[,<span class="dv">4</span>]))
+         )
+
+Congruency &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Congruent&quot;</span>,<span class="st">&quot;Incongruent&quot;</span>),<span class="dt">each=</span><span class="dv">50</span>),<span class="dv">2</span>)
+Posture &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Stand&quot;</span>,<span class="st">&quot;Sit&quot;</span>),<span class="dt">each=</span><span class="dv">100</span>)
+Subject &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>,<span class="dv">4</span>)
+
+stroop_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Subject,Congruency,Posture,RTs)</code></pre>
+</div>
+<div id="checks" class="section level3">
+<h3><span class="header-section-number">5.7.3</span> Checks</h3>
+<p>It is important to check the data you are analyzing before you analyze. The checks you make depend on the questions you are trying to answer. Here we check the number of subjects in each condition.</p>
+<p>This is a 2x2 repeated measures design, each subject should have 4 means</p>
+<pre class="sourceCode r"><code class="sourceCode r">num_subjects &lt;-<span class="st"> </span>stroop_df <span class="op">%&gt;%</span>
+<span class="st">                  </span><span class="kw">group_by</span>(Subject) <span class="op">%&gt;%</span>
+<span class="st">                  </span><span class="kw">summarise</span>(<span class="dt">counts =</span> <span class="kw">length</span>(Subject))
+total_subjects &lt;-<span class="st"> </span><span class="kw">length</span>(num_subjects<span class="op">$</span>Subject)
+total_has_four &lt;-<span class="st"> </span>num_subjects<span class="op">$</span>counts <span class="op">==</span><span class="st"> </span><span class="dv">4</span>
+<span class="kw">sum</span>(total_has_four) <span class="op">==</span><span class="st"> </span>total_subjects</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Are there any subjects with huge mean RTs? Could indicate something weird happened.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(stroop_df<span class="op">$</span>RTs)</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-124-1.png" width="672" /></p>
+</div>
+<div id="exclusion" class="section level3">
+<h3><span class="header-section-number">5.7.4</span> Exclusion</h3>
+<p>If you are going to exlcude subjects from analysis, then justify your exclusion criterion, and then eliminate subject data from the data frame. We will not exlcude any subjects here.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># no exclusions</span></code></pre>
+</div>
+<div id="analysis" class="section level3">
+<h3><span class="header-section-number">5.7.5</span> Analysis</h3>
+<p>Now you can begin analysis. This experiment asked whether the Stroop effect (difference between mean incongruent and mean congruent), depends on whether people are sitting or standing. Let’s get the means, make a tbale, then plot the data.</p>
+</div>
+<div id="table-of-2x2-means" class="section level3">
+<h3><span class="header-section-number">5.7.6</span> table of 2x2 means</h3>
+<pre class="sourceCode r"><code class="sourceCode r">overall_means &lt;-<span class="st"> </span>stroop_df <span class="op">%&gt;%</span>
+<span class="st">                  </span><span class="kw">group_by</span>(Posture,Congruency) <span class="op">%&gt;%</span>
+<span class="st">                  </span><span class="kw">summarise</span>(<span class="dt">meanRT =</span> <span class="kw">mean</span>(RTs),
+                            <span class="dt">SEMRT =</span> (<span class="kw">sd</span>(RTs)<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">length</span>(RTs))))
+
+<span class="co"># make a table of overall means</span>
+knitr<span class="op">::</span><span class="kw">kable</span>(overall_means)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Posture</th>
+<th align="left">Congruency</th>
+<th align="right">meanRT</th>
+<th align="right">SEMRT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sit</td>
+<td align="left">Congruent</td>
+<td align="right">821.9232</td>
+<td align="right">16.60384</td>
+</tr>
+<tr class="even">
+<td align="left">Sit</td>
+<td align="left">Incongruent</td>
+<td align="right">940.7855</td>
+<td align="right">17.91041</td>
+</tr>
+<tr class="odd">
+<td align="left">Stand</td>
+<td align="left">Congruent</td>
+<td align="right">807.9599</td>
+<td align="right">14.93521</td>
+</tr>
+<tr class="even">
+<td align="left">Stand</td>
+<td align="left">Incongruent</td>
+<td align="right">903.9131</td>
+<td align="right">15.34939</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="plot-of-2x2-means" class="section level3">
+<h3><span class="header-section-number">5.7.7</span> plot of 2x2 means</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(overall_means, <span class="kw">aes</span>(<span class="dt">x=</span>Posture,
+                          <span class="dt">y=</span>meanRT, 
+                          <span class="dt">group=</span>Congruency,
+                          <span class="dt">fill=</span>Congruency))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>,<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>(<span class="dt">base_size=</span><span class="dv">12</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Mean Reaction Time (ms)&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>meanRT<span class="op">-</span>SEMRT,
+                    <span class="dt">ymax=</span>meanRT<span class="op">+</span>SEMRT),
+                <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="dt">width=</span><span class="fl">0.9</span>),
+                <span class="dt">width=</span>.<span class="dv">2</span>,
+                <span class="dt">color=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">750</span>,<span class="dv">1000</span>))</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
+</div>
+<div id="repeated-measure-anova" class="section level3">
+<h3><span class="header-section-number">5.7.8</span> Repeated measure ANOVA</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make sure Subjecdt is  a factor</span>
+stroop_df<span class="op">$</span>Subject &lt;-<span class="st">  </span><span class="kw">as.factor</span>(stroop_df<span class="op">$</span>Subject)
+
+aov_out &lt;-<span class="st"> </span><span class="kw">aov</span>(RTs<span class="op">~</span>Posture<span class="op">*</span>Congruency <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(Subject<span class="op">/</span>(Posture<span class="op">*</span>Congruency)), stroop_df)
+<span class="co">#print summary of ANOVA table</span>
+<span class="kw">summary</span>(aov_out)</code></pre>
+<pre><code>## 
+## Error: Subject
+##           Df  Sum Sq Mean Sq F value Pr(&gt;F)
+## Residuals 49 2250739   45933               
+## 
+## Error: Subject:Posture
+##           Df Sum Sq Mean Sq F value  Pr(&gt;F)   
+## Posture    1  32303   32303    7.33 0.00931 **
+## Residuals 49 215948    4407                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: Subject:Congruency
+##            Df Sum Sq Mean Sq F value Pr(&gt;F)    
+## Congruency  1 576822  576822   342.5 &lt;2e-16 ***
+## Residuals  49  82535    1684                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: Subject:Posture:Congruency
+##                    Df Sum Sq Mean Sq F value  Pr(&gt;F)   
+## Posture:Congruency  1   6560    6560   8.964 0.00431 **
+## Residuals          49  35859     732                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># prints a nicer ANOVA table</span>
+summary_out &lt;-<span class="st"> </span><span class="kw">summary</span>(aov_out)
+<span class="kw">library</span>(xtable)
+knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">xtable</span>(summary_out))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Residuals</td>
+<td align="right">49</td>
+<td align="right">2250738.636</td>
+<td align="right">45933.4416</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td>Posture</td>
+<td align="right">1</td>
+<td align="right">32303.453</td>
+<td align="right">32303.4534</td>
+<td align="right">7.329876</td>
+<td align="right">0.0093104</td>
+</tr>
+<tr class="odd">
+<td>Residuals1</td>
+<td align="right">49</td>
+<td align="right">215947.614</td>
+<td align="right">4407.0942</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td>Congruency</td>
+<td align="right">1</td>
+<td align="right">576821.635</td>
+<td align="right">576821.6349</td>
+<td align="right">342.452244</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td>Residuals</td>
+<td align="right">49</td>
+<td align="right">82534.895</td>
+<td align="right">1684.3856</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td>Posture:Congruency</td>
+<td align="right">1</td>
+<td align="right">6560.339</td>
+<td align="right">6560.3389</td>
+<td align="right">8.964444</td>
+<td align="right">0.0043060</td>
+</tr>
+<tr class="odd">
+<td>Residuals</td>
+<td align="right">49</td>
+<td align="right">35859.069</td>
+<td align="right">731.8177</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># prints means for each effect</span>
+<span class="kw">print</span>(<span class="kw">model.tables</span>(aov_out,<span class="st">&quot;means&quot;</span>), <span class="dt">format=</span><span class="st">&quot;markdown&quot;</span>)</code></pre>
+<pre><code>## Tables of means
+## Grand mean
+##          
+## 868.6454 
+## 
+##  Posture 
+## Posture
+##   Sit Stand 
+## 881.4 855.9 
+## 
+##  Congruency 
+## Congruency
+##   Congruent Incongruent 
+##       814.9       922.3 
+## 
+##  Posture:Congruency 
+##        Congruency
+## Posture Congruent Incongruent
+##   Sit   821.9     940.8      
+##   Stand 808.0     903.9</code></pre>
+</div>
+<div id="example-write-up" class="section level3">
+<h3><span class="header-section-number">5.7.9</span> Example Write-Up</h3>
+<p>We submitted the mean reaction times for each subject in each condition to a 2 (Congruency: congruecnt vs. incongruent) x 2 (Posture: Standing vs. Sitting) repeated measures ANOVA.</p>
+<p>There was a main effect of Congruency, F (1, 49) = 342.45, MSE = 1684.39, p &lt; 0.001. Mean reaction times were slower for incongruent (922 ms) than congruent groups (815 ms).</p>
+<p>There main effect of Posture was significant, F (1, 49) = 7.33, MSE = 4407.09, p =.009. Mean reaction times were slower for sitting (881 ms) than standing groups (855 ms).</p>
+<p>The two-way interaction between Congruency and Posture was significant, F (1, 49) = 8.96, MSE = 731.82, p &lt; 0.004. The Stroop effect was 23 ms smaller in the standing than sitting conditions.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-visualization-ggplot2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-DataWrangling.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["7709Rbook.pdf", "7709Rbook.epub"],
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+</body>
+
+</html>

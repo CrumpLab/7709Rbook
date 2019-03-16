@@ -1,0 +1,13 @@
+base
+ggplot2
+ggrepel
+sysfonts
+showtextdb
+showtext
+dplyr
+bindrcpp
+magrittr
+ggpubr
+data.table
+foreign
+xtable

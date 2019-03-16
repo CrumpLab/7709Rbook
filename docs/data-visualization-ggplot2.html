@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 4 Data visualization (ggplot2) | Psyc 7709 R Book</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 4 Data visualization (ggplot2) | Psyc 7709 R Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Data visualization (ggplot2) | Psyc 7709 R Book" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Matthew Crump">
+
+
+<meta name="date" content="2019-03-16">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="programming-challenges-for-learning-the-fundamentals.html">
+<link rel="next" href="data-wrangling.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
+<li class="chapter" data-level="2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html"><i class="fa fa-check"></i><b>2</b> Basic Programming in R</a><ul>
+<li class="chapter" data-level="2.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#variables"><i class="fa fa-check"></i><b>2.1</b> Variables</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#style-guide"><i class="fa fa-check"></i><b>2.1.1</b> Style guide</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#double-checking-your-variable-works"><i class="fa fa-check"></i><b>2.1.2</b> Double-checking your variable works</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#changing-the-contents-of-a-variable"><i class="fa fa-check"></i><b>2.1.3</b> Changing the contents of a variable</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#properties-of-variables"><i class="fa fa-check"></i><b>2.1.4</b> Properties of variables</a></li>
+<li class="chapter" data-level="2.1.5" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#converting-between-numeric-and-character"><i class="fa fa-check"></i><b>2.1.5</b> Converting between numeric and character</a></li>
+<li class="chapter" data-level="2.1.6" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#converting-between-character-and-numeric"><i class="fa fa-check"></i><b>2.1.6</b> converting between character and numeric</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#vectors"><i class="fa fa-check"></i><b>2.2</b> Vectors</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#indexing"><i class="fa fa-check"></i><b>2.2.1</b> indexing</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#assignment-and-indexing"><i class="fa fa-check"></i><b>2.2.2</b> assignment and indexing</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#c-is-for-combine"><i class="fa fa-check"></i><b>2.2.3</b> c is for combine</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#loops"><i class="fa fa-check"></i><b>2.3</b> Loops</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#breaking-a-loop"><i class="fa fa-check"></i><b>2.3.1</b> Breaking a loop</a></li>
+<li class="chapter" data-level="2.3.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#while-loops"><i class="fa fa-check"></i><b>2.3.2</b> While loops</a></li>
+<li class="chapter" data-level="2.3.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#repeat-loops"><i class="fa fa-check"></i><b>2.3.3</b> Repeat loops</a></li>
+<li class="chapter" data-level="2.3.4" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#examples"><i class="fa fa-check"></i><b>2.3.4</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#logical-comparison"><i class="fa fa-check"></i><b>2.4</b> Logical comparison</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#equal-to"><i class="fa fa-check"></i><b>2.4.1</b> equal to</a></li>
+<li class="chapter" data-level="2.4.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#not-equal-to"><i class="fa fa-check"></i><b>2.4.2</b> not equal to</a></li>
+<li class="chapter" data-level="2.4.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#greater-than-less-than"><i class="fa fa-check"></i><b>2.4.3</b> Greater than/ less than</a></li>
+<li class="chapter" data-level="2.4.4" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#section"><i class="fa fa-check"></i><b>2.4.4</b> &gt;= &lt;=</a></li>
+<li class="chapter" data-level="2.4.5" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#and"><i class="fa fa-check"></i><b>2.4.5</b> AND</a></li>
+<li class="chapter" data-level="2.4.6" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#or"><i class="fa fa-check"></i><b>2.4.6</b> OR</a></li>
+<li class="chapter" data-level="2.4.7" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#true-false"><i class="fa fa-check"></i><b>2.4.7</b> TRUE FALSE</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#if-else"><i class="fa fa-check"></i><b>2.5</b> IF ELSE</a></li>
+<li class="chapter" data-level="2.6" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#functions"><i class="fa fa-check"></i><b>2.6</b> Functions</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#function-syntax"><i class="fa fa-check"></i><b>2.6.1</b> function syntax</a></li>
+<li class="chapter" data-level="2.6.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#example-functions"><i class="fa fa-check"></i><b>2.6.2</b> example functions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html"><i class="fa fa-check"></i><b>3</b> Programming Challenges for learning the fundamentals</a><ul>
+<li class="chapter" data-level="3.1" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#tips-for-approaching-the-problems"><i class="fa fa-check"></i><b>3.1</b> Tips for Approaching the Problems</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#rstudios-text-editor"><i class="fa fa-check"></i><b>3.1.1</b> Rstudio’s Text editor</a></li>
+<li class="chapter" data-level="3.1.2" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#use-informative-variable-names."><i class="fa fa-check"></i><b>3.1.2</b> Use informative variable names.</a></li>
+<li class="chapter" data-level="3.1.3" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#use-comments."><i class="fa fa-check"></i><b>3.1.3</b> Use comments.</a></li>
+<li class="chapter" data-level="3.1.4" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#r-markdown."><i class="fa fa-check"></i><b>3.1.4</b> R Markdown.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#easier-problems"><i class="fa fa-check"></i><b>3.2</b> Easier Problems</a></li>
+<li class="chapter" data-level="3.3" data-path="programming-challenges-for-learning-the-fundamentals.html"><a href="programming-challenges-for-learning-the-fundamentals.html#harder-problems"><i class="fa fa-check"></i><b>3.3</b> Harder Problems</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html"><i class="fa fa-check"></i><b>4</b> Data visualization (ggplot2)</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ggplot2-resources"><i class="fa fa-check"></i><b>4.1</b> ggplot2 resources</a></li>
+<li class="chapter" data-level="4.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#example-code"><i class="fa fa-check"></i><b>4.2</b> Example code</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#scatterplot"><i class="fa fa-check"></i><b>4.2.1</b> Scatterplot</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#bar-graph"><i class="fa fa-check"></i><b>4.2.2</b> bar graph</a></li>
+<li class="chapter" data-level="4.2.3" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#line-graph"><i class="fa fa-check"></i><b>4.2.3</b> Line Graph</a></li>
+<li class="chapter" data-level="4.2.4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#histogram"><i class="fa fa-check"></i><b>4.2.4</b> Histogram</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#advanced-ggplot"><i class="fa fa-check"></i><b>4.3</b> Advanced ggplot</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#add-on-packages"><i class="fa fa-check"></i><b>4.3.1</b> Add-on packages</a></li>
+<li class="chapter" data-level="4.3.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#figure-output-tips"><i class="fa fa-check"></i><b>4.3.2</b> Figure Output tips</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#knitr-options"><i class="fa fa-check"></i><b>4.4</b> knitr options</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#knitr-figure-output-defaults"><i class="fa fa-check"></i><b>4.4.1</b> knitr figure output defaults</a></li>
+<li class="chapter" data-level="4.4.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#figure-output-per-code-block"><i class="fa fa-check"></i><b>4.4.2</b> figure output per code block</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#data-vis-assignment-with-solutions"><i class="fa fa-check"></i><b>4.5</b> Data-vis assignment with solutions</a></li>
+<li class="chapter" data-level="4.6" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#list-of-figures-to-reproduce"><i class="fa fa-check"></i><b>4.6</b> List of Figures to reproduce</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>5</b> Data-Wrangling</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-wrangling.html"><a href="data-wrangling.html#what-is-data-wrangling"><i class="fa fa-check"></i><b>5.1</b> What is Data-wrangling</a></li>
+<li class="chapter" data-level="5.2" data-path="data-wrangling.html"><a href="data-wrangling.html#dplyr-basics"><i class="fa fa-check"></i><b>5.2</b> dplyr basics</a></li>
+<li class="chapter" data-level="5.3" data-path="data-wrangling.html"><a href="data-wrangling.html#basic-dataframe-stuff-without-dplyr"><i class="fa fa-check"></i><b>5.3</b> basic dataframe stuff without dplyr</a></li>
+<li class="chapter" data-level="5.4" data-path="data-wrangling.html"><a href="data-wrangling.html#a-couple-questions"><i class="fa fa-check"></i><b>5.4</b> A couple questions:</a></li>
+<li class="chapter" data-level="5.5" data-path="data-wrangling.html"><a href="data-wrangling.html#dplyr-style"><i class="fa fa-check"></i><b>5.5</b> dplyr style</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="data-wrangling.html"><a href="data-wrangling.html#quick-example"><i class="fa fa-check"></i><b>5.5.1</b> quick example</a></li>
+<li class="chapter" data-level="5.5.2" data-path="data-wrangling.html"><a href="data-wrangling.html#filter"><i class="fa fa-check"></i><b>5.5.2</b> filter</a></li>
+<li class="chapter" data-level="5.5.3" data-path="data-wrangling.html"><a href="data-wrangling.html#group_by-and-summarise"><i class="fa fa-check"></i><b>5.5.3</b> group_by and summarise</a></li>
+<li class="chapter" data-level="5.5.4" data-path="data-wrangling.html"><a href="data-wrangling.html#focus-on-summarise"><i class="fa fa-check"></i><b>5.5.4</b> focus on summarise</a></li>
+<li class="chapter" data-level="5.5.5" data-path="data-wrangling.html"><a href="data-wrangling.html#mutate"><i class="fa fa-check"></i><b>5.5.5</b> Mutate</a></li>
+<li class="chapter" data-level="5.5.6" data-path="data-wrangling.html"><a href="data-wrangling.html#select"><i class="fa fa-check"></i><b>5.5.6</b> Select</a></li>
+<li class="chapter" data-level="5.5.7" data-path="data-wrangling.html"><a href="data-wrangling.html#star-wars-questions-and-answers"><i class="fa fa-check"></i><b>5.5.7</b> Star wars questions and answers</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="data-wrangling.html"><a href="data-wrangling.html#data-input"><i class="fa fa-check"></i><b>5.6</b> Data input</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="data-wrangling.html"><a href="data-wrangling.html#other-helpful-libraries-for-reading-in-files"><i class="fa fa-check"></i><b>5.6.1</b> Other helpful libraries for reading in files</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="data-wrangling.html"><a href="data-wrangling.html#example-analysis"><i class="fa fa-check"></i><b>5.7</b> Example Analysis</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="data-wrangling.html"><a href="data-wrangling.html#load-the-data-and-libraries-you-will-use"><i class="fa fa-check"></i><b>5.7.1</b> Load the data and libraries you will use</a></li>
+<li class="chapter" data-level="5.7.2" data-path="data-wrangling.html"><a href="data-wrangling.html#pre-processing"><i class="fa fa-check"></i><b>5.7.2</b> Pre-processing</a></li>
+<li class="chapter" data-level="5.7.3" data-path="data-wrangling.html"><a href="data-wrangling.html#checks"><i class="fa fa-check"></i><b>5.7.3</b> Checks</a></li>
+<li class="chapter" data-level="5.7.4" data-path="data-wrangling.html"><a href="data-wrangling.html#exclusion"><i class="fa fa-check"></i><b>5.7.4</b> Exclusion</a></li>
+<li class="chapter" data-level="5.7.5" data-path="data-wrangling.html"><a href="data-wrangling.html#analysis"><i class="fa fa-check"></i><b>5.7.5</b> Analysis</a></li>
+<li class="chapter" data-level="5.7.6" data-path="data-wrangling.html"><a href="data-wrangling.html#table-of-2x2-means"><i class="fa fa-check"></i><b>5.7.6</b> table of 2x2 means</a></li>
+<li class="chapter" data-level="5.7.7" data-path="data-wrangling.html"><a href="data-wrangling.html#plot-of-2x2-means"><i class="fa fa-check"></i><b>5.7.7</b> plot of 2x2 means</a></li>
+<li class="chapter" data-level="5.7.8" data-path="data-wrangling.html"><a href="data-wrangling.html#repeated-measure-anova"><i class="fa fa-check"></i><b>5.7.8</b> Repeated measure ANOVA</a></li>
+<li class="chapter" data-level="5.7.9" data-path="data-wrangling.html"><a href="data-wrangling.html#example-write-up"><i class="fa fa-check"></i><b>5.7.9</b> Example Write-Up</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Psyc 7709 R Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-visualization-ggplot2" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Data visualization (ggplot2)</h1>
+<p>Make sure you load ggplot2 before you try to use it in your rmd file.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre>
+<div id="ggplot2-resources" class="section level2">
+<h2><span class="header-section-number">4.1</span> ggplot2 resources</h2>
+<ol style="list-style-type: decimal">
+<li><a href="https://ggplot2.tidyverse.org">ggplot2 reference website</a></li>
+<li><a href="https://r4ds.had.co.nz/data-visualisation.html">Hadley Wickham’s, R for Data Science, Chapter 3 Data visualization</a></li>
+<li><a href="https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf">ggplot2 cheatsheet</a></li>
+</ol>
+</div>
+<div id="example-code" class="section level2">
+<h2><span class="header-section-number">4.2</span> Example code</h2>
+<div id="scatterplot" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Scatterplot</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create dataframe</span>
+a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">4</span>)
+b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(a,b)
+
+<span class="co"># basic scatterplot</span>
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>a,<span class="dt">y=</span>b))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># customize, add regression line</span>
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>a,<span class="dt">y=</span>b))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">2</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm)<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">7</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;x-axis label&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;y-axis label&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;I made a scatterplot&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>(<span class="dt">base_size=</span><span class="dv">12</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-75-2.png" width="672" /></p>
+</div>
+<div id="bar-graph" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> bar graph</h3>
+<p>1 factor</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Create a dataframe</span>
+factor_one &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>))
+dv_means &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>)
+dv_SEs   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>,<span class="fl">3.4</span>,<span class="dv">4</span>)
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(factor_one,
+                      dv_means,
+                      dv_SEs)
+
+<span class="co"># basic bar graph</span>
+
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>factor_one,<span class="dt">y=</span>dv_means))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>)</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># adding error bars, customizing</span>
+
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>factor_one,<span class="dt">y=</span>dv_means))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>dv_means<span class="op">-</span>dv_SEs,
+                    <span class="dt">ymax=</span>dv_means<span class="op">+</span>dv_SEs),
+                <span class="dt">width=</span>.<span class="dv">2</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">100</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;x-axis label&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;y-axis label&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;I made a bar graph&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>(<span class="dt">base_size=</span><span class="dv">12</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-76-2.png" width="672" /></p>
+<p>2 factor</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Create a dataframe</span>
+factor_one &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>)),<span class="dv">2</span>)
+factor_two &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="st">&quot;IIA&quot;</span>,<span class="st">&quot;IIB&quot;</span>)),<span class="dv">3</span>)
+dv_means &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">20</span>,<span class="dv">40</span>,<span class="dv">40</span>)
+dv_SEs   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>,<span class="fl">3.4</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>)
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(factor_one,
+                      factor_two,
+                      dv_means,
+                      dv_SEs)
+
+<span class="co"># basic bar graph</span>
+
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>factor_one,<span class="dt">y=</span>dv_means,
+                    <span class="dt">group=</span>factor_two,
+                    <span class="dt">color=</span>factor_two))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>)</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># adding error bars, customizing</span>
+
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>factor_one,<span class="dt">y=</span>dv_means,
+                    <span class="dt">group=</span>factor_two,
+                    <span class="dt">color=</span>factor_two,
+                    <span class="dt">fill=</span>factor_two))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>dv_means<span class="op">-</span>dv_SEs,
+                    <span class="dt">ymax=</span>dv_means<span class="op">+</span>dv_SEs),
+                <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="dt">width=</span><span class="fl">0.9</span>),
+                <span class="dt">width=</span>.<span class="dv">2</span>,
+                <span class="dt">color=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">100</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;x-axis label&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;y-axis label&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Bar graph 2 factors&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>(<span class="dt">base_size=</span><span class="dv">12</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-77-2.png" width="672" /></p>
+<p>3 factor</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Create a dataframe</span>
+factor_one &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">rep</span>(<span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>)),<span class="dv">2</span>),<span class="dv">2</span>)
+factor_two &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">rep</span>(<span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="st">&quot;IIA&quot;</span>,<span class="st">&quot;IIB&quot;</span>)),<span class="dv">3</span>),<span class="dv">2</span>)
+factor_three &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="st">&quot;IIIA&quot;</span>,<span class="st">&quot;IIIB&quot;</span>)),<span class="dt">each=</span><span class="dv">6</span>)
+dv_means &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">20</span>,<span class="dv">40</span>,<span class="dv">40</span>,
+              <span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">50</span>,<span class="dv">50</span>,<span class="dv">10</span>,<span class="dv">10</span>)
+dv_SEs   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>,<span class="fl">3.4</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>,
+              <span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>)
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(factor_one,
+                      factor_two,
+                      factor_three,
+                      dv_means,
+                      dv_SEs)
+
+<span class="co"># basic bar graph</span>
+
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>factor_one,<span class="dt">y=</span>dv_means,
+                    <span class="dt">group=</span>factor_two,
+                    <span class="dt">color=</span>factor_two))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>factor_three)</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
+</div>
+<div id="line-graph" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Line Graph</h3>
+<p>1 factor</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Create a dataframe</span>
+factor_one &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>))
+dv_means &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>)
+dv_SEs   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>,<span class="fl">3.4</span>,<span class="dv">4</span>)
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(factor_one,
+                      dv_means,
+                      dv_SEs)
+
+<span class="co"># basic line graph</span>
+
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>factor_one,<span class="dt">y=</span>dv_means, <span class="dt">group=</span><span class="dv">1</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># adding error bars, customizing</span>
+
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>factor_one,<span class="dt">y=</span>dv_means, <span class="dt">group=</span><span class="dv">1</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>dv_means<span class="op">-</span>dv_SEs,
+                    <span class="dt">ymax=</span>dv_means<span class="op">+</span>dv_SEs),
+                <span class="dt">width=</span>.<span class="dv">2</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">100</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;x-axis label&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;y-axis label&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;I made a line graph&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>(<span class="dt">base_size=</span><span class="dv">12</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-79-2.png" width="672" /></p>
+<p>2 factor</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Create a dataframe</span>
+factor_one &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>)),<span class="dv">2</span>)
+factor_two &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="st">&quot;IIA&quot;</span>,<span class="st">&quot;IIB&quot;</span>)),<span class="dv">3</span>)
+dv_means &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">20</span>,<span class="dv">40</span>,<span class="dv">40</span>)
+dv_SEs   &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>,<span class="fl">3.4</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>)
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(factor_one,
+                      factor_two,
+                      dv_means,
+                      dv_SEs)
+
+<span class="co"># basic line graph</span>
+
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>factor_one,<span class="dt">y=</span>dv_means,
+                    <span class="dt">group=</span>factor_two,
+                    <span class="dt">color=</span>factor_two,
+                    <span class="dt">linetype=</span>factor_two))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
+</div>
+<div id="histogram" class="section level3">
+<h3><span class="header-section-number">4.2.4</span> Histogram</h3>
+<p>base R</p>
+<pre class="sourceCode r"><code class="sourceCode r">a&lt;-<span class="kw">rnorm</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>)
+<span class="kw">hist</span>(a)</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">score &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>)
+n &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span>
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(score,n)
+
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>score))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins=</span><span class="dv">10</span>,
+                 <span class="dt">color=</span><span class="st">&quot;white&quot;</span>)</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
+</div>
+</div>
+<div id="advanced-ggplot" class="section level2">
+<h2><span class="header-section-number">4.3</span> Advanced ggplot</h2>
+<div id="add-on-packages" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Add-on packages</h3>
+<ul>
+<li><a href="https://www.ggplot2-exts.org">https://www.ggplot2-exts.org</a> A repository of 50+ add on packages for ggplot2</li>
+<li><a href="https://gganimate.com">https://gganimate.com</a>
+<ul>
+<li>allows you to create animated .gifs of ggplots</li>
+<li>I made a bunch of animated gifs for a statistics textbook. They are all here along with the code <a href="https://crumplab.github.io/statistics/gifs.html">https://crumplab.github.io/statistics/gifs.html</a></li>
+</ul></li>
+<li><a href="https://github.com/slowkow/ggrepel%5D">ggrepel</a> allows you to repel overlapping text labels away from each other.</li>
+<li><a href="https://github.com/dreamRs/esquisse">esquisse</a> a GUI (graphic user interface) that allows you make ggplot graphs using drag-drop, and clickable options</li>
+<li><a href="https://github.com/metrumresearchgroup/ggedit">ggedit</a> similar to above, clickable editing of ggplot graphs</li>
+<li><a href="https://plot.ly/r/">plotly</a> a package similar to ggplot, makes a whole variety of graphs, mainly for use in websites. Allows interactive graphs.
+<ul>
+<li>As an example, I used plotly on my publications website, if you hover over the dots, info pops up <a href="https://crumplab.github.io/Publications.html">https://crumplab.github.io/Publications.html</a>.</li>
+</ul></li>
+<li><strong>ggpubr</strong> (install from CRAN), many useful things, including the <code>ggarrange</code> function which allows you to knit multiple plots together</li>
+<li><strong>ggthemes</strong> extra themes, scales, and geoms</li>
+</ul>
+</div>
+<div id="figure-output-tips" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> Figure Output tips</h3>
+<p>How do you control the size (width/height) of the figure, and where can you can get a file, like a .pdf or a .png of the figure?</p>
+<p>I use knitr options to solve these problems.</p>
+</div>
+</div>
+<div id="knitr-options" class="section level2">
+<h2><span class="header-section-number">4.4</span> knitr options</h2>
+<p>When you create a new R Markdown document you will see the following code chunk underneath the yaml, at the beginning of the document. It usually looks like this:</p>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="bn">```{r setup, include=FALSE}</span>
+<span class="bn">knitr::opts_chunk$set(echo = TRUE)</span>
+<span class="bn">```</span></code></pre>
+<p>This chunk is named setup, it is not printed in your output, but <strong>it controls the global setup options</strong> for the whole document. Any option you set here applies to all of the remaining code chunks you create. It’s a way of setting defaults.</p>
+<p>Here are some helpful defaults you can add. You turn the option on with <code>TRUE</code>, and turn it off with <code>FALSE</code>.</p>
+<ul>
+<li><code>echo=TRUE</code> sets the default to print all remaining code blocks to the output, <code>FALSE</code> sets the default to not print the code blocks</li>
+<li><code>warning = FALSE</code> turns off printing of warnings</li>
+<li><code>message = FALSE</code> turns off printing of messages, these commonly occur when you load a package, where you receive a message that the package was loaded</li>
+<li><code>eval = FALSE</code> sets the default to <strong>NOT</strong> evaluate the code chunk as R Code. This will not run the code block, but the code block will still print if <code>echo=TRUE</code></li>
+<li><code>error=TRUE</code> normally the knit fails when there is an error in the code. If you set <code>error=TRUE</code> the knit will complete, and return an error message for code blocks with errors.</li>
+</ul>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="bn">```{r setup, include=FALSE}</span>
+<span class="bn">knitr::opts_chunk$set(echo = TRUE,</span>
+<span class="bn">                      warning = FALSE,</span>
+<span class="bn">                      message = FALSE, </span>
+<span class="bn">                      eval = FALSE,</span>
+<span class="bn">                      error = TRUE)</span>
+<span class="bn">```</span></code></pre>
+<div id="knitr-figure-output-defaults" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> knitr figure output defaults</h3>
+<p>The following setup options are useful for figure output.</p>
+<ul>
+<li><code>fig.width = 3</code> sets the default width in inches for all figures</li>
+<li><code>fig.height = 3</code> sets the default height in inches for all figures</li>
+<li><code>fig.path = "myfigs/"</code> defines folder where figure files will be saved. This will be relative to your current working directoy</li>
+<li><code>dev = c("pdf", "png")</code> tells knitr to output both .png, and .pdf versions of the figure. The .pdf contains vector graphics, meaning the figure can be resized without pixelization.</li>
+</ul>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="bn">```{r setup, include=FALSE}</span>
+<span class="bn">knitr::opts_chunk$set(echo = TRUE,</span>
+<span class="bn">                      fig.width = 3,</span>
+<span class="bn">                      fig.height = 3,</span>
+<span class="bn">                      fig.path = &quot;myfigs/&quot;,</span>
+<span class="bn">                      dev = c(&quot;pdf&quot;, &quot;png&quot;))</span>
+<span class="bn">```</span></code></pre>
+</div>
+<div id="figure-output-per-code-block" class="section level3">
+<h3><span class="header-section-number">4.4.2</span> figure output per code block</h3>
+<p>You can set the options for remaining code blocks individually. These will overrule the default options that you specify in the setup chunk.</p>
+<p>`<code>markdown</code>{r figurename, fig.width =5, fig.height =7}</p>
+</div>
+</div>
+<div id="data-vis-assignment-with-solutions" class="section level2">
+<h2><span class="header-section-number">4.5</span> Data-vis assignment with solutions</h2>
+<p>This assignment contains several figures that were recently published in the January 2019 issue of Psychological Science. Although, this sample of figures is somewhat arbitrary, they represent a decent range of figures that are produced in Psychological research. Notably, the look and feel of these graphs suggests that that they were all made in R using the ggplot2 package. And even if they weren’t, they can all be made in ggplot2.</p>
+<p>Your task is to write code to reproduce each of the graphs using ggplot2. You do not have the original data for any of these graphs, and your job is to make inferences about what the data must have been. For each graph you will create a data.frame to mimic the data you see in the graph, and then use ggplot2 to make the plot.</p>
+<p>By the end of this exercise you will become much more familiar with how ggplot2 works, and you will have created several examples of working ggplot2 scripts that you can use for making graphs in the future.</p>
+</div>
+<div id="list-of-figures-to-reproduce" class="section level2">
+<h2><span class="header-section-number">4.6</span> List of Figures to reproduce</h2>
+<p>Calcutt, S. E., Proctor, D., &amp; Berman, S. M. (2019). Chimpanzees (Pan troglodytes) Are More Averse to Social Than Nonsocial Risk. Psychological Science, 30, 105–115.</p>
+<p><img src="datavis_figs/Calcutt1.png" width="403" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(ggrepel)
+
+chimps&lt;-<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Dara&quot;</span>,<span class="st">&quot;Rita&quot;</span>,<span class="st">&quot;Liza&quot;</span>,<span class="st">&quot;Katie&quot;</span>,<span class="st">&quot;Azalea&quot;</span>,<span class="st">&quot;Barbi&quot;</span>,<span class="st">&quot;Rowena&quot;</span>,<span class="st">&quot;Fiona&quot;</span>), <span class="dt">each=</span><span class="dv">2</span>)
+MF &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">59</span>,<span class="dv">60</span>,<span class="dv">51</span>,<span class="dv">57</span>,<span class="dv">48</span>,<span class="dv">33</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">23</span>,<span class="dv">43</span>,<span class="dv">1</span>,<span class="dv">42</span>,<span class="dv">3</span>,<span class="dv">38</span>,<span class="dv">0</span>,<span class="dv">10</span>)
+Condition &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Social Condition&quot;</span>,<span class="st">&quot;Nonsocial Condition&quot;</span>),<span class="dv">8</span>)
+Aversity &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Not Averse&quot;</span>,<span class="st">&quot;Averse&quot;</span>),<span class="dt">each=</span><span class="dv">8</span>)
+
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(chimps,
+                      MF,
+                      Condition,
+                      Aversity,
+                      <span class="dt">chimps2=</span>chimps)
+
+plot_df<span class="op">$</span>chimps2[<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">15</span>)]&lt;-<span class="st">&quot;&quot;</span>
+
+plot_df<span class="op">$</span>Condition &lt;-<span class="st"> </span><span class="kw">factor</span>(plot_df<span class="op">$</span>Condition, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Social Condition&quot;</span>,<span class="st">&quot;Nonsocial Condition&quot;</span>))
+
+
+<span class="co">#note the commented code shows an example of using text repel to make the labels non overlapping.</span>
+
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>Condition, 
+                    <span class="dt">y=</span>MF, 
+                    <span class="dt">linetype=</span>Aversity,
+                    <span class="dt">group=</span>chimps,
+                    <span class="dt">label=</span>chimps2))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>(<span class="dt">base_size=</span><span class="dv">13</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Mean Frequency of Risky Choice&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">70</span>,<span class="dv">10</span>), <span class="dt">expand=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">70</span>))<span class="op">+</span>
+<span class="st">  </span><span class="co">#geom_text_repel(size=3,aes(label=chimps2))+</span>
+<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="fl">.8</span>, <span class="dt">y =</span> <span class="dv">60</span>, <span class="dt">label =</span> <span class="st">&quot;Dara&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="fl">.8</span>, <span class="dt">y =</span> <span class="dv">53</span>, <span class="dt">label =</span> <span class="st">&quot;Rita&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="fl">.8</span>, <span class="dt">y =</span> <span class="dv">47</span>, <span class="dt">label =</span> <span class="st">&quot;Liza&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="fl">.8</span>, <span class="dt">y =</span> <span class="dv">3</span>, <span class="dt">label =</span> <span class="st">&quot;Katie&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="fl">2.2</span>, <span class="dt">y =</span> <span class="dv">45</span>, <span class="dt">label =</span> <span class="st">&quot;Azalea&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="fl">2.2</span>, <span class="dt">y =</span> <span class="dv">41</span>, <span class="dt">label =</span> <span class="st">&quot;Barbi&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="fl">2.2</span>, <span class="dt">y =</span> <span class="dv">35</span>, <span class="dt">label =</span> <span class="st">&quot;Rowena&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="fl">2.2</span>, <span class="dt">y =</span> <span class="dv">10</span>, <span class="dt">label =</span> <span class="st">&quot;Fiona&quot;</span>)</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-84-1.png" width="384" /></p>
+<hr />
+<p><img src="datavis_figs/Calcutt2.png" width="410" /></p>
+<p><strong>Notes</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Psychological Science has a style guide that asks authors to use the font: Helvetica Neue 57 Condensed roman font</p></li>
+<li><p>I installed that font on machine (found a free .ttf download), then used the <code>showtext</code> library to use that font with ggplot2. <strong>warning: this won’t work if you don’t have the font installed, and installing the font could be idiosyncratic, it took me at least an hour</strong></p></li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(showtext)
+
+<span class="kw">font_add</span>(<span class="st">&quot;HelveticaNeue&quot;</span>,
+    <span class="dt">regular =</span> <span class="st">&quot;/Users/mattcrump/Library/Fonts/Helvetica-Neue-LT-Std-57-Condensed_22529.ttf&quot;</span>)
+<span class="co">## Automatically use showtext to render plots</span>
+<span class="kw">showtext_auto</span>()
+
+NS_risk&lt;-<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">25</span>,<span class="dv">45</span>,<span class="dv">52</span>,<span class="dv">59</span>)
+S_risk&lt;-<span class="kw">c</span>(<span class="dv">12</span>,<span class="dv">47</span>,<span class="dv">4</span>,<span class="dv">41</span>,<span class="dv">48</span>,<span class="dv">35</span>,<span class="dv">55</span>,<span class="dv">60</span>)
+plot_df&lt;-<span class="kw">data.frame</span>(NS_risk,S_risk)
+
+p&lt;-<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>NS_risk,<span class="dt">y=</span>S_risk))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape=</span><span class="dv">18</span>, <span class="dt">size=</span><span class="dv">1</span>,<span class="dt">fill=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>,<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">color=</span><span class="st">&quot;black&quot;</span>, <span class="dt">size=</span>.<span class="dv">35</span>)<span class="op">+</span>
+<span class="st"> </span><span class="co"># theme_classic(base_size=12, base_family = &quot;Arial Narrow&quot;)+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.x=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">12</span>,<span class="dt">family=</span><span class="st">&quot;HelveticaNeue&quot;</span>),
+        <span class="dt">axis.title.y=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">12</span>, 
+                                  <span class="dt">family=</span><span class="st">&quot;HelveticaNeue&quot;</span>),
+        <span class="dt">axis.text =</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">11</span>, 
+                                  <span class="dt">family=</span><span class="st">&quot;HelveticaNeue&quot;</span>,
+                                  <span class="dt">color=</span><span class="st">&quot;black&quot;</span>),
+        <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>())<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Average Frequency of Nonsocial Risk&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Average Frequency of Social Risk&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">70</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">70</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">70</span>,<span class="dv">10</span>), <span class="dt">expand=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">70</span>,<span class="dv">10</span>), <span class="dt">expand=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">size =</span> <span class="fl">.25</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.ticks =</span> <span class="kw">element_line</span>(<span class="dt">size =</span> <span class="fl">.25</span>))
+
+<span class="kw">ggsave</span>(<span class="st">&quot;datavis_figs/Calcutt2_Crump.png&quot;</span>, p, <span class="dt">width =</span> <span class="dv">3</span>, <span class="dt">height =</span> <span class="dv">3</span>)
+
+knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;datavis_figs/Calcutt2_Crump.png&quot;</span>)</code></pre>
+<p><img src="datavis_figs/Calcutt2_Crump.png" width="450" /></p>
+<p>Cao, J., Kleiman-Weiner, M., &amp; Banaji, M. R. (2019). People Make the Same Bayesian Judgment They Criticize in Others. Psychological Science, 30, 20–31.</p>
+<p><img src="datavis_figs/Cao1.png" width="870" /></p>
+<p><strong>Notes</strong>
+1. ggplot automatically orders factor levels alphabetically, this examples shows a method to rearrange the order of factor levels in the data.frame before plotting</p>
+<pre class="sourceCode r"><code class="sourceCode r">studies &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Doctor </span><span class="ch">\n</span><span class="st"> Study 1 </span><span class="ch">\n</span><span class="st"> N = 199&quot;</span>,
+             <span class="st">&quot;Butcher </span><span class="ch">\n</span><span class="st"> Study 2 </span><span class="ch">\n</span><span class="st"> n = 199&quot;</span>,
+             <span class="st">&quot;Firefighter </span><span class="ch">\n</span><span class="st"> Study 2 </span><span class="ch">\n</span><span class="st"> n = 200&quot;</span>,
+             <span class="st">&quot;Construction </span><span class="ch">\n</span><span class="st"> Worker </span><span class="ch">\n</span><span class="st"> Study 2 </span><span class="ch">\n</span><span class="st"> n = 205&quot;</span>), <span class="dt">each=</span><span class="dv">3</span>)
+likely &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Women More Likely&quot;</span>,
+            <span class="st">&quot;Equally Likely&quot;</span>,
+            <span class="st">&quot;Man more Likely&quot;</span>),<span class="dv">4</span>)
+
+pp &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">90</span>,<span class="dv">10</span>,
+        <span class="dv">5</span>,<span class="dv">60</span>,<span class="dv">35</span>,
+        <span class="dv">2</span>,<span class="dv">40</span>,<span class="dv">58</span>,
+        <span class="dv">5</span>,<span class="dv">60</span>,<span class="dv">35</span>)<span class="op">/</span><span class="dv">100</span>
+
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(pp,studies,likely)
+
+plot_df<span class="op">$</span>likely &lt;-<span class="st"> </span><span class="kw">factor</span>(plot_df<span class="op">$</span>likely, 
+                         <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Women More Likely&quot;</span>,
+                                    <span class="st">&quot;Equally Likely&quot;</span>,
+                                    <span class="st">&quot;Man more Likely&quot;</span>))
+
+plot_df<span class="op">$</span>studies &lt;-<span class="st"> </span><span class="kw">factor</span>(plot_df<span class="op">$</span>studies, 
+                         <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Doctor </span><span class="ch">\n</span><span class="st"> Study 1 </span><span class="ch">\n</span><span class="st"> N = 199&quot;</span>,
+             <span class="st">&quot;Butcher </span><span class="ch">\n</span><span class="st"> Study 2 </span><span class="ch">\n</span><span class="st"> n = 199&quot;</span>,
+             <span class="st">&quot;Firefighter </span><span class="ch">\n</span><span class="st"> Study 2 </span><span class="ch">\n</span><span class="st"> n = 200&quot;</span>,
+             <span class="st">&quot;Construction </span><span class="ch">\n</span><span class="st"> Worker </span><span class="ch">\n</span><span class="st"> Study 2 </span><span class="ch">\n</span><span class="st"> n = 205&quot;</span>))
+
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>studies,
+                    <span class="dt">y=</span>pp,
+                    <span class="dt">group=</span>likely,
+                    <span class="dt">fill=</span>likely))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">width=</span>.<span class="dv">5</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>(<span class="dt">base_size=</span><span class="dv">10</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Percentage of Participants&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,.<span class="dv">1</span>),<span class="dt">labels =</span> scales<span class="op">::</span>percent)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">axis.ticks.x.bottom =</span> <span class="kw">element_blank</span>())</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-88-1.png" width="451.2" /></p>
+<p><strong>Notes</strong>
+1. An example of violin plots, which require distributions of numbers for each level
+2. An example of using two data.frames in ggplot, one with all of the raw data for each level, and another with the means and confidence intervals. Confidence intervals are computed using the t.test function</p>
+<pre class="sourceCode r"><code class="sourceCode r">A &lt;-<span class="st"> </span><span class="kw">rexp</span>(<span class="dv">200</span>)
+B &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">200</span>,<span class="dv">3</span>,<span class="dt">sd=</span><span class="dv">1</span>)
+C &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">200</span>,<span class="dv">3</span>,<span class="dt">sd=</span><span class="dv">1</span>)
+D &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">200</span>,<span class="dv">3</span>,<span class="dt">sd=</span><span class="dv">1</span>)
+DV &lt;-<span class="st"> </span><span class="kw">c</span>(A,B,C,D)
+studies &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Doctor </span><span class="ch">\n</span><span class="st"> Study 1 </span><span class="ch">\n</span><span class="st"> N = 199&quot;</span>,
+             <span class="st">&quot;Butcher </span><span class="ch">\n</span><span class="st"> Study 2 </span><span class="ch">\n</span><span class="st"> n = 199&quot;</span>,
+             <span class="st">&quot;Firefighter </span><span class="ch">\n</span><span class="st"> Study 2 </span><span class="ch">\n</span><span class="st"> n = 200&quot;</span>,
+             <span class="st">&quot;Construction </span><span class="ch">\n</span><span class="st"> Worker </span><span class="ch">\n</span><span class="st"> Study 2 </span><span class="ch">\n</span><span class="st"> n = 205&quot;</span>), <span class="dt">each=</span><span class="dv">200</span>)
+
+plot_df &lt;-<span class="kw">data.frame</span>(DV,studies)
+
+plot_df<span class="op">$</span>studies &lt;-<span class="st"> </span><span class="kw">factor</span>(plot_df<span class="op">$</span>studies, 
+                         <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Doctor </span><span class="ch">\n</span><span class="st"> Study 1 </span><span class="ch">\n</span><span class="st"> N = 199&quot;</span>,
+             <span class="st">&quot;Butcher </span><span class="ch">\n</span><span class="st"> Study 2 </span><span class="ch">\n</span><span class="st"> n = 199&quot;</span>,
+             <span class="st">&quot;Firefighter </span><span class="ch">\n</span><span class="st"> Study 2 </span><span class="ch">\n</span><span class="st"> n = 200&quot;</span>,
+             <span class="st">&quot;Construction </span><span class="ch">\n</span><span class="st"> Worker </span><span class="ch">\n</span><span class="st"> Study 2 </span><span class="ch">\n</span><span class="st"> n = 205&quot;</span>))
+
+<span class="kw">library</span>(dplyr)
+means_df &lt;-<span class="st"> </span>plot_df <span class="op">%&gt;%</span>
+<span class="st">              </span><span class="kw">group_by</span>(studies) <span class="op">%&gt;%</span>
+<span class="st">              </span><span class="kw">summarise</span>(<span class="dt">M=</span><span class="kw">mean</span>(DV),
+                        <span class="dt">CI_lower =</span> <span class="kw">t.test</span>(DV)<span class="op">$</span>conf.int[<span class="dv">1</span>],
+                        <span class="dt">CI_upper =</span> <span class="kw">t.test</span>(DV)<span class="op">$</span>conf.int[<span class="dv">2</span>])
+
+<span class="kw">ggplot</span>(means_df, <span class="kw">aes</span>(<span class="dt">x=</span>studies,<span class="dt">y=</span>M))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_violin</span>(<span class="dt">data=</span>plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>studies,<span class="dt">y=</span>DV),<span class="dt">fill=</span><span class="st">&quot;grey&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>(<span class="dt">base_size=</span><span class="dv">10</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Evaluation of Person X&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">7</span>,<span class="dv">1</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">7</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>CI_lower,<span class="dt">ymax=</span>CI_upper), <span class="dt">width=</span>.<span class="dv">2</span>)</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-89-1.png" width="336" /></p>
+<p><img src="datavis_figs/Cao2.png" width="412" /></p>
+<p><img src="datavis_figs/Cao3.png" width="829" /></p>
+<p><strong>Notes:</strong>
+1. An example of a histogram. Note this is incomplete because the y-axis is not showing percentages…</p>
+<pre class="sourceCode r"><code class="sourceCode r">ps &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>)
+s&lt;-<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>
+plot_df&lt;-<span class="kw">data.frame</span>(s,ps)
+
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>ps))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">fill=</span><span class="st">&quot;green&quot;</span>,
+                 <span class="dt">color=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>(<span class="dt">base_size=</span><span class="dv">9</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Log Likelihood Ratio&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Participants (in Each condition)&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Women Performed Surgery&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="dv">0</span>,<span class="dt">linetype=</span><span class="dv">2</span>)</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-92-1.png" width="240" /></p>
+<p><strong>Notes:</strong>
+1. customizes color schemes by hard-coding
+2. use facet_wrap, and take away the borders of the facet titles</p>
+<pre class="sourceCode r"><code class="sourceCode r">Gender &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Men Performed Surgery </span><span class="ch">\n</span><span class="st"> n = 152&quot;</span>,
+            <span class="st">&quot;Women Performed Surgery </span><span class="ch">\n</span><span class="st"> n = 142&quot;</span>), <span class="dt">each =</span><span class="dv">3</span>)
+Parameter &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Prior&quot;</span>,
+               <span class="st">&quot;Model </span><span class="ch">\n</span><span class="st"> Posterior&quot;</span>,
+               <span class="st">&quot;Reported </span><span class="ch">\n</span><span class="st"> Posterior&quot;</span>), <span class="dv">2</span>)
+p &lt;-<span class="st"> </span><span class="kw">c</span>(.<span class="dv">7</span>, <span class="fl">.88</span>, <span class="fl">.87</span>, <span class="fl">.29</span>, <span class="fl">.72</span>, <span class="fl">.76</span>)
+ci &lt;-<span class="st"> </span><span class="kw">c</span>(.<span class="dv">05</span>, <span class="fl">.05</span>, <span class="fl">.05</span>, <span class="fl">.05</span>, <span class="fl">.05</span>, <span class="fl">.05</span>)
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(p, ci, Gender, Parameter)
+plot_df<span class="op">$</span>Parameter &lt;-<span class="st"> </span><span class="kw">factor</span>(plot_df<span class="op">$</span>Parameter, 
+                         <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Prior&quot;</span>,
+               <span class="st">&quot;Model </span><span class="ch">\n</span><span class="st"> Posterior&quot;</span>,
+               <span class="st">&quot;Reported </span><span class="ch">\n</span><span class="st"> Posterior&quot;</span>))
+
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>Parameter, <span class="dt">y=</span>p, <span class="dt">fill=</span>Parameter))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Gender)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>(<span class="dt">base_size=</span><span class="dv">11</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#F8766D&quot;</span>, <span class="st">&quot;#7CAE00&quot;</span>, <span class="st">&quot;#C77CFF&quot;</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;P(Target = Doctor)&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,.<span class="dv">1</span>),<span class="dt">labels =</span> scales<span class="op">::</span>percent)<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.spacing.x =</span> <span class="kw">unit</span>(<span class="dv">0</span>,<span class="st">&quot;line&quot;</span>),
+        <span class="dt">panel.border =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.background =</span> <span class="kw">element_blank</span>())<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">strip.background =</span> <span class="kw">element_rect</span>(<span class="dt">colour =</span> <span class="st">&#39;white&#39;</span>, <span class="dt">fill =</span> <span class="st">&#39;white&#39;</span>, <span class="dt">size =</span> <span class="dv">0</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-93-1.png" width="384" /></p>
+<p><img src="datavis_figs/Cao4.png" width="398" /></p>
+<p><strong>Notes:</strong>
+1. two linear regression lines using <code>geom_smooth(method="lm")</code>
+2. The raw data is not plotted as points</p>
+<pre class="sourceCode r"><code class="sourceCode r">evaluation&lt;-<span class="kw">c</span>((<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">7</span>,.<span class="dv">1</span>)<span class="op">+</span><span class="kw">runif</span>(<span class="dv">61</span>,<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>)),
+              (<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">7</span>,.<span class="dv">1</span>)<span class="op">+</span><span class="kw">runif</span>(<span class="dv">61</span>,<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>)))
+pTarget &lt;-<span class="kw">c</span>((<span class="kw">seq</span>(.<span class="dv">92</span>,.<span class="dv">85</span>,<span class="dt">length.out=</span><span class="dv">61</span>)<span class="op">+</span><span class="kw">runif</span>(<span class="dv">61</span>,<span class="op">-</span>.<span class="dv">1</span>,.<span class="dv">1</span>)),
+            (<span class="kw">seq</span>(.<span class="dv">8</span>,.<span class="dv">4</span>,<span class="dt">length.out=</span><span class="dv">61</span>)<span class="op">+</span><span class="kw">runif</span>(<span class="dv">61</span>,<span class="op">-</span>.<span class="dv">5</span>,.<span class="dv">5</span>)))
+Gender &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Man Communicated with ATC&quot;</span>,
+            <span class="st">&quot;Woman Communicated with ATC&quot;</span>), <span class="dt">each=</span><span class="dv">61</span>)
+plot_df&lt;-<span class="kw">data.frame</span>(evaluation,pTarget,Gender)
+plot_df &lt;-<span class="st"> </span>plot_df <span class="op">%&gt;%</span>
+<span class="st">              </span><span class="kw">filter</span>(evaluation<span class="op">&gt;=</span><span class="dv">1</span>,
+                     evaluation<span class="op">&lt;=</span><span class="dv">7</span>)
+
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>evaluation,<span class="dt">y=</span>pTarget,
+                    <span class="dt">group=</span>Gender,
+                    <span class="dt">color=</span>Gender))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,.<span class="dv">1</span>),<span class="dt">labels =</span> scales<span class="op">::</span>percent)<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">7</span>,<span class="dv">1</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Evaluation of Person X&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;P(Target = Pilot)&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="kw">c</span>(<span class="fl">0.45</span>,<span class="fl">0.2</span>),
+        <span class="dt">legend.title=</span><span class="kw">element_blank</span>(),
+        <span class="dt">legend.key.size =</span> <span class="kw">unit</span>(.<span class="dv">5</span>, <span class="st">&quot;cm&quot;</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.key =</span> <span class="kw">element_rect</span>(<span class="dt">colour =</span> <span class="st">&#39;white&#39;</span>, <span class="dt">fill =</span> <span class="st">&#39;white&#39;</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">linetype=</span><span class="st">&#39;solid&#39;</span>))</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-95-1.png" width="336" /></p>
+<p>Jefferies, L. N., &amp; Lollo, V. D. (2019). Sudden Events Change Old Visual Objects Into New Ones: A Possible Role for Phasic Activation of Locus Coeruleus. Psychological Science, 30, 55–64.</p>
+<p><img src="datavis_figs/Jeffries1.png" width="644" /></p>
+<p><strong>Notes:</strong>
+1. Example of using the <code>ggpubr</code> package and the <code>ggarrange</code> function to put two separate plots side-by-side in a 2-column, 1-row, grid.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggpubr)
+
+Condition &lt;-<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;No </span><span class="ch">\n</span><span class="st"> Transient&quot;</span>,<span class="st">&quot;Transient&quot;</span>), <span class="dt">each=</span><span class="dv">2</span>)
+Location &lt;-<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Outside&quot;</span>,<span class="st">&quot;Inside&quot;</span>),<span class="dv">2</span>)
+MMRT &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">304</span>,<span class="dv">300</span>,<span class="dv">290</span>,<span class="dv">280</span>)
+CI_upper &lt;-<span class="kw">c</span>(<span class="dv">315</span>,<span class="dv">310</span>,<span class="dv">304</span>,<span class="dv">290</span>)
+CI_lower &lt;-<span class="kw">c</span>(<span class="dv">295</span>,<span class="dv">290</span>,<span class="dv">283</span>,<span class="dv">270</span>)
+plot_df &lt;-<span class="kw">data.frame</span>(Condition,Location,MMRT,CI_upper,CI_lower)
+plot_df<span class="op">$</span>Location &lt;-<span class="st"> </span><span class="kw">factor</span>(plot_df<span class="op">$</span>Location, 
+                         <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Outside&quot;</span>,<span class="st">&quot;Inside&quot;</span>))
+
+vis&lt;-<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>Condition, <span class="dt">y=</span>MMRT, <span class="dt">group=</span>Location,
+                    <span class="dt">fill=</span>Location))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>,<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>, 
+           <span class="dt">color=</span><span class="st">&quot;black&quot;</span>,
+           <span class="dt">size=</span>.<span class="dv">25</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Mean Median RT (ms)&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">230</span>,<span class="dv">340</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">230</span>,<span class="dv">340</span>,<span class="dv">10</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Greys&quot;</span>, <span class="dt">direction=</span><span class="op">-</span><span class="dv">1</span>)<span class="op">+</span>
+<span class="st">   </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="kw">c</span>(<span class="fl">0.55</span>,<span class="fl">0.8</span>),
+        <span class="dt">legend.title=</span><span class="kw">element_blank</span>(),
+        <span class="dt">legend.key.size =</span> <span class="kw">unit</span>(.<span class="dv">5</span>, <span class="st">&quot;cm&quot;</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Visual Group&quot;</span>)
+
+Condition &lt;-<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;No </span><span class="ch">\n</span><span class="st"> Transient&quot;</span>,<span class="st">&quot;Transient&quot;</span>), <span class="dt">each=</span><span class="dv">2</span>)
+Location &lt;-<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Outside&quot;</span>,<span class="st">&quot;Inside&quot;</span>),<span class="dv">2</span>)
+MMRT &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">295</span>,<span class="dv">290</span>,<span class="dv">265</span>,<span class="dv">250</span>)
+CI_upper &lt;-<span class="kw">c</span>(<span class="dv">305</span>,<span class="dv">300</span>,<span class="dv">275</span>,<span class="dv">260</span>)
+CI_lower &lt;-<span class="kw">c</span>(<span class="dv">285</span>,<span class="dv">280</span>,<span class="dv">255</span>,<span class="dv">240</span>)
+plot_df &lt;-<span class="kw">data.frame</span>(Condition,Location,MMRT,CI_upper,CI_lower)
+plot_df<span class="op">$</span>Location &lt;-<span class="st"> </span><span class="kw">factor</span>(plot_df<span class="op">$</span>Location, 
+                         <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Outside&quot;</span>,<span class="st">&quot;Inside&quot;</span>))
+
+aud&lt;-<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>Condition, <span class="dt">y=</span>MMRT, <span class="dt">group=</span>Location,
+                    <span class="dt">fill=</span>Location))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>,<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>, 
+           <span class="dt">color=</span><span class="st">&quot;black&quot;</span>,
+           <span class="dt">size=</span>.<span class="dv">25</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Mean Median RT (ms)&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">230</span>,<span class="dv">340</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">230</span>,<span class="dv">340</span>,<span class="dv">10</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Greys&quot;</span>, <span class="dt">direction=</span><span class="op">-</span><span class="dv">1</span>)<span class="op">+</span>
+<span class="st">   </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Auditory Group&quot;</span>)
+
+<span class="kw">ggarrange</span>(vis,aud)</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-97-1.png" width="480" /></p>
+<p>Jouravlev, O., Schwartz, R., Ayyash, D., Mineroff, Z., Gibson, E., &amp; Fedorenko, E. (2019). Tracking Colisteners’ Knowledge States During Language Comprehension. Psychological Science, 30, 3–19.</p>
+<p><img src="datavis_figs/Jouravlev1.png" width="307" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">25</span>,<span class="op">-</span><span class="fl">2.5</span>,<span class="dv">3</span>)
+y &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">25</span>,<span class="op">-</span><span class="dv">10</span>,<span class="dv">15</span>)
+r &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">cor</span>(x,y), <span class="dt">digits=</span><span class="dv">2</span>)
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x,y)
+
+a &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Social N400&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Autism-Spectrum </span><span class="ch">\n</span><span class="st"> Quotient (score)&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="op">-</span><span class="fl">2.5</span>,<span class="fl">2.5</span>,<span class="fl">2.5</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">2.5</span>,<span class="dv">3</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>,<span class="dt">label=</span><span class="kw">paste</span>(<span class="st">&quot;r = &quot;</span>,r), <span class="dt">x=</span><span class="fl">2.5</span>, <span class="dt">y=</span><span class="dv">10</span>)
+
+x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">25</span>,<span class="op">-</span><span class="fl">2.5</span>,<span class="dv">3</span>)
+y &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">25</span>,<span class="op">-</span><span class="dv">10</span>,<span class="dv">15</span>)
+r &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">cor</span>(x,y), <span class="dt">digits=</span><span class="dv">2</span>)
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x,y)
+
+b &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Social N400&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;</span><span class="ch">\&#39;</span><span class="st">Reading the Mind in the </span><span class="ch">\n</span><span class="st"> Eyes</span><span class="ch">\&#39;</span><span class="st"> Test (score&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="op">-</span><span class="fl">2.5</span>,<span class="fl">2.5</span>,<span class="fl">2.5</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">2.5</span>,<span class="dv">3</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>,<span class="dt">label=</span><span class="kw">paste</span>(<span class="st">&quot;r = &quot;</span>,r), <span class="dt">x=</span><span class="fl">2.5</span>, <span class="dt">y=</span><span class="dv">10</span>)
+
+x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">25</span>,<span class="op">-</span><span class="fl">2.5</span>,<span class="dv">3</span>)
+y &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">25</span>,<span class="op">-</span><span class="dv">10</span>,<span class="dv">15</span>)
+r &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">cor</span>(x,y), <span class="dt">digits=</span><span class="dv">2</span>)
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x,y)
+
+c &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Social N400&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Empathy Quotient Test </span><span class="ch">\n</span><span class="st"> (score&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="op">-</span><span class="fl">2.5</span>,<span class="fl">2.5</span>,<span class="fl">2.5</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">2.5</span>,<span class="dv">3</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>,<span class="dt">label=</span><span class="kw">paste</span>(<span class="st">&quot;r = &quot;</span>,r), <span class="dt">x=</span><span class="fl">2.5</span>, <span class="dt">y=</span><span class="dv">10</span>)
+
+<span class="kw">ggarrange</span>(a,b,c,<span class="dt">nrow=</span><span class="dv">3</span>, <span class="dt">ncol=</span><span class="dv">1</span>)</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-99-1.png" width="288" /></p>
+<p>Kim, H., Domenico, S. I. D., &amp; Connelly, B. S. (2019). Self–Other Agreement in Personality Reports: A Meta-Analytic Comparison of Self- and Informant-Report Means. Psychological Science, 30, 129–138.</p>
+<p><img src="datavis_figs/Kim1.png" width="644" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">people &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Family&quot;</span>,<span class="st">&quot;Friends&quot;</span>,<span class="st">&quot;Colleagues&quot;</span>,<span class="st">&quot;Strangers&quot;</span>), <span class="dt">each=</span><span class="dv">5</span>)
+big_five &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Emotional </span><span class="ch">\n</span><span class="st"> Stability&quot;</span>,<span class="st">&quot;Extraversion&quot;</span>,<span class="st">&quot;Openness/ </span><span class="ch">\n</span><span class="st"> Intellect&quot;</span>,
+              <span class="st">&quot;Agreeableness&quot;</span>,<span class="st">&quot;Consientiousness&quot;</span>), <span class="dv">4</span>)
+mean_difference &lt;-<span class="kw">c</span>(<span class="dv">0</span>,.<span class="dv">3</span>,.<span class="dv">8</span>,.<span class="dv">4</span>,.<span class="dv">4</span>,
+                    <span class="kw">c</span>(<span class="dv">0</span>,.<span class="dv">3</span>,.<span class="dv">8</span>,.<span class="dv">4</span>,.<span class="dv">4</span>)<span class="op">-</span>.<span class="dv">2</span>,
+                    <span class="kw">c</span>(<span class="dv">0</span>,.<span class="dv">3</span>,.<span class="dv">8</span>,.<span class="dv">4</span>,.<span class="dv">4</span>)<span class="op">-</span>.<span class="dv">21</span>,
+                    <span class="kw">c</span>(<span class="dv">0</span>,.<span class="dv">3</span>,.<span class="dv">8</span>,.<span class="dv">4</span>,.<span class="dv">4</span>)<span class="op">-</span>.<span class="dv">25</span>)
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(mean_difference,people,big_five)
+
+df<span class="op">$</span>big_five &lt;-<span class="st"> </span><span class="kw">factor</span>(df<span class="op">$</span>big_five, 
+                         <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Emotional </span><span class="ch">\n</span><span class="st"> Stability&quot;</span>,<span class="st">&quot;Extraversion&quot;</span>,<span class="st">&quot;Openness/ </span><span class="ch">\n</span><span class="st"> Intellect&quot;</span>,
+              <span class="st">&quot;Agreeableness&quot;</span>,<span class="st">&quot;Consientiousness&quot;</span>))
+
+df<span class="op">$</span>people &lt;-<span class="st"> </span><span class="kw">factor</span>(df<span class="op">$</span>people, 
+                         <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Family&quot;</span>,<span class="st">&quot;Friends&quot;</span>,<span class="st">&quot;Colleagues&quot;</span>,<span class="st">&quot;Strangers&quot;</span>))
+
+<span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x=</span>big_five, <span class="dt">y=</span>mean_difference,
+               <span class="dt">group=</span>people,
+               <span class="dt">shape=</span>people,
+               <span class="dt">linetype=</span>people,
+               <span class="dt">color=</span>people))<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Greys&quot;</span>, <span class="dt">direction=</span><span class="op">-</span><span class="dv">1</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Mean Difference&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span>.<span class="dv">8</span>,.<span class="dv">8</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="op">-</span>.<span class="dv">8</span>,.<span class="dv">8</span>,.<span class="dv">2</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="dv">0</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.line.x.bottom =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">axis.ticks.x.bottom =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">legend.title =</span> <span class="kw">element_blank</span>())</code></pre>
+<p><img src="7709Rbook_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
+<p>Oh, D., Buck, E. A., &amp; Todorov, A. (2019). Revealing Hidden Gender Biases in Competence Impressions of Faces. Psychological Science, 30, 65–79.</p>
+<p><img src="datavis_figs/Oh1.png" width="783" /></p>
+<p>Perfecto, H., Donnelly, K., &amp; Critcher, C. R. (2019). Volume Estimation Through Mental Simulation. Psychological Science, 30, 80–91.</p>
+<p><img src="datavis_figs/Perfecto1.png" width="417" /></p>
+<p><img src="datavis_figs/Perfecto2.png" width="411" /></p>
+<p>Smith, S. M., &amp; Krajbich, I. (2019). Gaze Amplifies Value in Decision Making. Psychological Science, 30, 116–128.</p>
+<p><img src="datavis_figs/Smith1.png" width="829" /></p>
+<p>Uitvlugt, M. G., &amp; Healey, M. K. (2019). Temporal Proximity Links Unrelated News Events in Memory. Psychological Science, 30, 92–104.</p>
+<p><img src="datavis_figs/Uitvlugt1.png" width="430" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="programming-challenges-for-learning-the-fundamentals.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-wrangling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-datavis.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["7709Rbook.pdf", "7709Rbook.epub"],
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+</body>
+
+</html>
